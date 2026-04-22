@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CertiMinds — Tech Talent Development, Qatar</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #0b1120; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .how-grid { grid-template-columns: 1fr !important; }
+      .adv-grid { grid-template-columns: 1fr 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 520px) {
+      .adv-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr !important; }
+      .hero-ctas { flex-direction: column !important; align-items: stretch !important; }
+      .hero-ctas a { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    /* ── Nav ──────────────────────────────────────────────────────── */
+    const Nav = () => {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
+      React.useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 16);
+        window.addEventListener('scroll', fn);
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const currentPage = window.location.pathname.split('/').pop() || 'index (2).html';
+      const links = [
+        { label: 'Build Your Team',   href: 'build-your-team.html' },
+        { label: 'Build Your Career', href: '#' },
+        { label: 'Our Launchpad',     href: 'our-launchpad.html' },
+        { label: 'About Us',          href: 'about-us.html' },
+        { label: 'Contact',           href: 'contact.html' },
+      ];
+
+      return (
+        <div style={{ position: 'sticky', top: 0, zIndex: 100, display: 'flex', justifyContent: 'center', padding: scrolled ? '8px 32px' : '14px 32px', transition: 'padding 0.3s ease', background: 'transparent', pointerEvents: 'none' }}>
+          <nav style={{
+            pointerEvents: 'all',
+            width: '100%', maxWidth: 1060,
+            background: '#ffffff',
+            borderRadius: 999,
+            boxShadow: scrolled
+              ? '0 8px 32px rgba(0,0,0,0.11), 0 2px 8px rgba(0,0,0,0.06)'
+              : '0 4px 20px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
+            transition: 'box-shadow 0.3s ease',
+          }}>
+            <div style={{ padding: '8px 8px 8px 20px', height: 62, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+
+              {/* Logo */}
+              <a href="index (2).html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0, marginRight: 8 }}>
+                <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 40, transition: 'opacity 0.2s' }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
+              </a>
+
+              {/* Nav links */}
+              <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1, justifyContent: 'center' }}>
+                {links.map(({ label, href }) => {
+                  const isActive = href !== '#' && currentPage === href;
+                  return (
+                    <NavPill key={label} href={href} label={label} active={isActive} />
+                  );
+                })}
+              </div>
+
+              {/* CTA */}
+              <div className="nav-cta" style={{ flexShrink: 0 }}>
+                <a href="contact.html"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '10px 22px', background: '#0b1120', borderRadius: 999, transition: 'all 0.2s', whiteSpace: 'nowrap', letterSpacing: '-0.1px' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#1b2d50'; e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#0b1120'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
+                  Let's Talk <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
+                </a>
+              </div>
+
+              {/* Hamburger */}
+              <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'rgba(11,17,32,0.06)', border: 'none', borderRadius: 999, cursor: 'pointer', padding: '10px 12px' }}
+                onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+                {[0,1,2].map(i => (
+                  <span key={i} style={{ width: 20, height: 2, background: '#0b1120', borderRadius: 2, display: 'block', transition: 'all 0.22s',
+                    transform: i===0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i===2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+                    opacity: i===1 && menuOpen ? 0 : 1 }} />
+                ))}
+              </button>
+            </div>
+
+            {/* Mobile menu */}
+            {menuOpen && (
+              <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', padding: '10px 16px 16px', display: 'flex', flexDirection: 'column', gap: 2, borderRadius: '0 0 28px 28px' }}>
+                {links.map(({ label, href }) => (
+                  <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '10px 14px', borderRadius: 12, textDecoration: 'none', transition: 'background 0.15s' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(11,17,32,0.05)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{label}</a>
+                ))}
+                <a href="contact.html" style={{ marginTop: 8, textAlign: 'center', background: '#0b1120', color: '#fff', fontSize: 14, fontWeight: 700, padding: '11px 16px', borderRadius: 999, textDecoration: 'none' }}>Let's Talk ↗</a>
+              </div>
+            )}
+          </nav>
+        </div>
+      );
+    };
+
+    const NavPill = ({ href, label, active }) => {
+      const [hov, setHov] = React.useState(false);
+      return (
+        <a href={href}
+          onMouseEnter={() => setHov(true)}
+          onMouseLeave={() => setHov(false)}
+          style={{
+            fontSize: 13.5,
+            fontWeight: active ? 700 : hov ? 600 : 500,
+            color: active ? '#0b1120' : hov ? '#fff' : '#6b7280',
+            padding: '8px 16px',
+            textDecoration: 'none',
+            borderRadius: 999,
+            background: active ? 'rgba(90,163,216,0.14)' : hov ? '#0b1120' : 'transparent',
+            border: active ? '1px solid rgba(90,163,216,0.3)' : '1px solid transparent',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap',
+          }}>
+          {label}
+        </a>
+      );
+    };
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    const Hero = () => {
+      return (
+      <section style={{ background: '#0b1120', minHeight: 'calc(100vh - 90px)', display: 'flex', alignItems: 'center', padding: '60px 24px 56px', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Grid texture overlay */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(90,163,216,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(90,163,216,0.04) 1px, transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
+        {/* Blue glow top-right */}
+        <div style={{ position: 'absolute', top: -100, right: -60, width: 480, height: 480, borderRadius: '50%', background: 'radial-gradient(circle, rgba(45,111,170,0.28) 0%, transparent 65%)', pointerEvents: 'none' }} />
+        {/* Subtle glow bottom-left */}
+        <div style={{ position: 'absolute', bottom: -60, left: -40, width: 320, height: 320, borderRadius: '50%', background: 'radial-gradient(circle, rgba(90,163,216,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+        <div style={{ maxWidth: 780, margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center', width: '100%' }}>
+
+          {/* Top badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(90,163,216,0.12)', border: '1px solid rgba(90,163,216,0.25)', borderRadius: 100, padding: '5px 14px', marginBottom: 28 }}>
+            <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#5aa3d8', display: 'inline-block' }} />
+            <span style={{ fontSize: 11.5, fontWeight: 600, color: '#8ec6e8', letterSpacing: '0.4px' }}>Tech Talent Development · Qatar &amp; Gulf</span>
+          </div>
+
+          {/* H1 with gradient */}
+          <h1 style={{ fontSize: 'clamp(1.6rem, 3.6vw, 2.9rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-1.5px', marginBottom: 20, fontFeatureSettings: '"lnum"' }}>
+            <span style={{ background: 'linear-gradient(135deg, #ffffff 0%, #8ec6e8 50%, #5aa3d8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Tech Specialists Your Organization
+            </span>
+            <br />
+            <span style={{ background: 'linear-gradient(135deg, #5aa3d8 0%, #2d6faa 50%, #8ec6e8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Needs.
+            </span>{' '}
+            <span style={{ background: 'linear-gradient(135deg, #ffffff 0%, #c8e4f5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Built Exclusively{' '}
+            </span>
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              <span style={{ background: 'linear-gradient(135deg, #ffffff 0%, #c8e4f5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>for You</span>
+              <svg style={{ position: 'absolute', bottom: -8, left: 0, width: '100%', height: 10, overflow: 'visible' }} viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path d="M0 8 Q25 2 50 6 Q75 10 100 4" stroke="url(#ug)" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.85"/>
+                <defs>
+                  <linearGradient id="ug" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8ec6e8"/>
+                    <stop offset="100%" stopColor="#5aa3d8"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+          </h1>
+
+          {/* Subheadline */}
+          <p style={{ fontSize: 'clamp(0.875rem, 1.4vw, 1rem)', lineHeight: 1.7, color: 'rgba(255,255,255,0.48)', marginBottom: 36, maxWidth: 560, margin: '0 auto 36px' }}>
+            We don't search the market for the right fit. We build it. CertiMinds Launchpad develops technology
+            professionals built around your exact requirements — assessed, ready and placed with you from day one.
+          </p>
+
+          {/* CTAs */}
+          <div className="hero-ctas" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="build-your-team.html"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#fff', color: '#0b1120', fontSize: 14, fontWeight: 700, padding: '12px 24px', borderRadius: 10, textDecoration: 'none', transition: 'all 0.2s', letterSpacing: '-0.1px' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#eaf4ff'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(0,0,0,0.22)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
+              Strengthen Your Team <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
+            </a>
+            <a href="#"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.07)', color: '#fff', fontSize: 14, fontWeight: 600, padding: '12px 24px', borderRadius: 10, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.14)', transition: 'all 0.2s', letterSpacing: '-0.1px' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.13)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
+              Launch My Career <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
+            </a>
+          </div>
+
+          {/* Stats row */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48, borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 32, gap: 0 }}>
+            {[
+              { value: '200+', label: 'Professionals Placed' },
+              { value: '6 mo', label: 'Avg. Launchpad Time' },
+              { value: '95%',  label: 'Client Retention' },
+              { value: 'Day 1', label: 'Ready to Deploy' },
+            ].map(({ value, label }, i, arr) => (
+              <div key={value} style={{ flex: 1, textAlign: 'center', padding: '0 16px', borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none' }}>
+                <div style={{ fontSize: 'clamp(1.4rem, 2.4vw, 2rem)', fontWeight: 900, letterSpacing: '-1px', lineHeight: 1, background: 'linear-gradient(135deg, #fff 30%, #8ec6e8 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{value}</div>
+                <div style={{ fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.32)', marginTop: 4 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+      );
+    };
+
+    /* ── Audience Cards ────────────────────────────────────────────── */
+    const AudienceSection = () => {
+      const [hovA, setHovA] = React.useState(false);
+      const [hovB, setHovB] = React.useState(false);
+      return (
+        <section style={{ background: '#f4f7fb', padding: '96px 24px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+
+            {/* Section label */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 56, justifyContent: 'center' }}>
+              <span style={{ width: 28, height: 1, background: '#2d6faa', display: 'inline-block' }} />
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Who We Work With</span>
+              <span style={{ width: 28, height: 1, background: '#2d6faa', display: 'inline-block' }} />
+            </div>
+
+            {/* Two cards side by side */}
+            <div className="hero-ctas" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+
+              {/* Card 1 — Organisations */}
+              <div onMouseEnter={() => setHovA(true)} onMouseLeave={() => setHovA(false)}
+                style={{ position: 'relative', borderRadius: 24, overflow: 'hidden', background: '#0b1120', transition: 'all 0.3s ease', cursor: 'default', minHeight: 380, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '40px 40px 36px', boxShadow: hovA ? '0 32px 80px rgba(11,17,32,0.3)' : '0 8px 32px rgba(11,17,32,0.15)' }}>
+                {/* Glow */}
+                <div style={{ position: 'absolute', top: -60, right: -60, width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, rgba(90,163,216,0.18) 0%, transparent 70%)', pointerEvents: 'none', transition: 'opacity 0.3s', opacity: hovA ? 1 : 0.5 }} />
+                {/* Number */}
+                <div style={{ position: 'absolute', bottom: 20, right: 28, fontSize: 96, fontWeight: 900, color: 'rgba(255,255,255,0.04)', lineHeight: 1, letterSpacing: '-4px', userSelect: 'none' }}>01</div>
+
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(90,163,216,0.15)', border: '1px solid rgba(90,163,216,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#5aa3d8', marginBottom: 28 }}>
+                    <BuildingIcon />
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#5aa3d8', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For organisations</span>
+                  <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#fff', marginBottom: 16 }}>Strengthen<br />Your Team</h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', maxWidth: 320 }}>We don't hand you a CV. We place a professional built specifically around your technology requirements — assessed, trained, and ready from day one.</p>
+                </div>
+
+                <a href="build-your-team.html" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', background: 'rgba(90,163,216,0.15)', border: '1px solid rgba(90,163,216,0.3)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(90,163,216,0.28)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(90,163,216,0.15)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
+                  Build Your Team <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)', fontSize: 15 }}>→</span>
+                </a>
+              </div>
+
+              {/* Card 2 — Candidates */}
+              <div onMouseEnter={() => setHovB(true)} onMouseLeave={() => setHovB(false)}
+                style={{ position: 'relative', borderRadius: 24, overflow: 'hidden', background: '#fff', transition: 'all 0.3s ease', cursor: 'default', minHeight: 380, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '40px 40px 36px', border: '1px solid rgba(45,111,170,0.12)', boxShadow: hovB ? '0 32px 80px rgba(45,111,170,0.14)' : '0 4px 24px rgba(0,0,0,0.06)' }}>
+                {/* Glow */}
+                <div style={{ position: 'absolute', bottom: -60, left: -60, width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, rgba(45,111,170,0.1) 0%, transparent 70%)', pointerEvents: 'none', transition: 'opacity 0.3s', opacity: hovB ? 1 : 0.4 }} />
+                {/* Number */}
+                <div style={{ position: 'absolute', bottom: 20, right: 28, fontSize: 96, fontWeight: 900, color: 'rgba(11,17,32,0.04)', lineHeight: 1, letterSpacing: '-4px', userSelect: 'none' }}>02</div>
+
+                <div style={{ position: 'relative', zIndex: 1 }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2d6faa', marginBottom: 28 }}>
+                    <PersonIcon />
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For candidates</span>
+                  <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#0b1120', marginBottom: 16 }}>Launch<br />Your Career</h3>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#6b7280', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Six months of structured development designed around what employers actually need — and end with a confirmed placement.</p>
+                </div>
+
+                <a href="#" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#2d6faa', textDecoration: 'none', background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.2)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(45,111,170,0.16)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'rgba(45,111,170,0.08)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
+                  Launch My Career <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)', fontSize: 15 }}>→</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ── How It Works — Stacking Cards ───────────────────────────── */
+    const howCards = [
+      {
+        step: '01', label: 'Select',
+        title: 'We Identify The Right People',
+        desc: 'We identify elite talent locally based in Qatar with strong technological foundations, assessed on capability and potential, not qualifications alone.',
+        img: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&auto=format&fit=crop&q=80',
+        color: '#1b2d50',
+      },
+      {
+        step: '02', label: 'Develop',
+        title: 'We Build Them For You',
+        desc: 'Selected candidates enter our Launchpad programme — a structured period of technical and professional development built around the capability your organization actually needs.',
+        img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=80',
+        color: '#163758',
+      },
+      {
+        step: '03', label: 'Place',
+        title: 'Placed. Assessed. Day One Ready.',
+        desc: 'Developed professionals are placed with your organization on flexible monthly engagements through a direct contract. No hidden fees. No additional costs.',
+        img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&auto=format&fit=crop&q=80',
+        color: '#0f2744',
+      },
+    ];
+
+    const HowCard = React.memo(({ i, step, label, title, desc, img, color, total, sectionRef }) => {
+      const containerRef = React.useRef(null);
+      const innerRef    = React.useRef(null);
+      const imgRef      = React.useRef(null);
+
+      React.useEffect(() => {
+        let raf;
+        const update = () => {
+          if (!containerRef.current || !sectionRef.current || !innerRef.current || !imgRef.current) return;
+
+          /* ── image zoom: 1.4 → 1 as card enters viewport ── */
+          const rect = containerRef.current.getBoundingClientRect();
+          const imgP = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+          imgRef.current.style.transform = `scale(${1.4 - 0.4 * imgP})`;
+
+          /* ── card scale-down based on section scroll progress ── */
+          const secRect      = sectionRef.current.getBoundingClientRect();
+          const secScrollable = Math.max(1, sectionRef.current.scrollHeight - window.innerHeight);
+          const secP         = Math.max(0, Math.min(1, -secRect.top / secScrollable));
+          const targetScale  = 1 - (total - i) * 0.05;
+          const start        = i / total;
+          const progress     = Math.max(0, Math.min(1, (secP - start) / (1 - start)));
+          innerRef.current.style.transform = `scale(${1 - (1 - targetScale) * progress})`;
+        };
+
+        const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        update();
+        return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+      }, [i, total]);
+
+      return (
+        <div ref={containerRef} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, zIndex: i + 1 }}>
+          <div ref={innerRef} style={{ backgroundColor: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 40px 100px rgba(0,0,0,0.5)' }}>
+
+            {/* Step badge */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
+              <span style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.2)' }} />
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
+            </div>
+
+            <div style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
+              {/* Left */}
+              <div style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#fff', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
+                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.58)' }}>{desc}</p>
+                <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 20, fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.25)', paddingBottom: 3, width: 'fit-content' }}>
+                  Learn more
+                  <svg width="16" height="9" viewBox="0 0 22 12" fill="none">
+                    <path d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 16.4645 11.5962 16.7574 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z" fill="white"/>
+                  </svg>
+                </a>
+              </div>
+
+              {/* Right — image */}
+              <div style={{ flex: 1, borderRadius: 12, overflow: 'hidden' }}>
+                <img ref={imgRef} src={img} alt={title} style={{ width: '100%', height: '100%', objectFit: 'cover', transformOrigin: 'center center', willChange: 'transform', display: 'block' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+
+    const HowItWorks = () => {
+      const cardsRef = React.useRef(null);
+      return (
+        <div style={{ background: '#ffffff' }}>
+          {/* Heading — scrolls away before cards stick */}
+          <div style={{ padding: '100px 24px 60px', maxWidth: 1200, margin: '0 auto' }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#2d6faa', letterSpacing: '0.5px', background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.18)', padding: '4px 12px', borderRadius: 9999, display: 'inline-block', marginBottom: 20 }}>How it works</span>
+            <h2 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-2px', color: '#0b1120', fontFeatureSettings: '"lnum","locl"' }}>This Is How We Do It</h2>
+          </div>
+
+          {/* Stacking cards */}
+          <section ref={cardsRef}>
+            {howCards.map((card, i) => (
+              <HowCard key={i} i={i} total={howCards.length} sectionRef={cardsRef} {...card} />
+            ))}
+          </section>
+        </div>
+      );
+    };
+
+    /* ── Advantage ────────────────────────────────────────────────── */
+    const Advantage = () => {
+      const [hov, setHov] = React.useState(-1);
+      const cards = [
+        {
+          a1:'#1d5fa8', a2:'#5aa3d8', stat:'100%', label:'Custom Fit',
+          headline:'Built Around What You Actually Need',
+          body:'We work with you to understand your gaps and requirements before a single consultant is confirmed.',
+          icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        },
+        {
+          a1:'#0369a1', a2:'#38bdf8', stat:'48hr', label:'Turnaround',
+          headline:'Faster Than Traditional Hiring',
+          body:'No job postings, no CV stacks, no months of back and forth. Tell us what you need and we move immediately.',
+          icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        },
+        {
+          a1:'#5b21b6', a2:'#a78bfa', stat:'95%', label:'Success Rate',
+          headline:'Less Risk. Better Outcomes.',
+          body:'Every consultant has been selected, developed, and assessed before they ever meet your team. Already tested, cleared, and ready.',
+          icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        },
+        {
+          a1:'#0891b2', a2:'#22d3ee', stat:'Local', label:'Qatar & Gulf',
+          headline:'Committed Local Professionals',
+          body:'Qatar based and career focused. Our people are here to build lasting careers, not to pass through.',
+          icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        },
+      ];
+      return (
+        <section style={{ background: 'linear-gradient(145deg, #07101f 0%, #0d1b30 55%, #091526 100%)', padding: '110px 24px', position: 'relative', overflow: 'hidden' }}>
+          {/* dot grid texture */}
+          <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(circle, rgba(255,255,255,0.028) 1px, transparent 1px)', backgroundSize:'28px 28px', pointerEvents:'none' }} />
+          {/* top-center glow */}
+          <div style={{ position:'absolute', top:'35%', left:'50%', transform:'translate(-50%,-50%)', width:1000, height:500, background:'radial-gradient(ellipse, rgba(45,111,170,0.12) 0%, transparent 65%)', pointerEvents:'none' }} />
+          {/* bottom-right accent */}
+          <div style={{ position:'absolute', bottom:0, right:0, width:400, height:400, background:'radial-gradient(ellipse at bottom right, rgba(91,33,182,0.08) 0%, transparent 70%)', pointerEvents:'none' }} />
+
+          <div style={{ maxWidth:1200, margin:'0 auto', position:'relative' }}>
+            {/* Header row */}
+            <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', flexWrap:'wrap', gap:24, marginBottom:72 }}>
+              <div>
+                <span style={{ fontSize:11, fontWeight:700, color:'#5aa3d8', letterSpacing:'2.5px', textTransform:'uppercase', display:'inline-block', marginBottom:14 }}>Why CertiMinds</span>
+                <h2 style={{ fontSize:'clamp(2rem,4vw,3rem)', fontWeight:800, color:'#fff', letterSpacing:'-1.5px', lineHeight:1.1, margin:0 }}>The CertiMinds Advantage</h2>
+              </div>
+              <p style={{ fontSize:'1rem', color:'rgba(255,255,255,0.42)', maxWidth:380, lineHeight:1.75, margin:0 }}>Every aspect of how we work is designed to reduce risk and deliver outcomes that actually stick.</p>
+            </div>
+
+            {/* 4 cards */}
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:18 }}>
+              {cards.map(({a1,a2,stat,label,headline,body,icon},i) => (
+                <div key={i}
+                  onMouseEnter={()=>setHov(i)} onMouseLeave={()=>setHov(-1)}
+                  style={{
+                    background: hov===i ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.03)',
+                    border: `1px solid rgba(255,255,255,${hov===i?'0.13':'0.07'})`,
+                    borderRadius: 22,
+                    padding: '38px 28px 34px',
+                    transition: 'all 0.35s cubic-bezier(0.4,0,0.2,1)',
+                    cursor: 'default',
+                    boxShadow: hov===i ? `0 24px 64px rgba(0,0,0,0.4), 0 0 0 1px ${a1}44` : '0 2px 16px rgba(0,0,0,0.25)',
+                    transform: hov===i ? 'translateY(-4px)' : 'translateY(0)',
+                  }}>
+                  {/* icon circle */}
+                  <div style={{ width:60, height:60, borderRadius:'50%', background:`linear-gradient(135deg,${a1},${a2})`, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:30, boxShadow:`0 10px 30px ${a1}55`, transition:'transform 0.35s cubic-bezier(0.34,1.56,0.64,1)', transform: hov===i?'scale(1.1) rotate(6deg)':'scale(1) rotate(0deg)' }}>{icon}</div>
+                  {/* stat */}
+                  <div style={{ fontSize:'2.6rem', fontWeight:900, color:'#fff', letterSpacing:'-2px', lineHeight:1, marginBottom:6 }}>{stat}</div>
+                  <div style={{ fontSize:12, fontWeight:700, color:a2, letterSpacing:'0.6px', textTransform:'uppercase', marginBottom:22 }}>{label}</div>
+                  {/* divider */}
+                  <div style={{ height:1, background:`linear-gradient(90deg,${a1}88,transparent)`, marginBottom:20 }} />
+                  {/* body */}
+                  <p style={{ fontSize:14, lineHeight:1.78, color:'rgba(255,255,255,0.5)', margin:0 }}>{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ── Bottom CTA Banner ────────────────────────────────────────── */
+    const FooterCTA = () => {
+      const [hov, setHov] = React.useState(false);
+      return (
+        <section style={{ background: 'linear-gradient(145deg, #060e1c 0%, #0b1932 50%, #071220 100%)', padding: '120px 24px', position: 'relative', overflow: 'hidden' }}>
+          {/* dot grid */}
+          <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)', backgroundSize:'28px 28px', pointerEvents:'none' }} />
+          {/* center glow */}
+          <div style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', width:900, height:500, background:'radial-gradient(ellipse, rgba(45,111,170,0.16) 0%, transparent 65%)', pointerEvents:'none' }} />
+          {/* top-left accent */}
+          <div style={{ position:'absolute', top:0, left:0, width:500, height:300, background:'radial-gradient(ellipse at top left, rgba(91,33,182,0.07) 0%, transparent 70%)', pointerEvents:'none' }} />
+          {/* bottom-right accent */}
+          <div style={{ position:'absolute', bottom:0, right:0, width:400, height:400, background:'radial-gradient(ellipse at bottom right, rgba(14,165,233,0.07) 0%, transparent 65%)', pointerEvents:'none' }} />
+
+          <div style={{ maxWidth:860, margin:'0 auto', textAlign:'center', position:'relative' }}>
+            {/* eyebrow */}
+            <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(90,163,216,0.1)', border:'1px solid rgba(90,163,216,0.2)', borderRadius:9999, padding:'5px 16px', marginBottom:32 }}>
+              <div style={{ width:6, height:6, borderRadius:'50%', background:'#5aa3d8', boxShadow:'0 0 8px #5aa3d8' }} />
+              <span style={{ fontSize:11, fontWeight:700, color:'#5aa3d8', letterSpacing:'2.5px', textTransform:'uppercase' }}>Start Today</span>
+            </div>
+
+            {/* headline */}
+            <h2 style={{ fontSize:'clamp(2.4rem,5.5vw,4.2rem)', fontWeight:900, lineHeight:1.05, letterSpacing:'-2px', color:'#fff', margin:'0 0 20px' }}>
+              Your next great hire{' '}
+              <span style={{ background:'linear-gradient(90deg,#5aa3d8,#8ec6e8)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>is already trained.</span>
+            </h2>
+
+            {/* sub-copy */}
+            <p style={{ fontSize:'1.1rem', color:'rgba(255,255,255,0.45)', lineHeight:1.8, maxWidth:560, margin:'0 auto 48px' }}>
+              Stop sifting through CVs. CertiMinds delivers verified, job-ready tech professionals in Qatar and the Gulf — built on your specs, not a generic pool.
+            </p>
+
+            {/* CTA pair */}
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:14, flexWrap:'wrap' }}>
+              <a href="contact.html"
+                onMouseEnter={e=>{ setHov(true); e.currentTarget.querySelector('[data-arr]').style.transform='rotate(0deg)'; }}
+                onMouseLeave={e=>{ setHov(false); e.currentTarget.querySelector('[data-arr]').style.transform='rotate(-45deg)'; }}
+                style={{ display:'inline-flex', alignItems:'center', gap:10, background: hov ? '#1a6fc4' : '#1560b0', color:'#fff', fontSize:15, fontWeight:700, padding:'15px 34px', borderRadius:9999, textDecoration:'none', transition:'background 0.2s, box-shadow 0.2s, transform 0.2s', boxShadow: hov ? '0 12px 40px rgba(21,96,176,0.55)' : '0 6px 24px rgba(21,96,176,0.35)', transform: hov ? 'translateY(-2px)' : 'none', letterSpacing:'-0.1px' }}>
+                Talk to Our Team
+                <span data-arr="1" style={{ fontSize:18, display:'inline-block', transform:'rotate(-45deg)', transition:'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
+              </a>
+              <a href="our-launchpad.html"
+                onMouseEnter={e=>{ e.currentTarget.style.background='rgba(255,255,255,0.07)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.22)'; }}
+                onMouseLeave={e=>{ e.currentTarget.style.background='rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.12)'; }}
+                style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.12)', color:'rgba(255,255,255,0.75)', fontSize:15, fontWeight:600, padding:'15px 32px', borderRadius:9999, textDecoration:'none', transition:'background 0.2s, border-color 0.2s', letterSpacing:'-0.1px' }}>
+                Explore the Launchpad
+              </a>
+            </div>
+
+            {/* trust line */}
+            <p style={{ marginTop:40, fontSize:12, color:'rgba(255,255,255,0.22)', letterSpacing:'0.3px' }}>Trusted by organisations across Qatar &amp; the Gulf · No commitment required to start</p>
+          </div>
+        </section>
+      );
+    };
+
+    /* ── Footer ───────────────────────────────────────────────────── */
+    const Footer = () => {
+      const navCols = [
+        { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'our-launchpad.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
+        { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
+      ];
+      const linkStyle = { fontSize:14, color:'#1f2937', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+      return (
+        <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
+          <div style={{ maxWidth:1200, margin:'0 auto' }}>
+            {/* top row */}
+            <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+
+              {/* brand col */}
+              <div>
+                <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+                <p style={{ fontSize:14, color:'#374151', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+                  Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
+                </p>
+                {/* Social icons */}
+                <div style={{ display:'flex', gap:10 }}>
+                  {[
+                    { href:'#', title:'Instagram', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg> },
+                    { href:'#', title:'Facebook', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> },
+                    { href:'#', title:'X / Twitter', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
+                    { href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+                  ].map(({ href, title, svg }) => (
+                    <a key={title} href={href} target="_blank" rel="noopener noreferrer" title={title}
+                      onMouseEnter={e=>{ e.currentTarget.style.background='rgba(11,17,32,0.07)'; e.currentTarget.style.color='#0b1120'; }}
+                      onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#8a9ab0'; }}
+                      style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#8a9ab0', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
+                      {svg}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* link cols */}
+              {navCols.map(col => (
+                <div key={col.heading}>
+                  <div style={{ fontSize:11, fontWeight:700, color:'rgba(0,0,0,0.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+                  <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
+                    {col.links.map(({ label, href }) => (
+                      <a key={label} href={href}
+                        onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                        onMouseLeave={e=>e.currentTarget.style.color='#1f2937'}
+                        style={linkStyle}>{label}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* bottom bar */}
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
+              <span style={{ fontSize:13, color:'rgba(0,0,0,0.55)' }}>© CertiMinds 2026. All rights reserved.</span>
+              <div style={{ display:'flex', gap:24 }}>
+                {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+                  <a key={label} href={href}
+                    onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                    onMouseLeave={e=>e.currentTarget.style.color='rgba(0,0,0,0.35)'}
+                    style={{ fontSize:13, color:'rgba(0,0,0,0.55)', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+    };
+
+    /* ── Icons (minimal SVG line icons) ──────────────────────────── */
+    const BuildingIcon = () => (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="9" width="18" height="12" rx="1"/><path d="M8 9V5a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v4"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/>
+      </svg>
+    );
+    const PersonIcon = () => (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="7" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+      </svg>
+    );
+    const NotRecruitIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/><path d="M15 9l-6 6"/><path d="M9 9l6 6"/>
+      </svg>
+    );
+    const ContextIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+    );
+    const ProgramIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    );
+    const AIIcon = () => (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+      </svg>
+    );
+
+    /* ── App ─────────────────────────────────────────────────────── */
+    const App = () => (
+      <div>
+        <Nav />
+        <Hero />
+        <AudienceSection />
+        <HowItWorks />
+        <Advantage />
+        <FooterCTA />
+        <Footer />
+      </div>
+    );
+
+    /* ── Tweaks ──────────────────────────────────────────────────── */
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "accentColor": "#0075de",
+      "heroHeadline": "The talent gap is real. We close it.",
+      "sectionPad": "normal"
+    }/*EDITMODE-END*/;
+
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+  <!-- Tweaks panel -->
+  <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px, rgba(0,0,0,0.03) 0 2px 8px; padding:20px; width:228px; z-index:9999; font-family:'Inter',sans-serif;">
+    <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:16px;">Tweaks</div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <select onchange="setPad(this.value)" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
+          <option value="normal">Normal</option>
+          <option value="airy">Airy</option>
+          <option value="compact">Compact</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">CTA emphasis</label>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <button onclick="setCtaStyle('split')" style="text-align:left;background:none;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:6px 10px;font-size:12px;font-family:inherit;cursor:pointer;color:rgba(0,0,0,0.7);">Split audience cards</button>
+          <button onclick="setCtaStyle('single')" style="text-align:left;background:none;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:6px 10px;font-size:12px;font-family:inherit;cursor:pointer;color:rgba(0,0,0,0.7);">Single primary CTA</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function setPad(val) {
+      const pads = { normal: '88px', airy: '112px', compact: '56px' };
+      document.querySelectorAll('section').forEach(s => { s.style.paddingTop = pads[val]; s.style.paddingBottom = pads[val]; });
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { sectionPad: val } }, '*');
+    }
+    function setCtaStyle(val) {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { ctaStyle: val } }, '*');
+    }
+  </script>
+</body>
+</html>

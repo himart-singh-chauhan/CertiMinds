@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Launchpad — CertiMinds</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .pillars-grid { grid-template-columns: 1fr !important; }
+      .tracks-grid { grid-template-columns: 1fr 1fr !important; }
+      .crosslink-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 520px) {
+      .tracks-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    /* ── Nav ──────────────────────────────────────────────────────── */
+    const Nav = () => {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const links = [
+        { label: 'Build Your Team', href: 'build-your-team.html' },
+        { label: 'Build Your Career', href: 'build-your-career.html' },
+        { label: 'Our Launchpad', href: 'our-launchpad.html', active: true },
+        { label: 'About Us', href: 'about-us.html' },
+        { label: 'Contact', href: 'contact.html' },
+      ];
+      return (
+        <nav style={{ background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64 }} />
+            </a>
+            <div className="nav-links" style={{ display: 'flex', gap: 2 }}>
+              {links.map(l => (
+                <a key={l.label} href={l.href} style={{ fontSize: 14, fontWeight: 600, color: l.active ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', padding: '6px 10px', borderRadius: 5, textDecoration: 'none', transition: 'all 0.15s', whiteSpace: 'nowrap', background: l.active ? 'rgba(0,0,0,0.04)' : 'transparent' }}
+                  onMouseEnter={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.95)'; e.currentTarget.style.background='rgba(0,0,0,0.04)'; }}}
+                  onMouseLeave={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.6)'; e.currentTarget.style.background='transparent'; }}}>{l.label}</a>
+              ))}
+            </div>
+            <div className="nav-cta">
+              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '8px 18px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background='#005bab'}
+                onMouseLeave={e => e.currentTarget.style.background='#0075de'}>Let's Talk</a>
+            </div>
+            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}
+              onClick={() => setMenuOpen(!menuOpen)}>
+              {[0,1,2].map(i => (
+                <span key={i} style={{ width: 22, height: 2, background: 'rgba(0,0,0,0.8)', borderRadius: 2, display: 'block', transition: 'all 0.2s',
+                  transform: i===0&&menuOpen?'rotate(45deg) translateY(7px)':i===2&&menuOpen?'rotate(-45deg) translateY(-7px)':'none',
+                  opacity: i===1&&menuOpen?0:1 }} />
+              ))}
+            </button>
+          </div>
+          {menuOpen && (
+            <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {links.map(l => <a key={l.label} href={l.href} style={{ fontSize: 16, fontWeight: 600, color: 'rgba(0,0,0,0.8)', padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', textDecoration: 'none' }}>{l.label}</a>)}
+              <a href="contact.html" style={{ fontSize: 16, fontWeight: 600, color: '#fff', padding: '10px 16px', textDecoration: 'none', background: '#0075de', borderRadius: 4, marginTop: 8, textAlign: 'center' }}>Let's Talk</a>
+            </div>
+          )}
+        </nav>
+      );
+    };
+
+    /* ── Hero ─────────────────────────────────────────────────────── */
+    const Hero = () => (
+      <section style={{ background: '#fff', padding: '88px 24px 80px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 760 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f2f9ff', color: '#097fe8', fontSize: 12, fontWeight: 600, letterSpacing: '0.125px', padding: '4px 12px', borderRadius: 9999, marginBottom: 28 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#0075de', display: 'inline-block' }} />
+              The CertiMinds programme
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 3.75rem)', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-2px', color: 'rgba(0,0,0,0.95)', marginBottom: 28, fontFeatureSettings: '"lnum","locl"', textWrap: 'balance' }}>
+              Not a bootcamp.<br />Not a recruiter.<br />Something better.
+            </h1>
+            <p style={{ fontSize: '1.2rem', lineHeight: 1.65, color: '#615d59', maxWidth: 580, marginBottom: 40 }}>
+              The Launchpad is a structured, multi-month development programme that takes driven individuals and builds them into consultant-ready tech professionals. Depth over speed. Rigour over volume.
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a href="build-your-career.html" style={{ background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background='#005bab'}
+                onMouseLeave={e => e.currentTarget.style.background='#0075de'}>Launch my career</a>
+              <a href="build-your-team.html" style={{ background: 'rgba(0,0,0,0.05)', color: 'rgba(0,0,0,0.85)', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background='rgba(0,0,0,0.09)'}
+                onMouseLeave={e => e.currentTarget.style.background='rgba(0,0,0,0.05)'}>Strengthen my team</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Three Pillars ────────────────────────────────────────────── */
+    const Pillars = () => (
+      <section style={{ background: '#f6f5f4', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Programme philosophy</span>
+            <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.25px', color: 'rgba(0,0,0,0.95)', marginBottom: 16, fontFeatureSettings: '"lnum","locl"' }}>Built on three pillars.</h2>
+            <p style={{ fontSize: '1.05rem', color: '#615d59', maxWidth: 500, margin: '0 auto', lineHeight: 1.6 }}>Every aspect of the Launchpad is designed around a clear philosophy. These three pillars shape everything — how we select, how we develop, and how we place.</p>
+          </div>
+
+          <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24 }}>
+            {[
+              {
+                n: '01',
+                color: '#0075de',
+                label: 'Depth over speed',
+                headline: 'Months, not weeks',
+                body: 'Short courses produce surface knowledge. The Launchpad runs over several months because that\'s what it takes to build genuine capability. We don\'t rush people into placements — we prepare them properly.',
+                points: ['Structured multi-month curriculum', 'Milestone-based progression', 'No shortcuts, no padding'],
+              },
+              {
+                n: '02',
+                color: '#213183',
+                label: 'Whole professional, not just technician',
+                headline: 'Technical and professional, both',
+                body: 'A consultant who can write code but can\'t communicate with a client is half a professional. The Launchpad builds technical competence and professional foundations simultaneously — consulting skills, communication, and business context are not optional extras.',
+                points: ['Technical track + professional skills', 'Consulting and communication', 'Business and domain context'],
+              },
+              {
+                n: '03',
+                color: '#2a9d99',
+                label: 'Context is everything',
+                headline: 'Developed for the Gulf',
+                body: 'Generic international training programmes are designed for generic markets. The Launchpad is built for Qatar and the Gulf — the organisations, the culture, the regulatory environment, and the specific technology challenges that matter here.',
+                points: ['Qatar and Gulf market focus', 'Local organisational context', 'Relevant domain knowledge'],
+              },
+            ].map(({ n, color, label, headline, body, points }) => (
+              <div key={n} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 16, padding: '36px 32px', boxShadow: 'rgba(0,0,0,0.04) 0 4px 18px, rgba(0,0,0,0.02) 0 2px 6px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 36, height: 36, borderRadius: '50%', background: `${color}14`, border: `2px solid ${color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color }}>{n}</span>
+                  </div>
+                  <span style={{ fontSize: 11, fontWeight: 700, color, letterSpacing: '0.7px', textTransform: 'uppercase', lineHeight: 1.3 }}>{label}</span>
+                </div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, lineHeight: 1.25, letterSpacing: '-0.3px', color: 'rgba(0,0,0,0.95)' }}>{headline}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.8, color: '#615d59', flexGrow: 1 }}>{body}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8, paddingTop: 8, borderTop: '1px solid rgba(0,0,0,0.07)' }}>
+                  {points.map(pt => (
+                    <div key={pt} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <div style={{ width: 16, height: 16, borderRadius: '50%', background: `${color}14`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      </div>
+                      <span style={{ fontSize: 13, fontWeight: 500, color: '#615d59' }}>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Capability Tracks ────────────────────────────────────────── */
+    const TRACKS = [
+      {
+        id: 'ai-data',
+        color: '#0075de',
+        label: 'AI & Data',
+        headline: 'AI and data engineering',
+        body: 'Build capability in machine learning, data pipelines, and AI-enabled applications. Designed for organisations deploying data-driven solutions across operations and decision-making.',
+        skills: ['Python & data engineering', 'Machine learning fundamentals', 'AI application development', 'Data visualisation & BI'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>,
+      },
+      {
+        id: 'cloud',
+        color: '#213183',
+        label: 'Cloud & Infrastructure',
+        headline: 'Cloud and DevOps engineering',
+        body: 'Build, deploy, and manage cloud infrastructure. Covers major cloud platforms, infrastructure-as-code, CI/CD pipelines, and modern DevOps practices across Gulf enterprise environments.',
+        skills: ['Cloud platforms (AWS/Azure/GCP)', 'Infrastructure as code', 'CI/CD and DevOps', 'Container orchestration'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>,
+      },
+      {
+        id: 'cyber',
+        color: '#523410',
+        label: 'Cybersecurity',
+        headline: 'Cybersecurity and risk',
+        body: 'Develop the skills to protect organisational systems and data. Covers threat analysis, risk management, security operations, and compliance frameworks relevant to Gulf regulatory requirements.',
+        skills: ['Threat analysis & response', 'Security operations (SOC)', 'Risk & compliance frameworks', 'Network and endpoint security'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+      },
+      {
+        id: 'software',
+        color: '#2a9d99',
+        label: 'Software Engineering',
+        headline: 'Software development',
+        body: 'Build full-stack software development capability. From web and mobile applications to APIs and system integration — focused on modern languages, frameworks, and engineering practices.',
+        skills: ['Full-stack web development', 'API design & integration', 'Software architecture', 'Testing & code quality'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
+      },
+      {
+        id: 'ba',
+        color: '#dd5b00',
+        label: 'Business Analysis',
+        headline: 'Technology business analysis',
+        body: 'Bridge the gap between business requirements and technology solutions. Build skills in requirements engineering, process analysis, stakeholder management, and digital transformation delivery.',
+        skills: ['Requirements engineering', 'Process mapping & analysis', 'Stakeholder facilitation', 'Agile delivery & documentation'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
+      },
+      {
+        id: 'pm',
+        color: '#391c57',
+        label: 'Technology Project Management',
+        headline: 'Technology delivery & project management',
+        body: 'Develop the skills to plan, manage and deliver technology projects. Covers Agile, waterfall and hybrid frameworks, risk management, and the specific demands of tech delivery in Gulf enterprise contexts.',
+        skills: ['Agile & Scrum delivery', 'Project planning & scheduling', 'Risk and change management', 'Stakeholder communication'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>,
+      },
+      {
+        id: 'data-analytics',
+        color: '#1aae39',
+        label: 'Data Analytics',
+        headline: 'Data analytics and visualisation',
+        body: 'Develop the capability to collect, analyse, and communicate data insights across an organisation. Covers analytical tools, statistical thinking, and business intelligence in real-world Gulf contexts.',
+        skills: ['SQL & database querying', 'Analytics & statistical methods', 'Power BI / Tableau / dashboards', 'Data storytelling & reporting'],
+        icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+      },
+    ];
+
+    const Tracks = () => {
+      const [activeTrack, setActiveTrack] = React.useState(null);
+
+      return (
+        <section style={{ background: '#fff', padding: '88px 24px' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Capability tracks</span>
+              <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.25px', color: 'rgba(0,0,0,0.95)', marginBottom: 16, fontFeatureSettings: '"lnum","locl"' }}>Seven tracks. One standard.</h2>
+              <p style={{ fontSize: '1.05rem', color: '#615d59', maxWidth: 500, margin: '0 auto', lineHeight: 1.6 }}>Every track is built to the same standard of rigour. The technology changes — the depth of development doesn't.</p>
+            </div>
+
+            <div className="tracks-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+              {TRACKS.map(track => {
+                const isActive = activeTrack === track.id;
+                return (
+                  <div key={track.id}
+                    onClick={() => setActiveTrack(isActive ? null : track.id)}
+                    style={{ background: isActive ? '#fff' : '#fff', border: `1px solid ${isActive ? track.color : 'rgba(0,0,0,0.08)'}`, borderRadius: 12, padding: '28px 24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: isActive ? `rgba(0,0,0,0.06) 0 8px 24px, rgba(0,0,0,0.03) 0 2px 8px` : 'rgba(0,0,0,0.04) 0 2px 8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 16, gap: 12 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <div style={{ width: 40, height: 40, borderRadius: 10, background: `${track.color}12`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: track.color, flexShrink: 0 }}>
+                          {track.icon}
+                        </div>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: track.color, letterSpacing: '0.6px', textTransform: 'uppercase' }}>{track.label}</span>
+                      </div>
+                      <div style={{ width: 20, height: 20, borderRadius: '50%', border: `1.5px solid ${isActive ? track.color : 'rgba(0,0,0,0.15)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2, transition: 'all 0.2s' }}>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                          <line x1="4" y1="1" x2="4" y2="7" stroke={isActive ? track.color : 'rgba(0,0,0,0.3)'} strokeWidth="1.25" strokeLinecap="round" style={{ transform: isActive ? 'scaleY(0)' : 'scaleY(1)', transition: 'transform 0.2s', transformOrigin: 'center' }} />
+                          <line x1="1" y1="4" x2="7" y2="4" stroke={isActive ? track.color : 'rgba(0,0,0,0.3)'} strokeWidth="1.25" strokeLinecap="round" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h3 style={{ fontSize: '1rem', fontWeight: 700, lineHeight: 1.3, color: 'rgba(0,0,0,0.95)', marginBottom: 10, letterSpacing: '-0.15px' }}>{track.headline}</h3>
+                    <p style={{ fontSize: 13, lineHeight: 1.7, color: '#615d59' }}>{track.body}</p>
+
+                    {isActive && (
+                      <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid rgba(0,0,0,0.07)' }}>
+                        <div style={{ fontSize: 11, fontWeight: 700, color: '#a39e98', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 10 }}>What you'll build</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                          {track.skills.map(skill => (
+                            <div key={skill} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                              <div style={{ width: 16, height: 16, borderRadius: '50%', background: `${track.color}14`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                <svg width="8" height="8" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke={track.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                              </div>
+                              <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(0,0,0,0.75)' }}>{skill}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <p style={{ textAlign: 'center', fontSize: 13, color: '#a39e98', marginTop: 24, fontWeight: 500 }}>Click any track to see what it covers</p>
+          </div>
+        </section>
+      );
+    };
+
+    /* ── Crosslink to Build Your Team ─────────────────────────────── */
+    const Crosslink = () => (
+      <section style={{ background: '#f6f5f4', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="crosslink-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+            {/* For organisations */}
+            <div style={{ background: '#31302e', borderRadius: 16, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '1px', textTransform: 'uppercase' }}>For organisations</span>
+              <h3 style={{ fontSize: '1.625rem', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#fff' }}>Use the Launchpad to close your capability gap.</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', flexGrow: 1 }}>Partner with CertiMinds to have Launchpad graduates placed directly into your organisation. We build them, you benefit — with ongoing support from us throughout the engagement.</p>
+              <a href="build-your-team.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '10px 20px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s', alignSelf: 'flex-start' }}
+                onMouseEnter={e => e.currentTarget.style.background='#005bab'}
+                onMouseLeave={e => e.currentTarget.style.background='#0075de'}>
+                Build your team →
+              </a>
+            </div>
+
+            {/* For candidates */}
+            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 16, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 16, boxShadow: 'rgba(0,0,0,0.04) 0 4px 18px' }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#a39e98', letterSpacing: '1px', textTransform: 'uppercase' }}>For candidates</span>
+              <h3 style={{ fontSize: '1.625rem', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.5px', color: 'rgba(0,0,0,0.95)' }}>Apply for the next Launchpad cohort.</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.7, color: '#615d59', flexGrow: 1 }}>No prior tech experience required. If you have drive, commitment, and the aptitude to learn, the Launchpad gives you everything else. Applications are assessed on an ongoing basis.</p>
+              <a href="build-your-career.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: 'rgba(0,0,0,0.05)', color: 'rgba(0,0,0,0.85)', fontSize: 14, fontWeight: 600, padding: '10px 20px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s', alignSelf: 'flex-start' }}
+                onMouseEnter={e => e.currentTarget.style.background='rgba(0,0,0,0.09)'}
+                onMouseLeave={e => e.currentTarget.style.background='rgba(0,0,0,0.05)'}>
+                Launch my career →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Footer ───────────────────────────────────────────────────── */
+    const Footer = () => (
+      <footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+            <div>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
+              <p style={{ fontSize: 14, color: '#615d59', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                {['LinkedIn','Twitter'].map(s => (
+                  <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4 }}
+                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.7)'}
+                    onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{s}</a>
+                ))}
+              </div>
+            </div>
+            {[
+              { heading: 'For organisations', links: ['Build Your Team', 'Our Launchpad', "Let's Talk"] },
+              { heading: 'For candidates', links: ['Build Your Career', 'Our Launchpad', 'Apply now'] },
+              { heading: 'Company', links: ['About Us', 'Contact', 'Privacy', 'Terms'] },
+            ].map(col => (
+              <div key={col.heading}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {col.links.map(l => <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#615d59', textDecoration: 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.9)'}
+                    onMouseLeave={e => e.currentTarget.style.color='#615d59'}>{l}</a>)}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
+            <div style={{ display: 'flex', gap: 20 }}>
+              {['Privacy','Terms'].map(l => <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
+                onMouseEnter={e => e.currentTarget.style.color='#615d59'}
+                onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{l}</a>)}
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+
+    /* ── App ─────────────────────────────────────────────────────── */
+    const App = () => (
+      <div>
+        <Nav />
+        <Hero />
+        <Pillars />
+        <Tracks />
+        <Crosslink />
+        <Footer />
+      </div>
+    );
+
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+  <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px; padding:20px; width:220px; z-index:9999; font-family:'Inter',sans-serif;">
+    <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:14px;">Tweaks</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <select onchange="document.querySelectorAll('section').forEach(s=>{s.style.paddingTop=this.value;s.style.paddingBottom=this.value})" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;">
+          <option value="88px">Normal</option>
+          <option value="112px">Airy</option>
+          <option value="56px">Compact</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Track grid</label>
+        <select onchange="document.querySelector('.tracks-grid').style.gridTemplateColumns=this.value" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;">
+          <option value="repeat(3,1fr)">3 columns</option>
+          <option value="repeat(2,1fr)">2 columns</option>
+          <option value="1fr">1 column</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — CertiMinds</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .values-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .mission-layout { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+    /* ── Nav ──────────────────────────────────────────────────────── */
+    const Nav = () => {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const links = [
+        { label: 'Build Your Team', href: 'build-your-team.html' },
+        { label: 'Build Your Career', href: 'build-your-career.html' },
+        { label: 'Our Launchpad', href: 'our-launchpad.html' },
+        { label: 'About Us', href: 'about-us.html', active: true },
+        { label: 'Contact', href: 'contact.html' },
+      ];
+      return (
+        <nav style={{ background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64 }} />
+            </a>
+            <div className="nav-links" style={{ display: 'flex', gap: 2 }}>
+              {links.map(l => (
+                <a key={l.label} href={l.href} style={{ fontSize: 14, fontWeight: 600, color: l.active ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', padding: '6px 10px', borderRadius: 5, textDecoration: 'none', transition: 'all 0.15s', whiteSpace: 'nowrap', background: l.active ? 'rgba(0,0,0,0.04)' : 'transparent' }}
+                  onMouseEnter={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.95)'; e.currentTarget.style.background='rgba(0,0,0,0.04)'; }}}
+                  onMouseLeave={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.6)'; e.currentTarget.style.background='transparent'; }}}>{l.label}</a>
+              ))}
+            </div>
+            <div className="nav-cta">
+              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '8px 18px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.background='#005bab'}
+                onMouseLeave={e => e.currentTarget.style.background='#0075de'}>Let's Talk</a>
+            </div>
+            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}
+              onClick={() => setMenuOpen(!menuOpen)}>
+              {[0,1,2].map(i => (
+                <span key={i} style={{ width: 22, height: 2, background: 'rgba(0,0,0,0.8)', borderRadius: 2, display: 'block', transition: 'all 0.2s',
+                  transform: i===0&&menuOpen?'rotate(45deg) translateY(7px)':i===2&&menuOpen?'rotate(-45deg) translateY(-7px)':'none',
+                  opacity: i===1&&menuOpen?0:1 }} />
+              ))}
+            </button>
+          </div>
+          {menuOpen && (
+            <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {links.map(l => <a key={l.label} href={l.href} style={{ fontSize: 16, fontWeight: 600, color: 'rgba(0,0,0,0.8)', padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', textDecoration: 'none' }}>{l.label}</a>)}
+              <a href="contact.html" style={{ fontSize: 16, fontWeight: 600, color: '#fff', padding: '10px 16px', textDecoration: 'none', background: '#0075de', borderRadius: 4, marginTop: 8, textAlign: 'center' }}>Let's Talk</a>
+            </div>
+          )}
+        </nav>
+      );
+    };
+
+    /* ── Mission ──────────────────────────────────────────────────── */
+    const Mission = () => (
+      <section style={{ background: '#fff', padding: '96px 24px 88px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          {/* Page label */}
+          <div style={{ marginBottom: 40 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 12px', borderRadius: 9999 }}>About CertiMinds</span>
+          </div>
+
+          <div className="mission-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }}>
+            {/* Left: headline */}
+            <div>
+              <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-2px', color: 'rgba(0,0,0,0.95)', marginBottom: 0, fontFeatureSettings: '"lnum","locl"', textWrap: 'balance' }}>
+                Built for the AI era.<br />Built for Qatar.
+              </h1>
+            </div>
+
+            {/* Right: mission text */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'rgba(0,0,0,0.8)', fontWeight: 400 }}>
+                CertiMinds exists because the technology talent gap in Qatar and the Gulf is real — and the existing solutions don't close it. Recruitment agencies move existing talent around. Short courses produce surface knowledge. Neither builds the depth of capability that organisations actually need.
+              </p>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#615d59' }}>
+                We built something different. A structured programme that takes driven individuals — regardless of their background — and develops them into consultant-ready tech professionals. Then we place them with organisations that need them, and stay engaged throughout.
+              </p>
+              <p style={{ fontSize: '1.1rem', lineHeight: 1.8, color: '#615d59' }}>
+                We're based in Doha and focused on Qatar and the Gulf. That focus is deliberate. Local context matters — in how we develop people, in how we work with organisations, and in the outcomes we deliver.
+              </p>
+            </div>
+          </div>
+
+          {/* Divider statement */}
+          <div style={{ marginTop: 72, paddingTop: 56, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+            <blockquote style={{ fontSize: 'clamp(1.375rem, 3vw, 1.875rem)', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.75px', color: 'rgba(0,0,0,0.95)', maxWidth: 760, fontFeatureSettings: '"lnum","locl"', fontStyle: 'normal' }}>
+              "We are not a recruitment agency or a staffing firm. We are a talent development platform built specifically for the AI era — a capability builder that bridges the gap between aspiration and professional readiness."
+            </blockquote>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Values ───────────────────────────────────────────────────── */
+    const VALUES = [
+      {
+        label: 'Excellence',
+        color: '#0075de',
+        headline: 'We hold ourselves to a high standard',
+        body: 'The quality of our graduates reflects directly on CertiMinds. We don\'t lower the bar to increase throughput. Every consultant who leaves the Launchpad must meet the same standard — and that standard is set by what organisations actually need, not what\'s easy to deliver.',
+        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+      },
+      {
+        label: 'Integrity',
+        color: '#213183',
+        headline: 'We say what we mean',
+        body: 'With candidates, we\'re honest about whether the Launchpad is right for them — and we say so clearly when it isn\'t. With organisations, we\'re direct about what we can and can\'t deliver. We don\'t oversell. We don\'t make promises we can\'t keep. Honest relationships produce better outcomes.',
+        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
+      },
+      {
+        label: 'Impact',
+        color: '#2a9d99',
+        headline: 'We measure what matters',
+        body: 'CertiMinds exists to close a real gap — in Qatar\'s technology workforce and in the career prospects of individuals who deserve a path into the industry. We measure our success by the quality and durability of placements, the growth of our graduates, and the capability we build in the organisations we work with.',
+        icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
+      },
+    ];
+
+    const OurValues = () => (
+      <section style={{ background: '#f6f5f4', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ marginBottom: 56 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Our values</span>
+            <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.25px', color: 'rgba(0,0,0,0.95)', fontFeatureSettings: '"lnum","locl"', maxWidth: 560 }}>What we stand for.</h2>
+          </div>
+
+          <div className="values-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 24 }}>
+            {VALUES.map(({ label, color, headline, body, icon }) => {
+              const [hov, setHov] = React.useState(false);
+              return (
+                <div key={label}
+                  onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+                  style={{ background: '#fff', border: `1px solid ${hov ? color+'40' : 'rgba(0,0,0,0.08)'}`, borderRadius: 16, padding: '40px 36px', transition: 'all 0.2s', display: 'flex', flexDirection: 'column', gap: 20, boxShadow: hov ? `rgba(0,0,0,0.06) 0 8px 24px` : 'rgba(0,0,0,0.04) 0 4px 18px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <div style={{ width: 52, height: 52, borderRadius: 14, background: `${color}10`, display: 'flex', alignItems: 'center', justifyContent: 'center', color, flexShrink: 0 }}>
+                      {icon}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 2 }}>{label}</div>
+                      <div style={{ fontSize: 16, fontWeight: 700, color: 'rgba(0,0,0,0.9)', lineHeight: 1.3 }}>{headline}</div>
+                    </div>
+                  </div>
+                  <p style={{ fontSize: 14, lineHeight: 1.85, color: '#615d59' }}>{body}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── What we're not ───────────────────────────────────────────── */
+    const WhatWeAreNot = () => (
+      <section style={{ background: '#fff', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }} className="mission-layout">
+            <div>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 24 }}>Our positioning</span>
+              <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.5rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1px', color: 'rgba(0,0,0,0.95)', marginBottom: 24, fontFeatureSettings: '"lnum","locl"' }}>What CertiMinds is not.</h2>
+              <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#615d59' }}>
+                Being clear about what we don't do is as important as explaining what we do. CertiMinds occupies a specific space — and understanding the boundaries helps both candidates and organisations decide whether we're the right fit.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              {[
+                { not: 'A recruitment agency', because: 'We don\'t search for existing talent or fill roles from a database. We build people from the ground up.' },
+                { not: 'A staffing firm', because: 'Our consultants are developed specifically for their engagements. We\'re not a body shop.' },
+                { not: 'A short course or bootcamp', because: 'The Launchpad runs over months, not weeks. It builds real capability, not surface familiarity.' },
+                { not: 'A university or degree programme', because: 'We focus entirely on professional readiness and practical placement. No academic credentials.' },
+                { not: 'A placement-only service', because: 'We remain engaged after placement. Development continues. We don\'t place and disappear.' },
+              ].map(({ not, because }, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 16, padding: '18px 20px', borderRadius: 8, background: '#f6f5f4', border: '1px solid rgba(0,0,0,0.06)' }}>
+                  <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="2" y1="2" x2="8" y2="8" stroke="rgba(0,0,0,0.35)" strokeWidth="1.5" strokeLinecap="round"/><line x1="8" y1="2" x2="2" y2="8" stroke="rgba(0,0,0,0.35)" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: 'rgba(0,0,0,0.9)', marginBottom: 4 }}>Not {not.toLowerCase()}</div>
+                    <div style={{ fontSize: 13, lineHeight: 1.6, color: '#615d59' }}>{because}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Footer CTA ───────────────────────────────────────────────── */
+    const FooterCTA = () => (
+      <section style={{ background: '#31302e', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-1.5px', color: '#fff', marginBottom: 20, fontFeatureSettings: '"lnum","locl"' }}>
+            Ready to work with us?
+          </h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', maxWidth: 440, margin: '0 auto 40px' }}>
+            Whether you're an organisation closing a capability gap or a candidate ready to build a career in tech — we'd like to hear from you.
+          </p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="build-your-team.html" style={{ background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.background='#005bab'}
+              onMouseLeave={e => e.currentTarget.style.background='#0075de'}>Strengthen your team</a>
+            <a href="build-your-career.html" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s', border: '1px solid rgba(255,255,255,0.15)' }}
+              onMouseEnter={e => e.currentTarget.style.background='rgba(255,255,255,0.15)'}
+              onMouseLeave={e => e.currentTarget.style.background='rgba(255,255,255,0.1)'}>Launch my career</a>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ── Footer ───────────────────────────────────────────────────── */
+    const Footer = () => (
+      <footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+            <div>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
+              <p style={{ fontSize: 14, color: '#615d59', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                {['LinkedIn','Twitter'].map(s => (
+                  <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4 }}
+                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.7)'}
+                    onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{s}</a>
+                ))}
+              </div>
+            </div>
+            {[
+              { heading: 'For organisations', links: ['Build Your Team', 'Our Launchpad', "Let's Talk"] },
+              { heading: 'For candidates', links: ['Build Your Career', 'Our Launchpad', 'Apply now'] },
+              { heading: 'Company', links: ['About Us', 'Contact', 'Privacy', 'Terms'] },
+            ].map(col => (
+              <div key={col.heading}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {col.links.map(l => <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#615d59', textDecoration: 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.9)'}
+                    onMouseLeave={e => e.currentTarget.style.color='#615d59'}>{l}</a>)}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
+            <div style={{ display: 'flex', gap: 20 }}>
+              {['Privacy','Terms'].map(l => <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
+                onMouseEnter={e => e.currentTarget.style.color='#615d59'}
+                onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{l}</a>)}
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+
+    /* ── App ─────────────────────────────────────────────────────── */
+    const App = () => (
+      <div>
+        <Nav />
+        <Mission />
+        <OurValues />
+        <WhatWeAreNot />
+        <FooterCTA />
+        <Footer />
+      </div>
+    );
+
+    window.addEventListener('message', e => {
+      if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+      if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+    });
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+  <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px; padding:20px; width:220px; z-index:9999; font-family:'Inter',sans-serif;">
+    <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:14px;">Tweaks</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <select onchange="document.querySelectorAll('section').forEach(s=>{s.style.paddingTop=this.value;s.style.paddingBottom=this.value})" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;">
+          <option value="88px">Normal</option>
+          <option value="112px">Airy</option>
+          <option value="56px">Compact</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Values layout</label>
+        <select onchange="document.querySelector('.values-grid').style.gridTemplateColumns=this.value" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;">
+          <option value="1fr 1fr 1fr">3 columns</option>
+          <option value="1fr">Stacked</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

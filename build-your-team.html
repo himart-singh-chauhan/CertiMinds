@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Team — CertiMinds</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .steps-timeline { padding-left: 16px !important; }
+    }
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+const Nav = () => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const links = [
+  { label: 'Build Your Team', href: 'build-your-team.html', active: true },
+  { label: 'Build Your Career', href: 'build-your-career.html' },
+  { label: 'Our Launchpad', href: 'our-launchpad.html' },
+  { label: 'About Us', href: 'about-us.html' },
+  { label: 'Contact', href: 'contact.html' }];
+
+  return (
+    <nav style={{ background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: "80px", width: "200px" }} />
+            </a>
+            <div className="nav-links" style={{ display: 'flex', gap: 2 }}>
+              {links.map((link) =>
+          <a key={link.label} href={link.href} style={{ fontSize: 14, fontWeight: 600, color: link.active ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', padding: '6px 10px', borderRadius: 5, textDecoration: 'none', transition: 'all 0.15s', whiteSpace: 'nowrap', background: link.active ? 'rgba(0,0,0,0.04)' : 'transparent' }}
+          onMouseEnter={(e) => {if (!link.active) {e.currentTarget.style.color = 'rgba(0,0,0,0.95)';e.currentTarget.style.background = 'rgba(0,0,0,0.04)';}}}
+          onMouseLeave={(e) => {if (!link.active) {e.currentTarget.style.color = 'rgba(0,0,0,0.6)';e.currentTarget.style.background = 'transparent';}}}>
+                  {link.label}
+                </a>
+          )}
+            </div>
+            <div className="nav-cta" style={{ display: 'flex', alignItems: 'center' }}>
+              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '8px 18px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+          onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
+          onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
+                Let's Talk
+              </a>
+            </div>
+            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}
+        onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+              {[0, 1, 2].map((i) =>
+          <span key={i} style={{ width: 22, height: 2, background: 'rgba(0,0,0,0.8)', borderRadius: 2, display: 'block', transition: 'all 0.2s',
+            transform: i === 0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i === 2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+            opacity: i === 1 && menuOpen ? 0 : 1 }} />
+          )}
+            </button>
+          </div>
+          {menuOpen &&
+      <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {links.map((link) =>
+        <a key={link.label} href={link.href} style={{ fontSize: 16, fontWeight: 600, color: 'rgba(0,0,0,0.8)', padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', textDecoration: 'none' }}>{link.label}</a>
+        )}
+              <a href="contact.html" style={{ fontSize: 16, fontWeight: 600, color: '#fff', padding: '10px 16px', textDecoration: 'none', background: '#0075de', borderRadius: 4, marginTop: 8, textAlign: 'center' }}>Let's Talk</a>
+            </div>
+      }
+        </nav>);
+
+};
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+const Hero = () =>
+<section style={{ background: '#fff', padding: '88px 24px 80px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div style={{ maxWidth: 720 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f2f9ff', color: '#097fe8', fontSize: 12, fontWeight: 600, letterSpacing: '0.125px', padding: '4px 12px', borderRadius: 9999, marginBottom: 28 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#0075de', display: 'inline-block' }} />
+              For organisations
+            </span>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 3.75rem)', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-2px', color: 'rgba(0,0,0,0.95)', marginBottom: 28, fontFeatureSettings: '"lnum","locl"', textWrap: 'balance' }}>
+              Tech capability built<br />for your organisation.
+            </h1>
+            <p style={{ fontSize: '1.2rem', lineHeight: 1.65, color: '#615d59', maxWidth: 560, marginBottom: 40 }}>
+              We identify driven individuals, develop them through the Launchpad programme, and place them as consultants within your team. You get tech talent that's shaped around your context — not a generic hire from a job board.
+            </p>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+        onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
+        onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
+                Start a conversation
+              </a>
+              <a href="our-launchpad.html" style={{ background: 'rgba(0,0,0,0.05)', color: 'rgba(0,0,0,0.85)', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.09)'}
+        onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}>
+                See the Launchpad
+              </a>
+            </div>
+          </div>
+
+          {/* Key points strip */}
+          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', marginTop: 64, paddingTop: 40, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+            {[
+      { label: 'Gulf-grown talent', desc: 'Developed in Qatar, for Qatar' },
+      { label: 'Structured programme', desc: 'Not ad hoc training' },
+      { label: 'Consultant-ready', desc: 'Day-one productive' },
+      { label: 'Ongoing partnership', desc: 'We stay engaged post-placement' }].
+      map(({ label, desc }) =>
+      <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(0,117,222,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#0075de" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: 'rgba(0,0,0,0.9)', lineHeight: 1.3 }}>{label}</div>
+                  <div style={{ fontSize: 13, color: '#a39e98', marginTop: 2 }}>{desc}</div>
+                </div>
+              </div>
+      )}
+          </div>
+        </div>
+      </section>;
+
+
+/* ── Icons ────────────────────────────────────────────────────── */
+const iconProps = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
+const DiscoverIcon = () => <svg {...iconProps}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v6" /><path d="M8 11h6" /></svg>;
+const SelectIcon = () => <svg {...iconProps}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
+const DevelopIcon = () => <svg {...iconProps}><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>;
+const AlignIcon = () => <svg {...iconProps}><path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" /></svg>;
+const PlaceIcon = () => <svg {...iconProps}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>;
+const GrowIcon = () => <svg {...iconProps}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>;
+
+/* ── Engagement Model ─────────────────────────────────────────── */
+const STEPS = [
+{
+  n: '01', label: 'Discovery',
+  headline: 'We understand your capability gap',
+  body: "Every engagement starts with a structured discovery session. We work with your technical leadership to map current gaps, near-term projects, and the skills you need — before a single consultant is selected.",
+  detail: 'Typical duration: 1–2 weeks',
+  icon: <DiscoverIcon />
+},
+{
+  n: '02', label: 'Candidate selection',
+  headline: 'We identify the right people',
+  body: 'From our pipeline of assessed candidates, we shortlist individuals whose aptitude and trajectory match your requirements. You review profiles before anyone enters development.',
+  detail: 'You approve before development begins',
+  icon: <SelectIcon />
+},
+{
+  n: '03', label: 'Launchpad development',
+  headline: 'We develop them for your context',
+  body: 'Selected candidates enter the Launchpad programme — a structured multi-month development track covering technical skills, professional foundations, and your specific domain context.',
+  detail: 'Typically 4–6 months',
+  icon: <DevelopIcon />
+},
+{
+  n: '04', label: 'Pre-placement alignment',
+  headline: 'We align before they arrive',
+  body: 'Before placement, consultants go through a context-setting phase specific to your organisation — your tools, culture, team dynamics, and expectations. No surprises on day one.',
+  detail: '2–4 weeks before placement',
+  icon: <AlignIcon />
+},
+{
+  n: '05', label: 'Placement',
+  headline: 'They join your team',
+  body: "Your consultant is placed and begins contributing. CertiMinds provides structured 30/60/90-day check-ins to ensure performance, resolve issues early, and keep development on track.",
+  detail: 'Ongoing performance support',
+  icon: <PlaceIcon />
+},
+{
+  n: '06', label: 'Continuous development',
+  headline: 'We stay engaged',
+  body: 'The relationship doesn\'t end at placement. CertiMinds continues to support your consultant\'s growth, provide additional training as needed, and work with you on future capability requirements.',
+  detail: 'Long-term partnership model',
+  icon: <GrowIcon />
+}];
+
+
+const EngagementModel = () => {
+  const [activeStep, setActiveStep] = React.useState(0);
+  const step = STEPS[activeStep];
+
+  return (
+    <section style={{ background: '#f6f5f4', padding: '88px 24px' }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 56 }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Our engagement model</span>
+              <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.25px', color: 'rgba(0,0,0,0.95)', marginBottom: 16, fontFeatureSettings: '"lnum","locl"' }}>Six steps to consultant-ready talent.</h2>
+              <p style={{ fontSize: '1.05rem', color: '#615d59', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>A rigorous, partnership-led process from capability gap to placed consultant.</p>
+            </div>
+
+            {/* Step tabs */}
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 40 }}>
+              {STEPS.map((s, i) =>
+          <button key={i} onClick={() => setActiveStep(i)}
+          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 9999, border: i === activeStep ? '1.5px solid #0075de' : '1.5px solid rgba(0,0,0,0.1)', background: i === activeStep ? '#fff' : 'transparent', color: i === activeStep ? '#0075de' : 'rgba(0,0,0,0.55)', fontWeight: 600, fontSize: 13, cursor: 'pointer', transition: 'all 0.15s', fontFamily: 'inherit' }}>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: i === activeStep ? '#0075de' : 'rgba(0,0,0,0.3)', letterSpacing: '0.5px' }}>{s.n}</span>
+                  {s.label}
+                </button>
+          )}
+            </div>
+
+            {/* Step detail card */}
+            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 16, overflow: 'hidden', boxShadow: 'rgba(0,0,0,0.04) 0 4px 18px, rgba(0,0,0,0.02) 0 2px 6px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }} className="step-detail-grid">
+                {/* Left: content */}
+                <div style={{ padding: '52px 48px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+                    <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de' }}>
+                      {step.icon}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: '#a39e98', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 2 }}>Step {step.n}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: '#0075de' }}>{step.label}</div>
+                    </div>
+                  </div>
+                  <h3 style={{ fontSize: '1.625rem', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.5px', color: 'rgba(0,0,0,0.95)', marginBottom: 16 }}>{step.headline}</h3>
+                  <p style={{ fontSize: 15, lineHeight: 1.75, color: '#615d59', marginBottom: 28 }}>{step.body}</p>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f2f9ff', color: '#097fe8', fontSize: 12, fontWeight: 600, padding: '5px 12px', borderRadius: 9999 }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    {step.detail}
+                  </div>
+                </div>
+                {/* Right: step list */}
+                <div style={{ background: '#f6f5f4', borderLeft: '1px solid rgba(0,0,0,0.07)', padding: '52px 40px', display: 'flex', flexDirection: 'column', gap: 4 }} className="steps-timeline">
+                  {STEPS.map((s, i) =>
+              <button key={i} onClick={() => setActiveStep(i)}
+              style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 14px', borderRadius: 8, border: 'none', background: i === activeStep ? '#fff' : 'transparent', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s', fontFamily: 'inherit', boxShadow: i === activeStep ? 'rgba(0,0,0,0.04) 0 2px 8px' : 'none' }}>
+                      <div style={{ width: 28, height: 28, borderRadius: '50%', border: `2px solid ${i === activeStep ? '#0075de' : 'rgba(0,0,0,0.15)'}`, background: i === activeStep ? '#0075de' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.15s' }}>
+                        {i < activeStep ?
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg> :
+                  <span style={{ fontSize: 10, fontWeight: 700, color: i === activeStep ? '#fff' : 'rgba(0,0,0,0.4)', letterSpacing: '0.3px' }}>{s.n}</span>
+                  }
+                      </div>
+                      <div>
+                        <div style={{ fontSize: 14, fontWeight: 700, color: i === activeStep ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', lineHeight: 1.3 }}>{s.label}</div>
+                        <div style={{ fontSize: 12, color: '#a39e98', marginTop: 1 }}>{s.detail}</div>
+                      </div>
+                    </button>
+              )}
+                </div>
+              </div>
+            </div>
+
+            {/* Navigation arrows */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 20 }}>
+              <button onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
+          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: '#fff', color: activeStep === 0 ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0.7)', fontWeight: 600, fontSize: 13, cursor: activeStep === 0 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
+                ← Previous
+              </button>
+              <span style={{ fontSize: 13, color: '#a39e98', fontWeight: 600 }}>{activeStep + 1} of {STEPS.length}</span>
+              <button onClick={() => setActiveStep(Math.min(STEPS.length - 1, activeStep + 1))}
+          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: activeStep === STEPS.length - 1 ? '#fff' : '#0075de', color: activeStep === STEPS.length - 1 ? 'rgba(0,0,0,0.25)' : '#fff', fontWeight: 600, fontSize: 13, cursor: activeStep === STEPS.length - 1 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
+                Next →
+              </button>
+            </div>
+          </div>
+        </section>);
+
+};
+
+/* ── FAQ ──────────────────────────────────────────────────────── */
+const FAQS = [
+{ q: "We already have a recruitment agency. Why do we need CertiMinds?", a: "Recruitment agencies find existing talent. We build it. If you can't find the right people in the market — or if the talent you hire arrives and still needs significant investment — that's the gap we close. We're not a faster recruiter. We're a different solution entirely." },
+{ q: "How long does the full process take from engagement to placement?", a: "The typical timeline from initial discovery to placement is 6–8 months. The majority of that is development time in the Launchpad programme. We plan with your hiring pipeline in mind, so engagements can be structured to meet your timelines." },
+{ q: "Do we get to review candidates before development begins?", a: "Yes. After initial selection, you review candidate profiles before anyone enters the development programme. You're involved in the decision, not just the outcome." },
+{ q: "What sectors and technology areas do your consultants cover?", a: "Our current capability tracks include: AI & Data, Cloud & Infrastructure, Cybersecurity, Software Engineering, and Business Analysis. We expand tracks based on demand from partner organisations." },
+{ q: "What happens if a placement doesn't work out?", a: "We work with you and the consultant to understand the issue and resolve it. Our 30/60/90-day check-in structure is designed to catch misalignments early. If a placement is genuinely not the right fit, we work to find a resolution — including re-placement where appropriate." },
+{ q: "Is there a minimum commitment or contract length?", a: "We structure engagements based on your requirements. Contact us to discuss your situation — we'll be direct about what makes sense and what doesn't." }];
+
+
+const FAQ = () => {
+  const [open, setOpen] = React.useState(null);
+  return (
+    <section style={{ background: '#fff', padding: '88px 24px' }}>
+          <div style={{ maxWidth: 800, margin: '0 auto' }}>
+            <div style={{ marginBottom: 48 }}>
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Common questions</span>
+              <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1px', color: 'rgba(0,0,0,0.95)', fontFeatureSettings: '"lnum","locl"' }}>Questions we get asked.</h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              {FAQS.map((faq, i) =>
+          <div key={i} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, overflow: 'hidden' }}>
+                  <button onClick={() => setOpen(open === i ? null : i)}
+            style={{ width: '100%', textAlign: 'left', padding: '20px 24px', background: open === i ? '#f6f5f4' : '#fff', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, transition: 'background 0.15s', fontFamily: 'inherit' }}>
+                    <span style={{ fontSize: 15, fontWeight: 600, color: 'rgba(0,0,0,0.9)', lineHeight: 1.4 }}>{faq.q}</span>
+                    <span style={{ width: 24, height: 24, borderRadius: '50%', background: open === i ? '#0075de' : 'rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.2s' }}>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                        <line x1="5" y1="1" x2="5" y2="9" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" style={{ transform: open === i ? 'scaleY(0)' : 'scaleY(1)', transition: 'transform 0.2s', transformOrigin: 'center' }} />
+                        <line x1="1" y1="5" x2="9" y2="5" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </span>
+                  </button>
+                  {open === i &&
+            <div style={{ padding: '4px 24px 22px', fontSize: 14, lineHeight: 1.8, color: '#615d59' }}>{faq.a}</div>
+            }
+                </div>
+          )}
+            </div>
+          </div>
+        </section>);
+
+};
+
+/* ── Footer CTA ───────────────────────────────────────────────── */
+const FooterCTA = () =>
+<section style={{ background: '#31302e', padding: '88px 24px' }}>
+        <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-1.5px', color: '#fff', marginBottom: 20, fontFeatureSettings: '"lnum","locl"' }}>
+            Ready to close your capability gap?
+          </h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', maxWidth: 480, margin: '0 auto 40px' }}>
+            Tell us about your technology challenges. We'll tell you whether we can help — and what that looks like.
+          </p>
+          <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '12px 28px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
+    onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
+    onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
+            Start a conversation →
+          </a>
+        </div>
+      </section>;
+
+
+/* ── Footer ───────────────────────────────────────────────────── */
+const Footer = () =>
+<footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+            <div>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
+              <p style={{ fontSize: 14, color: '#615d59', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                {['LinkedIn', 'Twitter'].map((s) =>
+          <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'color 0.15s' }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.7)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = '#a39e98'}>{s}</a>
+          )}
+              </div>
+            </div>
+            {[
+      { heading: 'For organisations', links: ['Build Your Team', 'Our Launchpad', "Let's Talk"] },
+      { heading: 'For candidates', links: ['Build Your Career', 'Our Launchpad', 'Apply now'] },
+      { heading: 'Company', links: ['About Us', 'Contact', 'Privacy', 'Terms'] }].
+      map((col) =>
+      <div key={col.heading}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {col.links.map((l) =>
+          <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#615d59', textDecoration: 'none', transition: 'color 0.15s' }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.9)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = '#615d59'}>{l}</a>
+          )}
+                </div>
+              </div>
+      )}
+          </div>
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+            <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
+            <div style={{ display: 'flex', gap: 20 }}>
+              {['Privacy', 'Terms'].map((l) =>
+        <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
+        onMouseEnter={(e) => e.currentTarget.style.color = '#615d59'}
+        onMouseLeave={(e) => e.currentTarget.style.color = '#a39e98'}>{l}</a>
+        )}
+            </div>
+          </div>
+        </div>
+      </footer>;
+
+
+/* ── App ─────────────────────────────────────────────────────── */
+const App = () =>
+<div>
+        <Nav />
+        <Hero />
+        <EngagementModel />
+        <FAQ />
+        <FooterCTA />
+        <Footer />
+      </div>;
+
+
+/* Tweaks */
+window.addEventListener('message', (e) => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+  <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px; padding:20px; width:220px; z-index:9999; font-family:'Inter',sans-serif;">
+    <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:14px;">Tweaks</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <select onchange="document.querySelectorAll('section').forEach(s=>{s.style.paddingTop=this.value;s.style.paddingBottom=this.value})" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
+          <option value="88px">Normal</option>
+          <option value="112px">Airy</option>
+          <option value="56px">Compact</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">FAQ default</label>
+        <select onchange="setFaqDefault(this.value)" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
+          <option value="closed">All closed</option>
+          <option value="first">First open</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <script>function setFaqDefault(v){}</script>
+</body>
+</html>
