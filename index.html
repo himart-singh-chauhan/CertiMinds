@@ -292,69 +292,60 @@
 
     const Hero = () => {
       return (
-        <section style={{ background: '#ffffff', minHeight: 'calc(100vh - 90px)', display: 'flex', alignItems: 'center', padding: '0 24px', position: 'relative', overflow: 'hidden' }}>
+        <section style={{ background: '#ffffff', minHeight: 'calc(100vh - 90px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 24px', position: 'relative', overflow: 'hidden' }}>
 
           {/* Grid background */}
           <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(21,96,176,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(21,96,176,0.06) 1px, transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
-          {/* Fade edges so grid doesn't hit borders hard */}
+          {/* Fade edges */}
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, #ffffff 100%)', pointerEvents: 'none' }} />
 
-          <div style={{ maxWidth: 1160, margin: '0 auto', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center', position: 'relative', zIndex: 1, padding: '28px 0 32px' }} className="hero-grid">
+          <div style={{ maxWidth: 860, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 1, padding: '48px 0 48px' }}>
 
-            {/* LEFT — Text */}
-            <div>
-              {/* Eyebrow badge */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 28 }}>
-                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
-                <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.3px' }}>Tech Talent Development · Qatar &amp; Gulf</span>
-              </div>
+            {/* Eyebrow badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 20 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.3px' }}>Qatar</span>
+            </div>
 
-              {/* H1 */}
-              <h1 style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3.8rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 12, fontFeatureSettings: '"lnum"' }}>
-                We Build The<br />
-                <HeroTyped /><br />
-                <span style={{ color: '#0a1628' }}>Your Business Needs.</span>
-              </h1>
+            {/* H1 — large centered */}
+            <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 0, fontFeatureSettings: '"lnum"' }}>
+              We Build The<br />
+              <span style={{ color: '#1560b0' }}><HeroTyped /></span><br />
+              <span style={{ color: '#0a1628' }}>Your Business Needs.</span>
+            </h1>
 
-              {/* Subheadline */}
-              <p style={{ fontSize: 'clamp(0.95rem, 1.3vw, 1.05rem)', lineHeight: 1.75, color: '#4b5563', maxWidth: 500, margin: '14px 0 24px' }}>
-                CertiMinds doesn't fill roles — we craft the professionals. Our Launchpad develops local Qatar talent around your exact technology requirements, assessed and job-ready from day one.
-              </p>
+            {/* Subheadline */}
+            <p style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1rem)', lineHeight: 1.7, color: '#4b5563', maxWidth: 560, margin: '16px auto 24px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              CertiMinds doesn't fill roles — we craft the professionals. Our Launchpad develops local Qatar talent around your exact technology requirements, assessed and job-ready from day one.
+            </p>
 
-              {/* CTA row */}
-              <div className="hero-ctas" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-                <a href="build-your-team.html"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1560b0', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(21,96,176,0.28)', letterSpacing: '-0.1px' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = '#1048a0'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(21,96,176,0.38)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(0deg)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 18px rgba(21,96,176,0.28)'; e.currentTarget.querySelector('[data-arr]').style.transform = 'rotate(-45deg)'; }}>
-                  Build Your Team <span data-arr="1" style={{ display: 'inline-block', transform: 'rotate(-45deg)', transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
-                </a>
-                <a href="#"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', color: '#0a1628', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', border: '1.5px solid rgba(10,22,40,0.18)', transition: 'all 0.2s', letterSpacing: '-0.1px' }}
-                  onMouseEnter={e => { e.currentTarget.style.background = '#f0f7ff'; e.currentTarget.style.borderColor = '#1560b0'; e.currentTarget.style.color = '#1560b0'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(10,22,40,0.18)'; e.currentTarget.style.color = '#0a1628'; }}>
-                  Start My Career
-                </a>
-              </div>
-
-              {/* Stats row */}
-              <div style={{ display: 'flex', gap: 40, marginTop: 28, paddingTop: 20, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'wrap' }}>
+            {/* Stats table */}
+            <div style={{ marginTop: 32, border: '1px solid rgba(0,0,0,0.1)', borderRadius: 14, overflow: 'hidden', background: '#fff' }}>
+              {/* Top row — headings */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 {[
-                  { value: '200+', label: 'Professionals Placed' },
-                  { value: '95%',  label: 'Client Retention' },
-                  { value: '6 month', label: 'Launchpad Duration' },
-                ].map(({ value, label }) => (
-                  <div key={value}>
-                    <div style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.2rem)', fontWeight: 900, letterSpacing: '-1.5px', color: '#0a1628', lineHeight: 1 }}>{value}</div>
-                    <div style={{ fontSize: 12, fontWeight: 500, color: '#6b7280', marginTop: 4 }}>{label}</div>
+                  { value: '2% Acceptance Rate' },
+                  { value: '100% Qatar-Based Talent' },
+                  { value: '3-Track Programme' },
+                ].map(({ value }, i) => (
+                  <div key={value} style={{ padding: '18px 24px', fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', fontWeight: 800, color: '#0a1628', borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
+                    {value}
+                  </div>
+                ))}
+              </div>
+              {/* Bottom row — subtexts */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+                {[
+                  { label: 'Rigorous selection, not open enrolment' },
+                  { label: 'Qatar-first talent pipeline' },
+                  { label: 'Technical · Professional · AI-Native' },
+                ].map(({ label }, i) => (
+                  <div key={label} style={{ padding: '14px 24px', fontSize: 'clamp(0.8rem, 1.1vw, 0.9rem)', color: '#6b7280', fontWeight: 500, borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
+                    {label}
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* RIGHT — Visual panel */}
-            <HeroVisual />
-
           </div>
         </section>
       );
@@ -392,7 +383,7 @@
                   </div>
                   <span style={{ fontSize: 11, fontWeight: 700, color: '#5aa3d8', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For organisations</span>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#fff', marginBottom: 16 }}>Strengthen<br />Your Team</h3>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', maxWidth: 320 }}>We don't hand you a CV. We place a professional built specifically around your technology requirements — assessed, trained, and ready from day one.</p>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.5)', maxWidth: 320 }}>We don't forward CVs. We build professionals around your exact technology stack. Assessed, trained, and ready to contribute from day one.</p>
                 </div>
 
                 <a href="build-your-team.html" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', background: 'rgba(90,163,216,0.15)', border: '1px solid rgba(90,163,216,0.3)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
@@ -416,7 +407,7 @@
                   </div>
                   <span style={{ fontSize: 11, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For candidates</span>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#0b1120', marginBottom: 16 }}>Launch<br />Your Career</h3>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#6b7280', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Six months of structured development designed around what employers actually need — and end with a confirmed placement.</p>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#6b7280', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Structured, employer-aligned training across technical, professional, and AI skills. Designed to get you hired and keep you there.</p>
                 </div>
 
                 <a href="#" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#2d6faa', textDecoration: 'none', background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.2)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
@@ -438,19 +429,19 @@
         step: '01', label: 'Select',
         title: 'We Identify The Right People',
         desc: 'We identify elite talent locally based in Qatar with strong technological foundations, assessed on capability and potential, not qualifications alone.',
-        color: '#1b2d50',
+        color: 'linear-gradient(135deg, #c8e6f8 0%, #b8d4f0 40%, #d4c8f0 100%)',
       },
       {
         step: '02', label: 'Develop',
-        title: 'We Build Them For You',
+        title: 'We Train To Your Brief',
         desc: 'Selected candidates enter our Launchpad programme — a structured period of technical and professional development built around the capability your organization actually needs.',
-        color: '#163758',
+        color: 'linear-gradient(135deg, #bdd8f5 0%, #c4beed 40%, #dab8e8 100%)',
       },
       {
         step: '03', label: 'Place',
-        title: 'Placed. Assessed. Day One Ready.',
+        title: 'Onboarded Once. Productive Immediately.',
         desc: 'Developed professionals are placed with your organization on flexible monthly engagements through a direct contract. No hidden fees. No additional costs.',
-        color: '#0f2744',
+        color: 'linear-gradient(135deg, #b8ccf0 0%, #c8b8ec 40%, #e0b8e8 100%)',
       },
     ];
 
@@ -487,26 +478,21 @@
 
       return (
         <div ref={containerRef} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, zIndex: i + 1 }}>
-          <div ref={innerRef} style={{ backgroundColor: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 40px 100px rgba(0,0,0,0.5)' }}>
+          <div ref={innerRef} style={{ background: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.25)' }}>
 
             {/* Step badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
-              <span style={{ width: 24, height: 1, background: 'rgba(255,255,255,0.2)' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.35)', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(30,50,120,0.5)', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
+              <span style={{ width: 24, height: 1, background: 'rgba(30,50,120,0.2)' }} />
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(30,50,120,0.5)', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
             </div>
 
             <div style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
               {/* Left */}
               <div style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#fff', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
-                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: 'rgba(255,255,255,0.58)' }}>{desc}</p>
-                <a href="#" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 20, fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.85)', textDecoration: 'none', borderBottom: '1px solid rgba(255,255,255,0.25)', paddingBottom: 3, width: 'fit-content' }}>
-                  Learn more
-                  <svg width="16" height="9" viewBox="0 0 22 12" fill="none">
-                    <path d="M21.5303 6.53033C21.8232 6.23744 21.8232 5.76256 21.5303 5.46967L16.7574 0.696699C16.4645 0.403806 15.9896 0.403806 15.6967 0.696699C15.4038 0.989592 15.4038 1.46447 15.6967 1.75736L19.9393 6L15.6967 10.2426C15.4038 10.5355 15.4038 11.0104 15.6967 11.3033C15.9896 11.5962 16.4645 11.5962 16.7574 11.3033L21.5303 6.53033ZM0 6.75L21 6.75V5.25L0 5.25L0 6.75Z" fill="white"/>
-                  </svg>
-                </a>
+                <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#0a1628', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
+                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: 'rgba(20,40,100,0.65)' }}>{desc}</p>
+
               </div>
 
               {/* ── Right panel 01 (Select): teal bg + 3 spaced pill cards ── */}
@@ -522,7 +508,7 @@
                     {[
                       { text: 'Qatar-Based Talent Only', g: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> },
                       { text: 'Capability-Led Assessment', g: 'linear-gradient(135deg,#2d6faa,#1a4878)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
-                      { text: '200+ Professionals Screened', g: 'linear-gradient(135deg,#8ec6e8,#5aa3d8)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
+                      { text: 'Scored across 20+ criteria\'s', g: 'linear-gradient(135deg,#8ec6e8,#5aa3d8)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
                     ].map(({ text, g, icon }, idx) => (
                       <div key={idx} style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 50, padding: '13px 18px', display: 'flex', alignItems: 'center', gap: 14, boxShadow: '0 6px 20px rgba(0,0,0,0.25)' }}>
                         <div style={{ width: 44, height: 44, borderRadius: '50%', background: g, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(45,111,170,0.4)' }}>{icon}</div>
@@ -533,70 +519,17 @@
                 </div>
               )}
 
-              {/* ── Right panel 02 (Develop): purple bg + circular orbital flow ── */}
+              {/* ── Right panel 02 (Develop): image ── */}
               {i === 1 && (
-                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', position: 'relative', background: 'linear-gradient(145deg,#0e1535 0%,#162050 55%,#1e2c68 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center' }}>
-                  {/* line grid texture */}
-                  <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(90,163,216,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(90,163,216,0.07) 1px, transparent 1px)', backgroundSize: '28px 28px', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: -30, right: -30, width: 150, height: 150, borderRadius: '50%', background: 'rgba(90,163,216,0.1)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: -25, left: -25, width: 120, height: 120, borderRadius: '50%', background: 'rgba(45,111,170,0.12)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: '8%', right: '8%', width: 65, height: 65, borderRadius: '50%', background: 'rgba(142,198,232,0.1)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'relative', zIndex: 1, width: '88%', height: '86%', background: 'rgba(255,255,255,0.97)', borderRadius: 18 }}>
-                    <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} viewBox="0 0 300 260" preserveAspectRatio="xMidYMid meet">
-                      <defs>
-                        <linearGradient id="orbitG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#5aa3d8" stopOpacity="0.7"/><stop offset="100%" stopColor="#2d6faa" stopOpacity="0.7"/></linearGradient>
-                        <marker id="mArrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 L5 2.5 L0 5 z" fill="#2d6faa" opacity="0.7"/></marker>
-                      </defs>
-                      <ellipse cx="150" cy="130" rx="88" ry="74" fill="none" stroke="url(#orbitG)" strokeWidth="1.5" strokeDasharray="6,4"/>
-                      <path d="M 212 72 L 220 66" stroke="#2d6faa" strokeWidth="1.5" opacity="0.7" markerEnd="url(#mArrow)"/>
-                      <path d="M 216 188 L 222 195" stroke="#2d6faa" strokeWidth="1.5" opacity="0.7" markerEnd="url(#mArrow)"/>
-                      <path d="M 62 130 L 55 123" stroke="#2d6faa" strokeWidth="1.5" opacity="0.7" markerEnd="url(#mArrow)"/>
-                    </svg>
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 60, height: 60, borderRadius: '50%', background: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 8px 24px rgba(45,111,170,0.4)' }}>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                    </div>
-                    <div style={{ position: 'absolute', top: '9%', right: '4%', background: 'rgba(90,163,216,0.1)', border: '1px solid rgba(90,163,216,0.3)', borderRadius: 12, padding: '8px 11px', display: 'flex', alignItems: 'center', gap: 8, maxWidth: '40%' }}>
-                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#0b1120', lineHeight: 1.3 }}>Full-Stack<br/>Ownership</span>
-                    </div>
-                    <div style={{ position: 'absolute', bottom: '9%', right: '4%', background: 'rgba(90,163,216,0.1)', border: '1px solid rgba(90,163,216,0.3)', borderRadius: 12, padding: '8px 11px', display: 'flex', alignItems: 'center', gap: 8, maxWidth: '40%' }}>
-                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#0b1120', lineHeight: 1.3 }}>End-to-End<br/>Delivery</span>
-                    </div>
-                    <div style={{ position: 'absolute', top: '50%', left: '3%', transform: 'translateY(-50%)', background: 'rgba(90,163,216,0.1)', border: '1px solid rgba(90,163,216,0.3)', borderRadius: 12, padding: '8px 11px', display: 'flex', alignItems: 'center', gap: 8, maxWidth: '38%' }}>
-                      <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-                      <span style={{ fontSize: 11, fontWeight: 700, color: '#0b1120', lineHeight: 1.3 }}>Integrated<br/>Eng. Roles</span>
-                    </div>
-                  </div>
+                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
+                  <img src="uploads/imgCard 2.png" alt="Develop" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
 
-              {/* ── Right panel 03 (Place): orange bg + stacked pill cards with dashed connectors ── */}
+              {/* ── Right panel 03 (Place): image ── */}
               {i === 2 && (
-                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', position: 'relative', background: 'linear-gradient(145deg,#081828 0%,#0d2748 55%,#122e58 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center' }}>
-                  {/* radial dot texture */}
-                  <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(90,163,216,0.15) 1px, transparent 1px)', backgroundSize: '20px 20px', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: -50, left: -50, width: 200, height: 200, borderRadius: '50%', background: 'rgba(45,111,170,0.15)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: -40, right: -40, width: 180, height: 180, borderRadius: '50%', background: 'rgba(90,163,216,0.1)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: '55%', left: '-8%', width: 100, height: 100, borderRadius: '50%', background: 'rgba(142,198,232,0.08)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: '5%', right: '5%', width: 55, height: 55, borderRadius: '50%', background: 'rgba(90,163,216,0.12)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'relative', zIndex: 1, width: '82%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    {[
-                      { text: '5× Faster PoC to Production', g: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> },
-                      { text: 'Day 1 Production-Ready Engineers', g: 'linear-gradient(135deg,#2d6faa,#1a4878)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg> },
-                      { text: 'ROI Positive Within 90 Days', g: 'linear-gradient(135deg,#8ec6e8,#5aa3d8)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> },
-                    ].map(({ text, g, icon }, idx, arr) => (
-                      <React.Fragment key={idx}>
-                        <div style={{ background: 'rgba(255,255,255,0.97)', borderRadius: 16, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 14, width: '100%', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}>
-                          <div style={{ width: 46, height: 46, borderRadius: '50%', background: g, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 14px rgba(45,111,170,0.4)' }}>{icon}</div>
-                          <span style={{ fontSize: 13.5, fontWeight: 700, color: '#0b1120', lineHeight: 1.3 }}>{text}</span>
-                        </div>
-                        {idx < arr.length - 1 && (
-                          <div style={{ height: 22, borderLeft: '2px dashed rgba(90,163,216,0.5)', alignSelf: 'flex-start', marginLeft: 38 }} />
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </div>
+                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
+                  <img src="uploads/imgCard 3.png" alt="Place" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
             </div>
@@ -611,8 +544,7 @@
         <div style={{ background: '#ffffff' }}>
           {/* Heading — scrolls away before cards stick */}
           <div style={{ padding: '100px 24px 60px', maxWidth: 1200, margin: '0 auto' }}>
-            <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.5px', background: 'rgba(21,96,176,0.08)', border: '1px solid rgba(21,96,176,0.18)', padding: '4px 12px', borderRadius: 9999, display: 'inline-block', marginBottom: 20 }}>How it works</span>
-            <h2 style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-2px', color: '#0a1628', fontFeatureSettings: '"lnum","locl"' }}>This Is How We Do It</h2>
+            <h2 style={{ fontSize: 'clamp(3rem, 6.5vw, 5.5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628', fontFeatureSettings: '"lnum","locl"' }}>The CertiMinds Model</h2>
           </div>
 
           {/* Stacking cards */}
