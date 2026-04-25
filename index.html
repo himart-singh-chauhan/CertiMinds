@@ -58,7 +58,7 @@
       const currentPage = window.location.pathname.split('/').pop() || 'index.html';
       const links = [
         { label: 'Build Your Team',   href: 'build-your-team.html' },
-        { label: 'Build Your Career', href: '#' },
+        { label: 'Build Your Career', href: 'build-your-career.html' },
         { label: 'Our Launchpad',     href: 'our-launchpad.html' },
         { label: 'About Us',          href: 'about-us.html' },
         { label: 'Contact',           href: 'contact.html' },
@@ -557,171 +557,138 @@
       );
     };
 
-    /* ── Advantage (Bento) ─────────────────────────────────────────── */
+    /* ── Advantage ────────────────────────────────────────────────── */
     const Advantage = () => {
-      const [hov, setHov] = React.useState(-1);
-
-      /* mini bar-chart data for the Custom Fit card */
-      const bars = [
-        { label: 'Energy', pct: 92, color: '#3b82f6' },
-        { label: 'FinTech', pct: 78, color: '#8b5cf6' },
-        { label: 'GovTech', pct: 85, color: '#06b6d4' },
-        { label: 'Telecom', pct: 70, color: '#1560b0' },
+      const features = [
+        {
+          icon: (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0a1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+              <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+            </svg>
+          ),
+          title: 'Built Around What You Actually Need',
+          desc: 'We work with you to understand your gaps and requirements before a single consultant is confirmed.',
+        },
+        {
+          icon: (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0a1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          ),
+          title: 'Faster Than Traditional Hiring',
+          desc: 'No job postings. No CV stacks. No months of back and forth. Tell us what you need and we move immediately.',
+        },
+        {
+          icon: (
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0a1628" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          ),
+          title: 'Less Risk. Better Outcomes.',
+          desc: 'Every consultant has been selected, developed, and assessed before they ever meet your team.',
+        },
       ];
 
-      /* speed steps for the 48hr card */
-      const steps = ['Brief received', 'Profiles shortlisted', 'Consultant confirmed'];
-
       return (
-        <section style={{ background: '#ffffff', padding: '110px 24px', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <section style={{ background: '#f8fafc', padding: '90px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
           <style>{`
-            .bento-tile { transition: box-shadow 0.3s ease, transform 0.3s ease; }
-            .bento-tile:hover { transform: translateY(-3px); }
+            @media (max-width: 768px) {
+              .adv-layout { grid-template-columns: 1fr !important; }
+              .adv-feat-grid { grid-template-columns: 1fr !important; }
+              .adv-img { min-height: 280px !important; }
+            }
           `}</style>
 
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            {/* Header */}
-            <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', flexWrap:'wrap', gap:24, marginBottom:56 }}>
-              <div>
-                <span style={{ fontSize:11, fontWeight:700, color:'#1560b0', letterSpacing:'2.5px', textTransform:'uppercase', display:'inline-block', marginBottom:14 }}>Why CertiMinds</span>
-                <h2 style={{ fontSize:'clamp(2rem,4vw,3rem)', fontWeight:800, color:'#0a1628', letterSpacing:'-1.5px', lineHeight:1.1, margin:0 }}>The CertiMinds Advantage</h2>
-              </div>
-              <p style={{ fontSize:'1rem', color:'#6b7280', maxWidth:380, lineHeight:1.75, margin:0 }}>Every aspect of how we work is designed to reduce risk and deliver outcomes that actually stick.</p>
+          <div className="adv-layout" style={{ maxWidth:1200, margin:'0 auto', display:'grid', gridTemplateColumns:'1fr 1.45fr', gap:20, alignItems:'stretch' }}>
+
+            {/* Left — photo */}
+            <div className="adv-img" style={{ borderRadius:28, overflow:'hidden', minHeight:500, background:'#cbd5e1', position:'relative' }}>
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                alt="CertiMinds consulting team"
+                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', position:'absolute', inset:0 }}
+              />
             </div>
 
-            {/* ── Bento grid ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gridTemplateRows:'auto auto', gap:16 }}>
+            {/* Right — cards column */}
+            <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
 
-              {/* TILE 1 — 100% Custom Fit · col-span 2 */}
-              <div className="bento-tile" style={{ gridColumn:'span 2', background:'#0a1628', borderRadius:24, padding:'40px 40px 36px', position:'relative', overflow:'hidden', boxShadow: hov===0 ? '0 28px 64px rgba(10,22,40,0.22)' : '0 4px 24px rgba(10,22,40,0.12)' }}
-                onMouseEnter={()=>setHov(0)} onMouseLeave={()=>setHov(-1)}>
-                {/* bg glow */}
-                <div style={{ position:'absolute', top:-80, right:-60, width:340, height:340, borderRadius:'50%', background:'radial-gradient(circle, rgba(21,96,176,0.28) 0%, transparent 70%)', pointerEvents:'none' }} />
-                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:24 }}>
-                  <div style={{ flex:1, minWidth:200 }}>
-                    <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:20 }}>
-                      <div style={{ width:44, height:44, borderRadius:12, background:'linear-gradient(135deg,#1560b0,#3b82f6)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 8px 20px rgba(21,96,176,0.5)' }}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                      </div>
-                      <span style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.45)', letterSpacing:'2px', textTransform:'uppercase' }}>Custom Fit</span>
-                    </div>
-                    <div style={{ fontSize:'3.2rem', fontWeight:900, color:'#ffffff', letterSpacing:'-2px', lineHeight:1, marginBottom:8 }}>100%</div>
-                    <div style={{ fontSize:15, fontWeight:700, color:'rgba(255,255,255,0.85)', marginBottom:12, letterSpacing:'-0.3px' }}>Built Around What You Actually Need</div>
-                    <p style={{ fontSize:13.5, lineHeight:1.75, color:'rgba(255,255,255,0.5)', margin:0, maxWidth:320 }}>We work with you to understand your gaps and requirements before a single consultant is confirmed.</p>
-                  </div>
-                  {/* mini bar chart */}
-                  <div style={{ minWidth:180, paddingTop:4 }}>
-                    <div style={{ fontSize:10.5, fontWeight:700, color:'rgba(255,255,255,0.35)', letterSpacing:'1.2px', textTransform:'uppercase', marginBottom:14 }}>Placement fit by sector</div>
-                    <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
-                      {bars.map(({ label, pct, color }) => (
-                        <div key={label}>
-                          <div style={{ display:'flex', justifyContent:'space-between', marginBottom:4 }}>
-                            <span style={{ fontSize:11.5, color:'rgba(255,255,255,0.55)', fontWeight:500 }}>{label}</span>
-                            <span style={{ fontSize:11.5, color:'rgba(255,255,255,0.7)', fontWeight:700 }}>{pct}%</span>
-                          </div>
-                          <div style={{ height:5, borderRadius:999, background:'rgba(255,255,255,0.1)' }}>
-                            <div style={{ height:'100%', width:`${pct}%`, borderRadius:999, background:`linear-gradient(90deg,${color},${color}bb)` }} />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+              {/* Title card */}
+              <div style={{ borderRadius:24, background:'linear-gradient(130deg, #93c5fd 0%, #c4b5fd 100%)', padding:'44px 44px', display:'flex', alignItems:'center', minHeight:160 }}>
+                <h2 style={{ fontSize:'clamp(2rem,3.2vw,2.7rem)', fontWeight:900, color:'#0a0f1e', letterSpacing:'-1.5px', lineHeight:1.1, margin:0 }}>
+                  The CertiMinds<br/>Advantage
+                </h2>
               </div>
 
-              {/* TILE 2 — 48hr Turnaround · col-span 1 */}
-              <div className="bento-tile" style={{ background:'#eef5ff', borderRadius:24, padding:'36px 32px', position:'relative', overflow:'hidden', border:'1px solid rgba(21,96,176,0.12)', boxShadow: hov===1 ? '0 20px 50px rgba(21,96,176,0.14)' : '0 2px 12px rgba(0,0,0,0.05)' }}
-                onMouseEnter={()=>setHov(1)} onMouseLeave={()=>setHov(-1)}>
-                <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:20 }}>
-                  <div style={{ width:44, height:44, borderRadius:12, background:'linear-gradient(135deg,#0369a1,#38bdf8)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 8px 20px rgba(3,105,161,0.35)' }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              {/* Feature cards row */}
+              <div className="adv-feat-grid" style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16, flex:1 }}>
+                {features.map((f, i) => (
+                  <div key={i} style={{ borderRadius:20, background:'linear-gradient(150deg, #bfdbfe 0%, #ddd6fe 100%)', padding:'28px 22px', display:'flex', flexDirection:'column', gap:14 }}>
+                    <div>{f.icon}</div>
+                    <div style={{ fontSize:14, fontWeight:800, color:'#0a0f1e', lineHeight:1.3 }}>{f.title}</div>
+                    <p style={{ fontSize:12.5, color:'#334155', lineHeight:1.7, margin:0 }}>{f.desc}</p>
                   </div>
-                  <span style={{ fontSize:11, fontWeight:700, color:'#0369a1', letterSpacing:'2px', textTransform:'uppercase' }}>Turnaround</span>
-                </div>
-                <div style={{ fontSize:'3rem', fontWeight:900, color:'#0a1628', letterSpacing:'-2px', lineHeight:1, marginBottom:6 }}>48hr</div>
-                <div style={{ fontSize:14, fontWeight:700, color:'#0a1628', marginBottom:20, letterSpacing:'-0.3px' }}>Faster Than Traditional Hiring</div>
-                {/* step timeline */}
-                <div style={{ display:'flex', flexDirection:'column', gap:0 }}>
-                  {steps.map((s, i) => (
-                    <div key={i} style={{ display:'flex', alignItems:'flex-start', gap:10 }}>
-                      <div style={{ display:'flex', flexDirection:'column', alignItems:'center', flexShrink:0 }}>
-                        <div style={{ width:18, height:18, borderRadius:'50%', background: i===2 ? '#0369a1' : '#ffffff', border:`2px solid ${i===2?'#0369a1':'#bfdbfe'}`, display:'flex', alignItems:'center', justifyContent:'center', marginTop:3 }}>
-                          {i===2 && <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
-                        </div>
-                        {i < steps.length-1 && <div style={{ width:2, height:22, background:'#bfdbfe', marginTop:3 }} />}
-                      </div>
-                      <span style={{ fontSize:12.5, color: i===2?'#0369a1':'#6b7280', fontWeight: i===2?700:500, paddingBottom: i<steps.length-1?14:0, marginTop:3 }}>{s}</span>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
 
-              {/* TILE 3 — 95% Success Rate · col-span 1 */}
-              <div className="bento-tile" style={{ background:'#faf8ff', borderRadius:24, padding:'36px 32px', border:'1px solid rgba(91,33,182,0.1)', boxShadow: hov===2 ? '0 20px 50px rgba(91,33,182,0.12)' : '0 2px 12px rgba(0,0,0,0.05)' }}
-                onMouseEnter={()=>setHov(2)} onMouseLeave={()=>setHov(-1)}>
-                <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:20 }}>
-                  <div style={{ width:44, height:44, borderRadius:12, background:'linear-gradient(135deg,#5b21b6,#a78bfa)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 8px 20px rgba(91,33,182,0.35)' }}>
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  </div>
-                  <span style={{ fontSize:11, fontWeight:700, color:'#5b21b6', letterSpacing:'2px', textTransform:'uppercase' }}>Success Rate</span>
-                </div>
-                <div style={{ fontSize:'3rem', fontWeight:900, color:'#0a1628', letterSpacing:'-2px', lineHeight:1, marginBottom:6 }}>95%</div>
-                <div style={{ fontSize:14, fontWeight:700, color:'#0a1628', marginBottom:16, letterSpacing:'-0.3px' }}>Less Risk. Better Outcomes.</div>
-                {/* donut-style ring */}
-                <div style={{ display:'flex', alignItems:'center', gap:16, marginBottom:16 }}>
-                  <svg width="60" height="60" viewBox="0 0 60 60" style={{ flexShrink:0 }}>
-                    <circle cx="30" cy="30" r="24" fill="none" stroke="#ede9fe" strokeWidth="7"/>
-                    <circle cx="30" cy="30" r="24" fill="none" stroke="#7c3aed" strokeWidth="7"
-                      strokeDasharray={`${2*Math.PI*24*0.95} ${2*Math.PI*24*0.05}`}
-                      strokeDashoffset={2*Math.PI*24*0.25} strokeLinecap="round"/>
-                    <text x="30" y="34" textAnchor="middle" fontSize="11" fontWeight="800" fill="#5b21b6">95%</text>
-                  </svg>
-                  <p style={{ fontSize:12.5, color:'#6b7280', lineHeight:1.65, margin:0 }}>Every consultant selected, developed, and assessed before they ever meet your team.</p>
-                </div>
-              </div>
-
-              {/* TILE 4 — Local · col-span 2 */}
-              <div className="bento-tile" style={{ gridColumn:'span 2', background:'#f0fdfa', borderRadius:24, padding:'36px 40px', border:'1px solid rgba(8,145,178,0.12)', position:'relative', overflow:'hidden', boxShadow: hov===3 ? '0 20px 50px rgba(8,145,178,0.14)' : '0 2px 12px rgba(0,0,0,0.05)' }}
-                onMouseEnter={()=>setHov(3)} onMouseLeave={()=>setHov(-1)}>
-                {/* bg map dots */}
-                <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(circle, rgba(8,145,178,0.15) 1px, transparent 1px)', backgroundSize:'22px 22px', pointerEvents:'none' }} />
-                <div style={{ position:'absolute', right:-40, top:'50%', transform:'translateY(-50%)', width:220, height:220, borderRadius:'50%', background:'radial-gradient(circle, rgba(8,145,178,0.12) 0%, transparent 70%)', pointerEvents:'none' }} />
-
-                <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:24, position:'relative' }}>
-                  <div style={{ flex:1, minWidth:200 }}>
-                    <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:20 }}>
-                      <div style={{ width:44, height:44, borderRadius:12, background:'linear-gradient(135deg,#0891b2,#22d3ee)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 8px 20px rgba(8,145,178,0.35)' }}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                      </div>
-                      <span style={{ fontSize:11, fontWeight:700, color:'#0891b2', letterSpacing:'2px', textTransform:'uppercase' }}>Qatar & Gulf</span>
-                    </div>
-                    <div style={{ fontSize:'3rem', fontWeight:900, color:'#0a1628', letterSpacing:'-2px', lineHeight:1, marginBottom:6 }}>Local</div>
-                    <div style={{ fontSize:14, fontWeight:700, color:'#0a1628', marginBottom:12, letterSpacing:'-0.3px' }}>Committed Local Professionals</div>
-                    <p style={{ fontSize:13.5, color:'#6b7280', lineHeight:1.75, margin:0, maxWidth:340 }}>Qatar based and career focused. Our people are here to build lasting careers, not to pass through.</p>
-                  </div>
-                  {/* location chips */}
-                  <div style={{ display:'flex', flexDirection:'column', gap:10, paddingTop:4 }}>
-                    {[
-                      { city:'Doha, Qatar',     flag:'🇶🇦', active:true  },
-                      { city:'Riyadh, KSA',     flag:'🇸🇦', active:false },
-                      { city:'Dubai, UAE',       flag:'🇦🇪', active:false },
-                      { city:'Kuwait City',      flag:'🇰🇼', active:false },
-                    ].map(({ city, flag, active }) => (
-                      <div key={city} style={{ display:'flex', alignItems:'center', gap:9, padding:'9px 16px', borderRadius:999, background: active ? '#0891b2' : '#ffffff', border: active ? 'none' : '1px solid rgba(8,145,178,0.2)', boxShadow: active ? '0 6px 18px rgba(8,145,178,0.28)' : 'none' }}>
-                        <span style={{ fontSize:15 }}>{flag}</span>
-                        <span style={{ fontSize:12.5, fontWeight:600, color: active ? '#ffffff' : '#374151', whiteSpace:'nowrap' }}>{city}</span>
-                        {active && <div style={{ width:6, height:6, borderRadius:'50%', background:'#a7f3d0', marginLeft:2 }} />}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-            </div>{/* end bento grid */}
+            </div>
           </div>
         </section>
       );
     };
+
+    /* ── Reality Section ──────────────────────────────────────────── */
+    const RealitySection = () => (
+      <section style={{ background: '#ffffff', padding: '100px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <style>{`
+          @media (max-width: 768px) {
+            .reality-grid { grid-template-columns: 1fr !important; }
+            .reality-img  { min-height: 320px !important; height: auto !important; }
+          }
+        `}</style>
+        <div className="reality-grid" style={{ maxWidth:1200, margin:'0 auto', display:'grid', gridTemplateColumns:'0.9fr 1.1fr', gap:72, alignItems:'center' }}>
+
+          {/* Left — image */}
+          <div className="reality-img" style={{ borderRadius:28, overflow:'hidden', height:600, position:'relative', background:'#c7d2fe', flexShrink:0 }}>
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
+              alt="Tech professional at work"
+              style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', position:'absolute', inset:0 }}
+            />
+            <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(139,92,246,0.25) 0%, rgba(59,130,246,0.2) 100%)', pointerEvents:'none' }} />
+          </div>
+
+          {/* Right — text */}
+          <div style={{ display:'flex', flexDirection:'column', gap:24 }}>
+            <span style={{ fontSize:12, fontWeight:700, color:'#6d28d9', letterSpacing:'2.5px', textTransform:'uppercase' }}>The Reality Qatar's Tech Market Faces</span>
+            <h2 style={{ fontSize:'clamp(2.2rem,3.8vw,3.4rem)', fontWeight:900, color:'#0a1628', letterSpacing:'-2px', lineHeight:1.05, margin:0 }}>
+              Demand Isn't the Problem.<br/>Ready Talent Is.
+            </h2>
+            <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
+              <p style={{ fontSize:'1.05rem', color:'#4b5563', lineHeight:1.85, margin:0 }}>
+                Most organisations aren't short of ambition. They're short of people who can walk in and actually get things done.
+              </p>
+              <p style={{ fontSize:'1.05rem', color:'#6d28d9', lineHeight:1.85, margin:0 }}>
+                Finding the right person takes time. Getting them up to speed takes more. And while that's happening, your projects don't wait.
+              </p>
+              <p style={{ fontSize:'1.05rem', color:'#4b5563', lineHeight:1.85, margin:0 }}>
+                At CertiMinds, we do the heavy lifting before the hire. Every consultant we place has been put through a structured development process built around technical skills, workplace readiness, and the kind of AI fluency that modern teams actually need. By the time they join you, the work is already done.
+              </p>
+              <p style={{ fontSize:'1.1rem', fontWeight:700, color:'#0a1628', margin:0 }}>That's how we close the gap.</p>
+            </div>
+            <div style={{ marginTop:8 }}>
+              <a href="build-your-team.html" style={{ display:'inline-flex', alignItems:'center', background:'linear-gradient(135deg,#6d28d9,#3b82f6)', color:'#fff', fontWeight:700, fontSize:'1rem', padding:'18px 40px', borderRadius:50, textDecoration:'none', letterSpacing:'0.3px', boxShadow:'0 10px 30px rgba(109,40,217,0.35)' }}>
+                Build Your Tech Talent Team
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    );
 
     /* ── Bottom CTA Banner ────────────────────────────────────────── */
     const FooterCTA = () => {
@@ -738,21 +705,16 @@
           <div style={{ position:'absolute', bottom:0, left:0, width:400, height:260, background:'radial-gradient(ellipse at bottom left, rgba(56,189,248,0.08) 0%, transparent 70%)', pointerEvents:'none' }} />
 
           <div style={{ maxWidth:860, margin:'0 auto', textAlign:'center', position:'relative' }}>
-            {/* eyebrow */}
-            <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:9999, padding:'5px 16px', marginBottom:32 }}>
-              <div style={{ width:6, height:6, borderRadius:'50%', background:'#38bdf8' }} />
-              <span style={{ fontSize:11, fontWeight:700, color:'rgba(255,255,255,0.7)', letterSpacing:'2.5px', textTransform:'uppercase' }}>Start Today</span>
-            </div>
 
             {/* headline */}
             <h2 style={{ fontSize:'clamp(2.4rem,5.5vw,4.2rem)', fontWeight:900, lineHeight:1.05, letterSpacing:'-2px', color:'#ffffff', margin:'0 0 20px' }}>
-              Your next great hire{' '}
-              <span style={{ color:'#38bdf8' }}>is already trained.</span>
+              Let's Build Talent{' '}
+              <span style={{ color:'#38bdf8' }}>Around Your Requirements.</span>
             </h2>
 
             {/* sub-copy */}
-            <p style={{ fontSize:'1.1rem', color:'rgba(255,255,255,0.55)', lineHeight:1.8, maxWidth:560, margin:'0 auto 48px' }}>
-              Stop sifting through CVs. CertiMinds delivers verified, job-ready tech professionals in Qatar and the Gulf — built on your specs, not a generic pool.
+            <p style={{ fontSize:'1.1rem', color:'rgba(255,255,255,0.55)', lineHeight:1.8, maxWidth:580, margin:'0 auto 48px' }}>
+              Connect with CertiMinds to close your tech talent gap with professionals who are selected, trained, and ready before they ever reach you.
             </p>
 
             {/* CTA pair */}
@@ -771,9 +733,6 @@
                 Explore the Launchpad
               </a>
             </div>
-
-            {/* trust line */}
-            <p style={{ marginTop:40, fontSize:12, color:'rgba(255,255,255,0.3)', letterSpacing:'0.3px' }}>Trusted by organisations across Qatar &amp; the Gulf · No commitment required to start</p>
           </div>
         </section>
       );
@@ -889,6 +848,7 @@
         <AudienceSection />
         <HowItWorks />
         <Advantage />
+        <RealitySection />
         <FooterCTA />
         <Footer />
       </div>

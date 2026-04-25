@@ -15,7 +15,7 @@
       .nav-links, .nav-cta { display: none !important; }
       .nav-hamburger { display: flex !important; }
       .footer-grid { grid-template-columns: 1fr 1fr !important; }
-      .steps-timeline { padding-left: 16px !important; }
+      .step-detail-grid { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 520px) {
       .footer-grid { grid-template-columns: 1fr !important; }
@@ -30,106 +30,234 @@
 /* ── Nav ──────────────────────────────────────────────────────── */
 const Nav = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  const lastY = React.useRef(0);
+
+  React.useEffect(() => {
+    const fn = () => {
+      const y = window.scrollY;
+      setScrolled(y > 16);
+      if (y > lastY.current && y > 80) setHidden(true);
+      else setHidden(false);
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
+  }, []);
+
   const links = [
-  { label: 'Build Your Team', href: 'build-your-team.html', active: true },
-  { label: 'Build Your Career', href: 'build-your-career.html' },
-  { label: 'Our Launchpad', href: 'our-launchpad.html' },
-  { label: 'About Us', href: 'about-us.html' },
-  { label: 'Contact', href: 'contact.html' }];
+    { label: 'Build Your Team',   href: 'build-your-team.html' },
+    { label: 'Build Your Career', href: 'build-your-career.html' },
+    { label: 'Our Launchpad',     href: 'our-launchpad.html' },
+    { label: 'About Us',          href: 'about-us.html' },
+    { label: 'Contact',           href: 'contact.html' },
+  ];
 
   return (
-    <nav style={{ background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: "80px", width: "200px" }} />
-            </a>
-            <div className="nav-links" style={{ display: 'flex', gap: 2 }}>
-              {links.map((link) =>
-          <a key={link.label} href={link.href} style={{ fontSize: 14, fontWeight: 600, color: link.active ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', padding: '6px 10px', borderRadius: 5, textDecoration: 'none', transition: 'all 0.15s', whiteSpace: 'nowrap', background: link.active ? 'rgba(0,0,0,0.04)' : 'transparent' }}
-          onMouseEnter={(e) => {if (!link.active) {e.currentTarget.style.color = 'rgba(0,0,0,0.95)';e.currentTarget.style.background = 'rgba(0,0,0,0.04)';}}}
-          onMouseLeave={(e) => {if (!link.active) {e.currentTarget.style.color = 'rgba(0,0,0,0.6)';e.currentTarget.style.background = 'transparent';}}}>
-                  {link.label}
-                </a>
-          )}
-            </div>
-            <div className="nav-cta" style={{ display: 'flex', alignItems: 'center' }}>
-              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '8px 18px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
-          onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
-          onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
-                Let's Talk
+    <header style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+      background: '#ffffff',
+      borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
+      boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.06)' : 'none',
+      transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+      transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
+    }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+        <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38 }} />
+        </a>
+        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}>
+          {links.map(({ label, href }) => {
+            const isActive = window.location.pathname.includes('build-your-team') && href === 'build-your-team.html';
+            return (
+              <a key={label} href={href} style={{
+                fontSize: 13.5, fontWeight: isActive ? 600 : 500,
+                color: isActive ? '#0a1628' : '#6b7280',
+                padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
+                transition: 'color 0.18s', whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
+              onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#6b7280'}>
+                {label}
               </a>
-            </div>
-            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}
-        onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
-              {[0, 1, 2].map((i) =>
-          <span key={i} style={{ width: 22, height: 2, background: 'rgba(0,0,0,0.8)', borderRadius: 2, display: 'block', transition: 'all 0.2s',
-            transform: i === 0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i === 2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
-            opacity: i === 1 && menuOpen ? 0 : 1 }} />
-          )}
-            </button>
-          </div>
-          {menuOpen &&
-      <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {links.map((link) =>
-        <a key={link.label} href={link.href} style={{ fontSize: 16, fontWeight: 600, color: 'rgba(0,0,0,0.8)', padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', textDecoration: 'none' }}>{link.label}</a>
-        )}
-              <a href="contact.html" style={{ fontSize: 16, fontWeight: 600, color: '#fff', padding: '10px 16px', textDecoration: 'none', background: '#0075de', borderRadius: 4, marginTop: 8, textAlign: 'center' }}>Let's Talk</a>
-            </div>
-      }
-        </nav>);
-
+            );
+          })}
+        </div>
+        <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          <a href="contact.html"
+            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: '#0a1628', borderRadius: 9999, border: '1.5px solid #0a1628', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#0a1628'; e.currentTarget.style.borderColor = '#0a1628'; }}>
+            Let's Talk
+          </a>
+        </div>
+        <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px' }}
+          onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          {[0,1,2].map(i => (
+            <span key={i} style={{ width: 22, height: 2, background: '#0a1628', borderRadius: 2, display: 'block', transition: 'all 0.22s',
+              transform: i===0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i===2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+              opacity: i===1 && menuOpen ? 0 : 1 }} />
+          ))}
+        </button>
+      </div>
+      {menuOpen && (
+        <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
+          {links.map(({ label, href }) => (
+            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
+          ))}
+          <a href="contact.html" style={{ textAlign: 'center', background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
+        </div>
+      )}
+    </header>
+  );
 };
 
 /* ── Hero ─────────────────────────────────────────────────────── */
-const Hero = () =>
-<section style={{ background: '#fff', padding: '88px 24px 80px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ maxWidth: 720 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f2f9ff', color: '#097fe8', fontSize: 12, fontWeight: 600, letterSpacing: '0.125px', padding: '4px 12px', borderRadius: 9999, marginBottom: 28 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#0075de', display: 'inline-block' }} />
-              For organisations
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 3.75rem)', fontWeight: 700, lineHeight: 1.0, letterSpacing: '-2px', color: 'rgba(0,0,0,0.95)', marginBottom: 28, fontFeatureSettings: '"lnum","locl"', textWrap: 'balance' }}>
-              Tech capability built<br />for your organisation.
-            </h1>
-            <p style={{ fontSize: '1.2rem', lineHeight: 1.65, color: '#615d59', maxWidth: 560, marginBottom: 40 }}>
-              We identify driven individuals, develop them through the Launchpad programme, and place them as consultants within your team. You get tech talent that's shaped around your context — not a generic hire from a job board.
-            </p>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
-        onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
-        onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
-                Start a conversation
-              </a>
-              <a href="our-launchpad.html" style={{ background: 'rgba(0,0,0,0.05)', color: 'rgba(0,0,0,0.85)', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
-        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.09)'}
-        onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}>
-                See the Launchpad
-              </a>
-            </div>
+const Hero = () => {
+  const stats = [
+    { value: '200+', label: 'Professionals Placed' },
+    { value: '95%',  label: 'Client Retention' },
+    { value: '18d',  label: 'Avg. Time to Fill' },
+    { value: '100%', label: 'Qatar-Based Talent' },
+  ];
+  const tracks = ['AI & Data', 'Cloud & Infra', 'Cybersecurity', 'Software Eng.', 'Business Analysis'];
+  const [activeTrack, setActiveTrack] = React.useState(0);
+  React.useEffect(() => {
+    const t = setInterval(() => setActiveTrack(p => (p + 1) % tracks.length), 2000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <section style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 0, position: 'relative', overflow: 'hidden' }}>
+      {/* grid bg */}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(21,96,176,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(21,96,176,0.05) 1px, transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 60% at 60% 40%, transparent 30%, #ffffff 100%)', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: 1160, margin: '0 auto', padding: '60px 32px 0', position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+
+        {/* LEFT */}
+        <div>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 28 }}>
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0' }}>For Organisations · Qatar</span>
           </div>
 
-          {/* Key points strip */}
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap', marginTop: 64, paddingTop: 40, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+          <h1 style={{ fontSize: 'clamp(2.2rem, 3.8vw, 3.4rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 20 }}>
+            The Tech Professionals<br />
+            <span style={{ color: '#1560b0' }}>Your Organization</span><br />
+            Has Been Looking For
+          </h1>
+
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#4b5563', maxWidth: 500, marginBottom: 32 }}>
+            Finding AI-native professionals with leading technology and business skills in Qatar is harder than it should be. We solve that — developing and placing the right talent directly with your organization.
+          </p>
+
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 40 }}>
+            <a href="contact.html"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1560b0', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(21,96,176,0.28)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#1048a0'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+              Request a Consultation →
+            </a>
+            <a href="our-launchpad.html"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', color: '#0a1628', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', border: '1.5px solid rgba(10,22,40,0.18)', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#f0f7ff'; e.currentTarget.style.borderColor = '#1560b0'; e.currentTarget.style.color = '#1560b0'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(10,22,40,0.18)'; e.currentTarget.style.color = '#0a1628'; }}>
+              See the Launchpad
+            </a>
+          </div>
+
+          {/* trust strip */}
+          <div style={{ display: 'flex', gap: 32, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'wrap' }}>
             {[
-      { label: 'Gulf-grown talent', desc: 'Developed in Qatar, for Qatar' },
-      { label: 'Structured programme', desc: 'Not ad hoc training' },
-      { label: 'Consultant-ready', desc: 'Day-one productive' },
-      { label: 'Ongoing partnership', desc: 'We stay engaged post-placement' }].
-      map(({ label, desc }) =>
-      <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(0,117,222,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
-                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#0075de" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: 'rgba(0,0,0,0.9)', lineHeight: 1.3 }}>{label}</div>
-                  <div style={{ fontSize: 13, color: '#a39e98', marginTop: 2 }}>{desc}</div>
-                </div>
+              { icon: '✓', text: 'Gulf-grown talent' },
+              { icon: '✓', text: 'Day-one productive' },
+              { icon: '✓', text: 'Ongoing partnership' },
+            ].map(({ icon, text }) => (
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(21,96,176,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: '#1560b0', fontWeight: 800, flexShrink: 0 }}>{icon}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#4b5563' }}>{text}</span>
               </div>
-      )}
+            ))}
           </div>
         </div>
-      </section>;
+
+        {/* RIGHT — visual card */}
+        <div style={{ position: 'relative' }}>
+          <div style={{ background: '#ffffff', borderRadius: 24, border: '1px solid rgba(0,0,0,0.09)', boxShadow: '0 24px 64px rgba(10,22,40,0.1), 0 4px 16px rgba(0,0,0,0.05)', padding: '28px 28px 24px', position: 'relative', zIndex: 2 }}>
+
+            {/* header */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
+              <div>
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: 3 }}>Active Capability Tracks</div>
+                <div style={{ fontSize: 15, fontWeight: 800, color: '#0a1628' }}>Available for Placement</div>
+              </div>
+              <div style={{ background: '#eef5ff', borderRadius: 8, padding: '6px 12px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#1560b0' }}>Hiring Now</span>
+              </div>
+            </div>
+
+            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', marginBottom: 16 }} />
+
+            {/* rotating active track highlight */}
+            <div style={{ marginBottom: 16 }}>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Featured Track</div>
+              <div style={{ background: 'linear-gradient(135deg,#eef5ff,#f0f4ff)', border: '1px solid #c7ddf8', borderRadius: 12, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(135deg,#1560b0,#3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0a1628' }}>{tracks[activeTrack]}</div>
+                  <div style={{ fontSize: 11, color: '#6b7280', marginTop: 2 }}>Developed &amp; ready to deploy</div>
+                </div>
+              </div>
+            </div>
+
+            {/* all tracks */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
+              {tracks.map((t, idx) => (
+                <span key={t} style={{ fontSize: 11.5, fontWeight: 600, color: idx === activeTrack ? '#1560b0' : '#6b7280', background: idx === activeTrack ? '#eef5ff' : '#f9fafb', border: `1px solid ${idx === activeTrack ? '#c7ddf8' : 'rgba(0,0,0,0.07)'}`, borderRadius: 999, padding: '4px 12px', transition: 'all 0.3s' }}>{t}</span>
+              ))}
+            </div>
+
+            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', marginBottom: 16 }} />
+
+            {/* stats grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {stats.map(({ value, label }) => (
+                <div key={label} style={{ background: '#f8faff', borderRadius: 12, padding: '14px 16px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                  <div style={{ fontSize: 22, fontWeight: 900, color: '#0a1628', letterSpacing: '-1px', lineHeight: 1 }}>{value}</div>
+                  <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginTop: 4 }}>{label}</div>
+                </div>
+              ))}
+            </div>
+
+            <a href="contact.html" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 18, background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '12px 20px', borderRadius: 12, textDecoration: 'none', transition: 'all 0.2s' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#1560b0'}
+              onMouseLeave={e => e.currentTarget.style.background = '#0a1628'}>
+              Request a Consultation →
+            </a>
+          </div>
+
+          {/* floating pill */}
+          <div style={{ position: 'absolute', top: -18, right: -12, background: '#ffffff', border: '1.5px solid rgba(16,185,129,0.3)', borderRadius: 999, padding: '6px 14px', fontSize: 11.5, fontWeight: 700, color: '#10b981', boxShadow: '0 4px 14px rgba(0,0,0,0.08)', zIndex: 3 }}>
+            🇶🇦 Qatar-Based Talent Only
+          </div>
+        </div>
+
+      </div>
+
+      {/* bottom wave separator */}
+      <div style={{ marginTop: 60, lineHeight: 0 }}>
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', display: 'block' }}>
+          <path d="M0 60V30C360 0 720 60 1080 30 1260 15 1380 20 1440 30V60H0Z" fill="#f8f9fc"/>
+        </svg>
+      </div>
+    </section>
+  );
+};
 
 
 /* ── Icons ────────────────────────────────────────────────────── */
@@ -144,45 +272,39 @@ const GrowIcon = () => <svg {...iconProps}><polyline points="23 6 13.5 15.5 8.5 
 /* ── Engagement Model ─────────────────────────────────────────── */
 const STEPS = [
 {
-  n: '01', label: 'Discovery',
-  headline: 'We understand your capability gap',
-  body: "Every engagement starts with a structured discovery session. We work with your technical leadership to map current gaps, near-term projects, and the skills you need — before a single consultant is selected.",
-  detail: 'Typical duration: 1–2 weeks',
+  n: '01', label: 'Tell us what you need',
+  body: "Share the capability areas you are looking to fill. We take it from there.",
+  detail: 'No obligation to start',
   icon: <DiscoverIcon />
 },
 {
-  n: '02', label: 'Candidate selection',
-  headline: 'We identify the right people',
-  body: 'From our pipeline of assessed candidates, we shortlist individuals whose aptitude and trajectory match your requirements. You review profiles before anyone enters development.',
-  detail: 'You approve before development begins',
+  n: '02', label: 'We find the right fit',
+  body: 'We match you with a tech consultant developed around your requirements, with hands-on experience in the latest AI tools.',
+  detail: 'Shortlisted within days',
   icon: <SelectIcon />
 },
 {
-  n: '03', label: 'Launchpad development',
-  headline: 'We develop them for your context',
-  body: 'Selected candidates enter the Launchpad programme — a structured multi-month development track covering technical skills, professional foundations, and your specific domain context.',
-  detail: 'Typically 4–6 months',
-  icon: <DevelopIcon />
-},
-{
-  n: '04', label: 'Pre-placement alignment',
-  headline: 'We align before they arrive',
-  body: 'Before placement, consultants go through a context-setting phase specific to your organisation — your tools, culture, team dynamics, and expectations. No surprises on day one.',
-  detail: '2–4 weeks before placement',
+  n: '03', label: 'Review and confirm',
+  body: 'You review the profile and confirm the fit. No obligation until you are ready.',
+  detail: 'You stay in control',
   icon: <AlignIcon />
 },
 {
-  n: '05', label: 'Placement',
-  headline: 'They join your team',
-  body: "Your consultant is placed and begins contributing. CertiMinds provides structured 30/60/90-day check-ins to ensure performance, resolve issues early, and keep development on track.",
-  detail: 'Ongoing performance support',
+  n: '04', label: 'They join your team',
+  body: 'Your consultant starts on a direct monthly contract. Zero upfront cost. No placement fees.',
+  detail: 'Direct monthly contract',
   icon: <PlaceIcon />
 },
 {
-  n: '06', label: 'Continuous development',
-  headline: 'We stay engaged',
-  body: 'The relationship doesn\'t end at placement. CertiMinds continues to support your consultant\'s growth, provide additional training as needed, and work with you on future capability requirements.',
-  detail: 'Long-term partnership model',
+  n: '05', label: 'We stay involved',
+  body: 'We provide ongoing technical support throughout the entire engagement. You are never managing this alone.',
+  detail: 'Ongoing support included',
+  icon: <DevelopIcon />
+},
+{
+  n: '06', label: 'They grow with you',
+  body: 'Every consultant has a structured growth path. When the time is right, convert them into a permanent full-time member of your team at no additional cost.',
+  detail: 'Convert to FTE anytime',
   icon: <GrowIcon />
 }];
 
@@ -192,92 +314,129 @@ const EngagementModel = () => {
   const step = STEPS[activeStep];
 
   return (
-    <section style={{ background: '#f6f5f4', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 56 }}>
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Our engagement model</span>
-              <h2 style={{ fontSize: 'clamp(1.875rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1.25px', color: 'rgba(0,0,0,0.95)', marginBottom: 16, fontFeatureSettings: '"lnum","locl"' }}>Six steps to consultant-ready talent.</h2>
-              <p style={{ fontSize: '1.05rem', color: '#615d59', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>A rigorous, partnership-led process from capability gap to placed consultant.</p>
-            </div>
+    <section style={{ background: '#ffffff', padding: '96px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+      <div style={{ maxWidth: 1160, margin: '0 auto' }}>
 
-            {/* Step tabs */}
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 40 }}>
-              {STEPS.map((s, i) =>
-          <button key={i} onClick={() => setActiveStep(i)}
-          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 9999, border: i === activeStep ? '1.5px solid #0075de' : '1.5px solid rgba(0,0,0,0.1)', background: i === activeStep ? '#fff' : 'transparent', color: i === activeStep ? '#0075de' : 'rgba(0,0,0,0.55)', fontWeight: 600, fontSize: 13, cursor: 'pointer', transition: 'all 0.15s', fontFamily: 'inherit' }}>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: i === activeStep ? '#0075de' : 'rgba(0,0,0,0.3)', letterSpacing: '0.5px' }}>{s.n}</span>
-                  {s.label}
-                </button>
-          )}
-            </div>
+        {/* Header */}
+        <div style={{ marginBottom: 48 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, color: '#1560b0', letterSpacing: '2px', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Section 03 — The Engagement Model</span>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2px', color: '#0a1628', margin: 0 }}>Working With Us</h2>
+            <p style={{ fontSize: '0.95rem', color: '#6b7280', maxWidth: 340, lineHeight: 1.7, margin: 0 }}>A transparent, low-friction process from first conversation to placed consultant.</p>
+          </div>
+        </div>
 
-            {/* Step detail card */}
-            <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 16, overflow: 'hidden', boxShadow: 'rgba(0,0,0,0.04) 0 4px 18px, rgba(0,0,0,0.02) 0 2px 6px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }} className="step-detail-grid">
-                {/* Left: content */}
-                <div style={{ padding: '52px 48px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24 }}>
-                    <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de' }}>
-                      {step.icon}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: '#a39e98', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 2 }}>Step {step.n}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: '#0075de' }}>{step.label}</div>
-                    </div>
-                  </div>
-                  <h3 style={{ fontSize: '1.625rem', fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.5px', color: 'rgba(0,0,0,0.95)', marginBottom: 16 }}>{step.headline}</h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.75, color: '#615d59', marginBottom: 28 }}>{step.body}</p>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#f2f9ff', color: '#097fe8', fontSize: 12, fontWeight: 600, padding: '5px 12px', borderRadius: 9999 }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                    {step.detail}
-                  </div>
+        {/* Step pills */}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 32, borderBottom: '1px solid rgba(0,0,0,0.07)', paddingBottom: 24 }}>
+          {STEPS.map((s, i) => (
+            <button key={i} onClick={() => setActiveStep(i)}
+              style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 18px', borderRadius: 9999,
+                border: i === activeStep ? '1.5px solid #1560b0' : '1.5px solid rgba(0,0,0,0.09)',
+                background: i === activeStep ? '#1560b0' : i < activeStep ? '#f0f7ff' : '#ffffff',
+                color: i === activeStep ? '#fff' : i < activeStep ? '#1560b0' : 'rgba(0,0,0,0.5)',
+                fontWeight: 600, fontSize: 13, cursor: 'pointer', transition: 'all 0.18s', fontFamily: 'inherit' }}>
+              {i < activeStep
+                ? <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1560b0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                : <span style={{ fontSize: 10, fontWeight: 800, opacity: i === activeStep ? 0.7 : 0.4, letterSpacing: '0.5px' }}>{s.n}</span>
+              }
+              {s.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Step detail card */}
+        <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 20, overflow: 'hidden', boxShadow: '0 8px 40px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.03)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr' }} className="step-detail-grid">
+
+            {/* Left: step content */}
+            <div style={{ padding: '52px 52px 48px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 32 }}>
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: 'linear-gradient(135deg, rgba(21,96,176,0.1), rgba(21,96,176,0.06))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1560b0', flexShrink: 0 }}>
+                  {step.icon}
                 </div>
-                {/* Right: step list */}
-                <div style={{ background: '#f6f5f4', borderLeft: '1px solid rgba(0,0,0,0.07)', padding: '52px 40px', display: 'flex', flexDirection: 'column', gap: 4 }} className="steps-timeline">
-                  {STEPS.map((s, i) =>
-              <button key={i} onClick={() => setActiveStep(i)}
-              style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 14px', borderRadius: 8, border: 'none', background: i === activeStep ? '#fff' : 'transparent', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s', fontFamily: 'inherit', boxShadow: i === activeStep ? 'rgba(0,0,0,0.04) 0 2px 8px' : 'none' }}>
-                      <div style={{ width: 28, height: 28, borderRadius: '50%', border: `2px solid ${i === activeStep ? '#0075de' : 'rgba(0,0,0,0.15)'}`, background: i === activeStep ? '#0075de' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.15s' }}>
-                        {i < activeStep ?
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#fff" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" /></svg> :
-                  <span style={{ fontSize: 10, fontWeight: 700, color: i === activeStep ? '#fff' : 'rgba(0,0,0,0.4)', letterSpacing: '0.3px' }}>{s.n}</span>
-                  }
-                      </div>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 700, color: i === activeStep ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', lineHeight: 1.3 }}>{s.label}</div>
-                        <div style={{ fontSize: 12, color: '#a39e98', marginTop: 1 }}>{s.detail}</div>
-                      </div>
-                    </button>
-              )}
+                <div>
+                  <div style={{ fontSize: 10.5, fontWeight: 700, color: '#9ca3af', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: 3 }}>Step {step.n} of {STEPS.length}</div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: '#1560b0', lineHeight: 1 }}>{step.label}</div>
+                </div>
+              </div>
+
+              <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.75px', color: '#0a1628', marginBottom: 16 }}>{step.headline}</h3>
+              <p style={{ fontSize: 15, lineHeight: 1.8, color: '#4b5563', marginBottom: 32 }}>{step.body}</p>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: '#eef5ff', border: '1px solid #c7ddf8', color: '#1560b0', fontSize: 12, fontWeight: 600, padding: '6px 14px', borderRadius: 9999 }}>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  {step.detail}
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
+                    style={{ width: 36, height: 36, borderRadius: 9999, border: '1.5px solid rgba(0,0,0,0.12)', background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: activeStep === 0 ? 'default' : 'pointer', opacity: activeStep === 0 ? 0.3 : 1, transition: 'all 0.15s', fontFamily: 'inherit' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                  </button>
+                  <button onClick={() => setActiveStep(Math.min(STEPS.length - 1, activeStep + 1))}
+                    style={{ width: 36, height: 36, borderRadius: 9999, border: '1.5px solid rgba(0,0,0,0.12)', background: activeStep === STEPS.length - 1 ? '#fff' : '#0a1628', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: activeStep === STEPS.length - 1 ? 'default' : 'pointer', opacity: activeStep === STEPS.length - 1 ? 0.3 : 1, transition: 'all 0.15s', fontFamily: 'inherit', color: activeStep === STEPS.length - 1 ? '#000' : '#fff' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Navigation arrows */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 20 }}>
-              <button onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
-          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: '#fff', color: activeStep === 0 ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0.7)', fontWeight: 600, fontSize: 13, cursor: activeStep === 0 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
-                ← Previous
-              </button>
-              <span style={{ fontSize: 13, color: '#a39e98', fontWeight: 600 }}>{activeStep + 1} of {STEPS.length}</span>
-              <button onClick={() => setActiveStep(Math.min(STEPS.length - 1, activeStep + 1))}
-          style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: activeStep === STEPS.length - 1 ? '#fff' : '#0075de', color: activeStep === STEPS.length - 1 ? 'rgba(0,0,0,0.25)' : '#fff', fontWeight: 600, fontSize: 13, cursor: activeStep === STEPS.length - 1 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
-                Next →
-              </button>
+            {/* Right: step list */}
+            <div style={{ background: '#f8f9fc', borderLeft: '1px solid rgba(0,0,0,0.06)', padding: '40px 32px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {STEPS.map((s, i) => (
+                <button key={i} onClick={() => setActiveStep(i)}
+                  style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '13px 14px', borderRadius: 10, border: 'none',
+                    background: i === activeStep ? '#ffffff' : 'transparent',
+                    cursor: 'pointer', textAlign: 'left', transition: 'all 0.15s', fontFamily: 'inherit',
+                    boxShadow: i === activeStep ? '0 2px 12px rgba(0,0,0,0.06)' : 'none' }}>
+                  <div style={{ width: 30, height: 30, borderRadius: '50%', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s',
+                    border: `2px solid ${i === activeStep ? '#1560b0' : i < activeStep ? '#c7ddf8' : 'rgba(0,0,0,0.12)'}`,
+                    background: i === activeStep ? '#1560b0' : i < activeStep ? '#eef5ff' : 'transparent' }}>
+                    {i < activeStep
+                      ? <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1560b0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      : <span style={{ fontSize: 10, fontWeight: 800, color: i === activeStep ? '#fff' : 'rgba(0,0,0,0.35)', letterSpacing: '0.3px' }}>{s.n}</span>
+                    }
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 13.5, fontWeight: 700, color: i === activeStep ? '#0a1628' : 'rgba(0,0,0,0.55)', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
+                    <div style={{ fontSize: 11.5, color: '#9ca3af', marginTop: 2 }}>{s.detail}</div>
+                  </div>
+                  {i === activeStep && (
+                    <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', flexShrink: 0 }} />
+                  )}
+                </button>
+              ))}
             </div>
-          </div>
-        </section>);
 
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        <div style={{ marginTop: 16, height: 3, background: 'rgba(0,0,0,0.06)', borderRadius: 99, overflow: 'hidden' }}>
+          <div style={{ height: '100%', background: 'linear-gradient(90deg, #1560b0, #3b82f6)', borderRadius: 99, width: `${((activeStep + 1) / STEPS.length) * 100}%`, transition: 'width 0.3s ease' }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
+          <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Step {activeStep + 1} of {STEPS.length}</span>
+          <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>{Math.round(((activeStep + 1) / STEPS.length) * 100)}% complete</span>
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
 /* ── FAQ ──────────────────────────────────────────────────────── */
 const FAQS = [
-{ q: "We already have a recruitment agency. Why do we need CertiMinds?", a: "Recruitment agencies find existing talent. We build it. If you can't find the right people in the market — or if the talent you hire arrives and still needs significant investment — that's the gap we close. We're not a faster recruiter. We're a different solution entirely." },
-{ q: "How long does the full process take from engagement to placement?", a: "The typical timeline from initial discovery to placement is 6–8 months. The majority of that is development time in the Launchpad programme. We plan with your hiring pipeline in mind, so engagements can be structured to meet your timelines." },
-{ q: "Do we get to review candidates before development begins?", a: "Yes. After initial selection, you review candidate profiles before anyone enters the development programme. You're involved in the decision, not just the outcome." },
-{ q: "What sectors and technology areas do your consultants cover?", a: "Our current capability tracks include: AI & Data, Cloud & Infrastructure, Cybersecurity, Software Engineering, and Business Analysis. We expand tracks based on demand from partner organisations." },
-{ q: "What happens if a placement doesn't work out?", a: "We work with you and the consultant to understand the issue and resolve it. Our 30/60/90-day check-in structure is designed to catch misalignments early. If a placement is genuinely not the right fit, we work to find a resolution — including re-placement where appropriate." },
-{ q: "Is there a minimum commitment or contract length?", a: "We structure engagements based on your requirements. Contact us to discuss your situation — we'll be direct about what makes sense and what doesn't." }];
+{ q: "How long does it take for consultants to be ready?", a: "Our consultants complete up to 16 weeks of intensive training in Qatar, depending on client requests. Once complete they are available for immediate placement." },
+{ q: "Can we influence the training consultants receive?", a: "Yes. Alongside our core curriculum we can tailor training to reflect your workflows and project needs." },
+{ q: "Do we choose which consultants join our team?", a: "Yes. You can meet and interview consultants before confirming placement to ensure the right fit for your team and culture." },
+{ q: "How flexible are you if our needs change?", a: "Very. If a consultant change is needed we handle it at no additional cost. Additional consultants are prioritised for existing clients to ensure continuity." },
+{ q: "What happens if a consultant does not meet expectations?", a: "We act quickly. Our team will step in to resolve the issue through additional support, guidance or redeployment where needed." },
+{ q: "How does pricing work?", a: "We operate a transparent model with no hidden costs. Every engagement is tailored to your requirements. Contact us directly for a clear proposal." },
+{ q: "Can consultants work on site or remotely?", a: "On site or hybrid working can be accommodated based on your requirements." },
+{ q: "Do consultants remain CertiMinds employees?", a: "Yes, during the engagement. You will have the option to convert them into permanent employees or extend the engagement. No conversion fees apply." },
+{ q: "How do you keep consultants motivated?", a: "Through fair compensation, structured career development and ongoing mentorship." },
+{ q: "How does CertiMinds align with Qatar's workforce vision?", a: "Every consultant is trained in Qatar, mentored throughout their placement and built for a long-term career." }];
 
 
 const FAQ = () => {
@@ -286,16 +445,16 @@ const FAQ = () => {
     <section style={{ background: '#fff', padding: '88px 24px' }}>
           <div style={{ maxWidth: 800, margin: '0 auto' }}>
             <div style={{ marginBottom: 48 }}>
-              <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Common questions</span>
-              <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-1px', color: 'rgba(0,0,0,0.95)', fontFeatureSettings: '"lnum","locl"' }}>Questions we get asked.</h2>
+          <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.5px', background: 'rgba(21,96,176,0.08)', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Common questions</span>
+              <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-1px', color: '#0a1628' }}>Questions we get asked.</h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               {FAQS.map((faq, i) =>
           <div key={i} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, overflow: 'hidden' }}>
                   <button onClick={() => setOpen(open === i ? null : i)}
-            style={{ width: '100%', textAlign: 'left', padding: '20px 24px', background: open === i ? '#f6f5f4' : '#fff', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, transition: 'background 0.15s', fontFamily: 'inherit' }}>
+            style={{ width: '100%', textAlign: 'left', padding: '20px 24px', background: open === i ? '#f0f7ff' : '#fff', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, transition: 'background 0.15s', fontFamily: 'inherit' }}>
                     <span style={{ fontSize: 15, fontWeight: 600, color: 'rgba(0,0,0,0.9)', lineHeight: 1.4 }}>{faq.q}</span>
-                    <span style={{ width: 24, height: 24, borderRadius: '50%', background: open === i ? '#0075de' : 'rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.2s' }}>
+            <span style={{ width: 24, height: 24, borderRadius: '50%', background: open === i ? '#1560b0' : 'rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.2s' }}>
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                         <line x1="5" y1="1" x2="5" y2="9" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" style={{ transform: open === i ? 'scaleY(0)' : 'scaleY(1)', transition: 'transform 0.2s', transformOrigin: 'center' }} />
                         <line x1="1" y1="5" x2="9" y2="5" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" />
@@ -303,7 +462,7 @@ const FAQ = () => {
                     </span>
                   </button>
                   {open === i &&
-            <div style={{ padding: '4px 24px 22px', fontSize: 14, lineHeight: 1.8, color: '#615d59' }}>{faq.a}</div>
+            <div style={{ padding: '4px 24px 22px', fontSize: 14, lineHeight: 1.8, color: '#4b5563' }}>{faq.a}</div>
             }
                 </div>
           )}
@@ -315,31 +474,38 @@ const FAQ = () => {
 
 /* ── Footer CTA ───────────────────────────────────────────────── */
 const FooterCTA = () =>
-<section style={{ background: '#31302e', padding: '88px 24px' }}>
+<section style={{ background: 'linear-gradient(135deg,#0a1628 0%,#1560b0 100%)', padding: '88px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-1.5px', color: '#fff', marginBottom: 20, fontFeatureSettings: '"lnum","locl"' }}>
-            Ready to close your capability gap?
+          <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-1.5px', color: '#fff', marginBottom: 20 }}>
+            Tell us what you need.<br />We'll find the right fit.
           </h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', maxWidth: 480, margin: '0 auto 40px' }}>
-            Tell us about your technology challenges. We'll tell you whether we can help — and what that looks like.
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', maxWidth: 440, margin: '0 auto 40px' }}>
+            No lengthy procurement process. No placement fees. Just a direct conversation about your capability needs.
           </p>
-          <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '12px 28px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
-    onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
-    onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
-            Start a conversation →
-          </a>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#ffffff', color: '#0a1628', fontSize: 15, fontWeight: 700, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(0,0,0,0.25)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#f0f7ff'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+              Book a Discovery Call →
+            </a>
+            <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', color: '#fff', fontSize: 15, fontWeight: 600, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.3)', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'; }}>
+              Contact Form
+            </a>
+          </div>
         </div>
       </section>;
 
 
 /* ── Footer ───────────────────────────────────────────────────── */
 const Footer = () =>
-<footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
+<footer style={{ background: '#f8f9fc', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
             <div>
               <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
-              <p style={{ fontSize: 14, color: '#615d59', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
+              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
               <div style={{ display: 'flex', gap: 8 }}>
                 {['LinkedIn', 'Twitter'].map((s) =>
           <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'color 0.15s' }}
@@ -357,9 +523,9 @@ const Footer = () =>
                 <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {col.links.map((l) =>
-          <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#615d59', textDecoration: 'none', transition: 'color 0.15s' }}
+          <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#4b5563', textDecoration: 'none', transition: 'color 0.15s' }}
           onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.9)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#615d59'}>{l}</a>
+          onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>{l}</a>
           )}
                 </div>
               </div>
@@ -370,7 +536,7 @@ const Footer = () =>
             <div style={{ display: 'flex', gap: 20 }}>
               {['Privacy', 'Terms'].map((l) =>
         <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
-        onMouseEnter={(e) => e.currentTarget.style.color = '#615d59'}
+        onMouseEnter={(e) => e.currentTarget.style.color = '#4b5563'}
         onMouseLeave={(e) => e.currentTarget.style.color = '#a39e98'}>{l}</a>
         )}
             </div>

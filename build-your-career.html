@@ -1,0 +1,870 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Career — CertiMinds</title>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .hero-grid { grid-template-columns: 1fr !important; }
+      .track-strip { gap: 8px !important; }
+      .journey-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+    @keyframes scroll-tracks {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-up { animation: fadeUp 0.65s ease both; }
+    .animate-up-2 { animation: fadeUp 0.65s 0.12s ease both; }
+    .animate-up-3 { animation: fadeUp 0.65s 0.24s ease both; }
+    .animate-up-4 { animation: fadeUp 0.65s 0.36s ease both; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+
+/* ── Nav ──────────────────────────────────────────────────────── */
+const Nav = () => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [hidden, setHidden] = React.useState(false);
+  const lastY = React.useRef(0);
+
+  React.useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 10);
+      setHidden(y > lastY.current && y > 80);
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const links = [
+    { label: 'Build Your Team',   href: 'build-your-team.html' },
+    { label: 'Build Your Career', href: 'build-your-career.html', active: true },
+    { label: 'Our Launchpad',     href: 'our-launchpad.html' },
+    { label: 'About Us',          href: 'about-us.html' },
+    { label: 'Contact',           href: 'contact.html' },
+  ];
+
+  return (
+    <header style={{
+      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
+      background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.0)',
+      backdropFilter: scrolled ? 'blur(12px)' : 'none',
+      borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : 'none',
+      transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+      transition: 'all 0.3s ease',
+    }}>
+      <div style={{ maxWidth: 1160, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38, width: 'auto' }} />
+        </a>
+        <div className="nav-links" style={{ display: 'flex', gap: 4 }}>
+          {links.map(({ label, href, active }) => {
+            const isActive = active || false;
+            return (
+              <a key={label} href={href}
+                style={{ fontSize: 13.5, fontWeight: isActive ? 600 : 500, color: isActive ? '#0a1628' : '#6b7280', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', transition: 'color 0.18s', whiteSpace: 'nowrap' }}
+                onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
+                onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#6b7280'}>
+                {label}
+              </a>
+            );
+          })}
+        </div>
+        <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+          <a href="contact.html"
+            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#ffffff', textDecoration: 'none', padding: '9px 22px', background: '#0a1628', borderRadius: 9999, border: '1.5px solid #0a1628', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#0a1628'; e.currentTarget.style.borderColor = '#0a1628'; }}>
+            Let's Talk
+          </a>
+        </div>
+        <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px' }}
+          onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          {[0,1,2].map(i => (
+            <span key={i} style={{ width: 22, height: 2, background: '#0a1628', borderRadius: 2, display: 'block', transition: 'all 0.22s',
+              transform: i===0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i===2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+              opacity: i===1 && menuOpen ? 0 : 1 }} />
+          ))}
+        </button>
+      </div>
+      {menuOpen && (
+        <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
+          {links.map(({ label, href }) => (
+            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
+          ))}
+          <a href="contact.html" style={{ textAlign: 'center', background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
+        </div>
+      )}
+    </header>
+  );
+};
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+const Hero = () => {
+  const milestones = [
+    { step: '01', label: 'Apply', sub: 'Submit your profile' },
+    { step: '02', label: 'Assess', sub: 'Aptitude & skills test' },
+    { step: '03', label: 'Train',  sub: 'Launchpad programme' },
+    { step: '04', label: 'Place',  sub: 'Join an organisation' },
+    { step: '05', label: 'Grow',   sub: 'Structured career path' },
+  ];
+
+  const tracks = ['AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis', 'AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis'];
+
+  return (
+    <section style={{ background: '#ffffff', minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+
+      {/* Decorative grid */}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(21,96,176,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(21,96,176,0.05) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
+
+      {/* Glow orbs */}
+      <div style={{ position: 'absolute', top: '20%', left: '-10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(21,96,176,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '10%', right: '-5%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      {/* Main content */}
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', maxWidth: 1160, margin: '0 auto', padding: '120px 32px 60px', width: '100%', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center', width: '100%' }} className="hero-grid">
+
+          {/* LEFT — text */}
+          <div>
+            {/* Eyebrow */}
+            <div className="animate-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 36 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block', animation: 'pulse-dot 2s ease-in-out infinite' }} />
+              <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.5px' }}>For Candidates · Qatar</span>
+            </div>
+
+            {/* H1 */}
+            <h1 className="animate-up-2" style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628', marginBottom: 28 }}>
+              Build a Career<br />
+              in <span style={{ color: '#1560b0' }}>Technology.</span><br />
+              <span style={{ color: 'rgba(10,22,40,0.35)', fontWeight: 700, fontSize: '0.72em', letterSpacing: '-1.5px' }}>Starting in Qatar.</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="animate-up-3" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#4b5563', maxWidth: 520, marginBottom: 40 }}>
+              If you have the drive and the foundation, we provide the path. A structured training that develops real capability and places you with ambitious organizations across Qatar.
+            </p>
+
+            {/* CTAs */}
+            <div className="animate-up-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 48 }}>
+              <a href="contact.html"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1560b0', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 32px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(21,96,176,0.4)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(59,130,246,0.4)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(21,96,176,0.4)'; }}>
+                Apply Now →
+              </a>
+              <a href="our-launchpad.html"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', color: '#0a1628', fontSize: 15, fontWeight: 600, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', border: '1.5px solid rgba(10,22,40,0.18)', transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#f0f7ff'; e.currentTarget.style.color = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#0a1628'; e.currentTarget.style.borderColor = 'rgba(10,22,40,0.18)'; }}>
+                See the Launchpad
+              </a>
+            </div>
+
+            {/* Trust row */}
+            <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
+              {[
+                { val: '16 Weeks', lbl: 'Intensive training' },
+                { val: '5 Tracks', lbl: 'Specialisation paths' },
+                { val: '100%', lbl: 'Qatar-based placements' },
+              ].map(({ val, lbl }) => (
+                <div key={lbl} style={{ borderLeft: '2px solid rgba(21,96,176,0.35)', paddingLeft: 12 }}>
+                  <div style={{ fontSize: 16, fontWeight: 800, color: '#0a1628', lineHeight: 1 }}>{val}</div>
+                  <div style={{ fontSize: 12, color: '#6b7280', marginTop: 3, fontWeight: 500 }}>{lbl}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — career path visualizer */}
+          <div style={{ width: 220, flexShrink: 0, position: 'relative' }}>
+            {/* vertical line */}
+            <div style={{ position: 'absolute', left: 22, top: 28, bottom: 28, width: 2, background: 'linear-gradient(180deg, #1560b0 0%, rgba(21,96,176,0.08) 100%)', borderRadius: 99 }} />
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {milestones.map(({ step, label, sub }, i) => {
+                const isLast = i === milestones.length - 1;
+                return (
+                  <div key={step} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '14px 0', position: 'relative' }}>
+                    {/* dot */}
+                    <div style={{ width: 44, height: 44, borderRadius: '50%', flexShrink: 0, background: i === 0 ? '#1560b0' : '#f0f4fa', border: `2px solid ${i === 0 ? '#1560b0' : 'rgba(0,0,0,0.1)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1, transition: 'all 0.2s' }}>
+                      <span style={{ fontSize: 10.5, fontWeight: 800, color: i === 0 ? '#fff' : 'rgba(0,0,0,0.3)', letterSpacing: '0.5px' }}>{step}</span>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: i === 0 ? '#0a1628' : 'rgba(0,0,0,0.45)', lineHeight: 1.2 }}>{label}</div>
+                      <div style={{ fontSize: 11.5, color: '#9ca3af', marginTop: 2 }}>{sub}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* floating badge */}
+            <div style={{ position: 'absolute', top: -20, right: -20, background: '#1560b0', borderRadius: 12, padding: '10px 14px', boxShadow: '0 8px 24px rgba(21,96,176,0.4)', zIndex: 2 }}>
+              <div style={{ fontSize: 18, fontWeight: 900, color: '#fff', lineHeight: 1 }}>0%</div>
+              <div style={{ fontSize: 10, fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginTop: 2, whiteSpace: 'nowrap' }}>Placement fees</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Bottom track strip — scrolling marquee */}
+      <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '18px 0', overflow: 'hidden', position: 'relative', zIndex: 1, background: '#f8f9fc' }}>
+        <div style={{ display: 'flex', gap: 16, animation: 'scroll-tracks 28s linear infinite', width: 'max-content' }}>
+          {tracks.map((t, i) => (
+            <div key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '6px 18px', whiteSpace: 'nowrap' }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
+              <span style={{ fontSize: 12.5, fontWeight: 600, color: '#4b5563' }}>{t}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </section>
+  );
+};
+
+/* ── Footer ───────────────────────────────────────────────────── */
+const Footer = () =>
+<footer style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
+  <div style={{ maxWidth: 1160, margin: '0 auto' }}>
+    <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+      <div>
+        <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38, width: 'auto', marginBottom: 16 }} />
+        <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar.</p>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {['LinkedIn', 'Twitter'].map(s =>
+            <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'all 0.15s' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'rgba(0,0,0,0.7)'}
+              onMouseLeave={e => e.currentTarget.style.color = '#a39e98'}>{s}</a>
+          )}
+        </div>
+      </div>
+      {[
+        { heading: 'For Organisations', links: [{ l: 'Build Your Team', h: 'build-your-team.html' }, { l: 'Our Launchpad', h: 'our-launchpad.html' }, { l: "Let's Talk", h: 'contact.html' }] },
+        { heading: 'For Candidates', links: [{ l: 'Build Your Career', h: 'build-your-career.html' }, { l: 'Our Launchpad', h: 'our-launchpad.html' }, { l: 'Apply Now', h: 'contact.html' }] },
+        { heading: 'Company', links: [{ l: 'About Us', h: 'about-us.html' }, { l: 'Contact', h: 'contact.html' }, { l: 'Privacy', h: '#' }, { l: 'Terms', h: '#' }] },
+      ].map(col =>
+        <div key={col.heading}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {col.links.map(({ l, h }) =>
+              <a key={l} href={h} style={{ fontSize: 14, fontWeight: 500, color: '#4b5563', textDecoration: 'none', transition: 'color 0.15s' }}
+                onMouseEnter={e => e.currentTarget.style.color = 'rgba(0,0,0,0.9)'}
+                onMouseLeave={e => e.currentTarget.style.color = '#4b5563'}>{l}</a>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+    <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+      <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
+      <div style={{ display: 'flex', gap: 20 }}>
+        {['Privacy', 'Terms'].map(l =>
+          <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none', transition: 'color 0.15s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#4b5563'}
+            onMouseLeave={e => e.currentTarget.style.color = '#a39e98'}>{l}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</footer>;
+
+/* ── Journey ─────────────────────────────────────────────────── */
+const STEPS = [
+  {
+    num: '01',
+    title: 'Register Your Interest',
+    body: 'Tell us who you are and what you are working toward. Elite candidates are shortlisted for the next stage.',
+    icon: '✦',
+    tag: 'Application Open',
+  },
+  {
+    num: '02',
+    title: 'Assessment',
+    body: 'We look beyond grades and qualifications. Our assessment focuses on your potential, communication ability and technical foundations.',
+    icon: '◈',
+    tag: 'Potential-First',
+  },
+  {
+    num: '03',
+    title: 'Launchpad',
+    body: 'Selected candidates join our intensive training programme — hands-on technical and professional development with AI training built in throughout.',
+    icon: '⬡',
+    tag: '16 Weeks · Full-Time',
+  },
+  {
+    num: '04',
+    title: 'Placement',
+    body: 'You join an ambitious organisation in Qatar, contributing to real projects and playing your part in Qatar\'s continued growth.',
+    icon: '◎',
+    tag: '0% Placement Fees',
+  },
+  {
+    num: '05',
+    title: 'Progression',
+    body: 'From the moment you are placed, CertiMinds supports your ongoing development and career progression every step of the way.',
+    icon: '▲',
+    tag: 'Lifetime Support',
+  },
+];
+
+const Journey = () => {
+  const [active, setActive] = React.useState(0);
+  const step = STEPS[active];
+  return (
+    <section style={{ background: '#fff', padding: '100px 24px 112px', position: 'relative', overflow: 'hidden' }}>
+      {/* subtle bg grid */}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(21,96,176,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(21,96,176,0.04) 1px, transparent 1px)', backgroundSize: '56px 56px', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: 1160, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        {/* Section label + heading */}
+        <div style={{ marginBottom: 64 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 03 — Your Journey With Us</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: 16 }}>
+            Five Steps.<br /><span style={{ color: '#1560b0' }}>One Destination.</span>
+          </h2>
+          <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.75, maxWidth: 480 }}>
+            From your first message to a thriving career in tech — here is exactly how it works.
+          </p>
+        </div>
+
+        {/* Main layout: step pills left + detail card right */}
+        <div className="journey-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
+
+          {/* Left: vertical step list */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+            {STEPS.map((s, i) => {
+              const isDone = i < active;
+              const isAct  = i === active;
+              return (
+                <button key={i} onClick={() => setActive(i)}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 20,
+                    padding: '22px 24px', borderRadius: 14, border: 'none',
+                    background: isAct ? '#0a1628' : 'transparent',
+                    cursor: 'pointer', textAlign: 'left', transition: 'all 0.22s',
+                    marginBottom: 4,
+                    boxShadow: isAct ? '0 8px 32px rgba(10,22,40,0.13)' : 'none',
+                  }}
+                  onMouseEnter={e => { if (!isAct) e.currentTarget.style.background = '#f4f6f9'; }}
+                  onMouseLeave={e => { if (!isAct) e.currentTarget.style.background = 'transparent'; }}>
+
+                  {/* Step number bubble */}
+                  <div style={{
+                    width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
+                    background: isAct ? '#1560b0' : isDone ? '#e8f4e8' : '#f0f4fa',
+                    border: `2px solid ${isAct ? '#1560b0' : isDone ? '#6ec96e' : 'rgba(0,0,0,0.08)'}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    transition: 'all 0.22s',
+                  }}>
+                    {isDone
+                      ? <span style={{ fontSize: 16, color: '#22a822' }}>✓</span>
+                      : <span style={{ fontSize: 11, fontWeight: 800, color: isAct ? '#fff' : '#9ca3af', letterSpacing: '0.5px' }}>{s.num}</span>
+                    }
+                  </div>
+
+                  {/* Title + tag */}
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: isAct ? '#fff' : '#0a1628', lineHeight: 1.2, marginBottom: 4, transition: 'color 0.2s' }}>{s.title}</div>
+                    <div style={{ fontSize: 11.5, fontWeight: 600, color: isAct ? 'rgba(255,255,255,0.5)' : '#9ca3af', transition: 'color 0.2s' }}>{s.tag}</div>
+                  </div>
+
+                  {/* Arrow */}
+                  {isAct && <div style={{ marginLeft: 'auto', fontSize: 18, color: 'rgba(255,255,255,0.4)' }}>→</div>}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right: detail card */}
+          <div style={{ position: 'sticky', top: 100 }}>
+            <div style={{ background: '#f8f9fc', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 20, padding: '44px 44px 40px', overflow: 'hidden', position: 'relative' }}>
+
+              {/* Large faint step number watermark */}
+              <div style={{ position: 'absolute', top: -12, right: 24, fontSize: 120, fontWeight: 900, color: 'rgba(21,96,176,0.05)', lineHeight: 1, pointerEvents: 'none', userSelect: 'none' }}>{step.num}</div>
+
+              {/* Icon badge */}
+              <div style={{ width: 52, height: 52, borderRadius: 14, background: '#eef5ff', border: '1px solid #c7ddf8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, marginBottom: 28, color: '#1560b0' }}>
+                {step.icon}
+              </div>
+
+              {/* Tag pill */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 20 }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+                <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.4px' }}>{step.tag}</span>
+              </div>
+
+              {/* Step counter */}
+              <div style={{ fontSize: 11, fontWeight: 800, color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Step {step.num} of 05</div>
+
+              {/* Title */}
+              <h3 style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.9rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-0.8px', lineHeight: 1.15, marginBottom: 20 }}>{step.title}</h3>
+
+              {/* Body */}
+              <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.8, marginBottom: 36 }}>{step.body}</p>
+
+              {/* Progress bar */}
+              <div style={{ background: 'rgba(0,0,0,0.07)', borderRadius: 99, height: 4, marginBottom: 12, overflow: 'hidden' }}>
+                <div style={{ height: '100%', width: `${((active + 1) / STEPS.length) * 100}%`, background: 'linear-gradient(90deg, #1560b0, #3b82f6)', borderRadius: 99, transition: 'width 0.35s ease' }} />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>{active + 1} of {STEPS.length} steps</span>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button onClick={() => setActive(a => Math.max(0, a - 1))} disabled={active === 0}
+                    style={{ width: 34, height: 34, borderRadius: '50%', border: '1.5px solid rgba(0,0,0,0.12)', background: '#fff', cursor: active === 0 ? 'not-allowed' : 'pointer', opacity: active === 0 ? 0.35 : 1, fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}
+                    onMouseEnter={e => { if (active !== 0) { e.currentTarget.style.borderColor = '#1560b0'; e.currentTarget.style.color = '#1560b0'; } }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'; e.currentTarget.style.color = '#0a1628'; }}>←</button>
+                  <button onClick={() => setActive(a => Math.min(STEPS.length - 1, a + 1))} disabled={active === STEPS.length - 1}
+                    style={{ width: 34, height: 34, borderRadius: '50%', border: '1.5px solid rgba(0,0,0,0.12)', background: '#fff', cursor: active === STEPS.length - 1 ? 'not-allowed' : 'pointer', opacity: active === STEPS.length - 1 ? 0.35 : 1, fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}
+                    onMouseEnter={e => { if (active !== STEPS.length - 1) { e.currentTarget.style.borderColor = '#1560b0'; e.currentTarget.style.color = '#1560b0'; } }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.12)'; e.currentTarget.style.color = '#0a1628'; }}>→</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+/* ── What You Gain — Stacking Cards ──────────────────────────── */
+const gainCards = [
+  {
+    num: '01',
+    bg: 'linear-gradient(135deg, #c8dff8 0%, #b8ccf0 40%, #ccc8f0 100%)',
+    textColor: '#0a1628',
+    subColor: 'rgba(10,22,40,0.6)',
+    tagBg: 'rgba(21,96,176,0.12)',
+    tagColor: '#1560b0',
+    checkColor: '#1560b0',
+    icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1560b0" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>),
+    title: 'A Mindset for Continuous Learning',
+    body: "Technology never stands still and neither will you. Our Launchpad is designed to teach you how to learn fast, adapt quickly and stay ahead of the tools and technologies that matter in today's workplace.",
+    checks: ['The ability to pick up new tools and systems with confidence','A learning mindset that grows with every role you take on'],
+  },
+  {
+    num: '02',
+    bg: 'linear-gradient(135deg, #d4c8f0 0%, #c4b8ec 40%, #e0c8e8 100%)',
+    textColor: '#0a1628',
+    subColor: 'rgba(10,22,40,0.6)',
+    tagBg: 'rgba(109,40,217,0.12)',
+    tagColor: '#5b21b6',
+    checkColor: '#5b21b6',
+    icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>),
+    title: 'AI Equipped',
+    body: "Every candidate will have hands-on experience with the latest AI tools. You will not just understand AI — you will know how to use it practically in a professional environment, giving you an immediate advantage in the workplace.",
+    checks: ['Practical experience using AI tools in real work scenarios','The skills modern technology teams are actively looking for'],
+  },
+  {
+    num: '03',
+    bg: 'linear-gradient(135deg, #b8d4f0 0%, #c8c0ec 40%, #d8b8e4 100%)',
+    textColor: '#0a1628',
+    subColor: 'rgba(10,22,40,0.6)',
+    tagBg: 'rgba(8,145,178,0.12)',
+    tagColor: '#0e7490',
+    checkColor: '#0e7490',
+    icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0e7490" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>),
+    title: 'The Professional Foundations to Succeed',
+    body: "Technical skills alone are not enough. Our consultants will develop the professional behaviors that organizations in Qatar value most: communication, reliability, team integration and a commitment to delivering results.",
+    checks: ['The confidence to contribute from your very first day','A professional foundation that sets you apart from the crowd'],
+  },
+];
+
+const GainCard = React.memo(({ i, c, total, sectionRef }) => {
+  const containerRef = React.useRef(null);
+  const innerRef     = React.useRef(null);
+
+  React.useEffect(() => {
+    let raf;
+    const update = () => {
+      if (!containerRef.current || !sectionRef.current || !innerRef.current) return;
+      const secRect       = sectionRef.current.getBoundingClientRect();
+      const secScrollable = Math.max(1, sectionRef.current.scrollHeight - window.innerHeight);
+      const secP          = Math.max(0, Math.min(1, -secRect.top / secScrollable));
+      const targetScale   = 1 - (total - i) * 0.05;
+      const start         = i / total;
+      const progress      = Math.max(0, Math.min(1, (secP - start) / (1 - start)));
+      innerRef.current.style.transform = `scale(${1 - (1 - targetScale) * progress})`;
+    };
+    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
+  }, [i, total]);
+
+  return (
+    <div ref={containerRef} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, zIndex: i + 1 }}>
+      <div ref={innerRef} style={{ background: c.bg, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '78%', height: 420, borderRadius: 24, overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.22)', display: 'flex' }}>
+        <div style={{ position: 'absolute', bottom: -20, right: 32, fontSize: 180, fontWeight: 900, lineHeight: 1, color: 'rgba(10,22,40,0.05)', pointerEvents: 'none', userSelect: 'none', letterSpacing: '-10px' }}>{c.num}</div>
+        <div style={{ flexShrink: 0, width: 110, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, borderRight: '1px solid rgba(10,22,40,0.08)' }}>
+          <div style={{ width: 52, height: 52, borderRadius: 16, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{c.icon}</div>
+          <span style={{ fontSize: 10.5, fontWeight: 800, color: c.tagColor, letterSpacing: '1.5px' }}>{c.num} / 03</span>
+        </div>
+        <div style={{ flex: 1, padding: '40px 48px 40px 40px', display: 'flex', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: c.tagBg, borderRadius: 9999, padding: '4px 12px', marginBottom: 16 }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: c.tagColor, letterSpacing: '0.3px' }}>Core Principle {c.num}</span>
+            </div>
+            <h3 style={{ fontSize: 'clamp(1.3rem, 1.8vw, 1.65rem)', fontWeight: 900, color: c.textColor, letterSpacing: '-0.5px', lineHeight: 1.2, marginBottom: 14 }}>{c.title}</h3>
+            <p style={{ fontSize: '0.925rem', color: c.subColor, lineHeight: 1.85, margin: 0, maxWidth: 420 }}>{c.body}</p>
+          </div>
+          <div style={{ width: 1, alignSelf: 'stretch', background: 'rgba(10,22,40,0.1)', flexShrink: 0 }} />
+          <div style={{ flex: '0 0 260px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ fontSize: 10, fontWeight: 800, color: c.tagColor, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 18 }}>You Will Leave With</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {c.checks.map((chk, j) => (
+                <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                  <div style={{ flexShrink: 0, width: 22, height: 22, borderRadius: 7, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 1 }}>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={c.checkColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <span style={{ fontSize: '0.875rem', color: c.subColor, lineHeight: 1.6 }}>{chk}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+const WhatYouGain = () => {
+  const sectionRef = React.useRef(null);
+  return (
+    <div style={{ background: '#f1f5f9' }}>
+      <div style={{ padding: '100px 24px 60px', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 05 — What You Gain</span>
+        </div>
+        <h2 style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628' }}>
+          Why Organizations Trust<br /><span style={{ color: '#1560b0' }}>CertiMinds Consultants</span>
+        </h2>
+        <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.75, marginTop: 16, maxWidth: 480 }}>Every consultant we develop is built around three core principles.</p>
+      </div>
+      <section ref={sectionRef}>
+        {gainCards.map((c, i) => (
+          <GainCard key={i} i={i} c={c} total={gainCards.length} sectionRef={sectionRef} />
+        ))}
+      </section>
+    </div>
+  );
+};
+/* ── FAQs ────────────────────────────────────────────────────── */
+const faqs = [
+  { q: 'Do I have to pay for the training?', a: 'Not at all. CertiMinds invests in your development because we believe in your potential. Your entire programme is fully funded from day one.' },
+  { q: 'How long is my commitment with CertiMinds?', a: 'Consultants typically commit to a fixed contract following the completion of training. This gives you meaningful industry experience and gives our clients confidence in your capabilities.' },
+  { q: 'How long is the training programme?', a: 'Up to 16 weeks depending on your track and specialization.' },
+  { q: 'Am I guaranteed a placement after training?', a: 'Our focus is always on placing you into a meaningful role. While opportunities can vary, CertiMinds exists to connect capable professionals with real industry demand and we work hard to place every consultant we develop.' },
+  { q: 'Can I choose which organization I work with?', a: 'We match you to opportunities where your skills and interests align with client needs. While consultants do not select their own placements, we make every effort to align you with industries and roles that suit your ambitions.' },
+  { q: 'Do I need to be based in Qatar?', a: 'Yes. All placements are currently within Qatar.' },
+  { q: 'Do I need a computer science degree?', a: 'We welcome applicants from relevant technical backgrounds including Computer Science, Data, AI, Cybersecurity, Engineering and related fields. What matters most is your drive, problem-solving ability and passion for technology.' },
+  { q: 'What support do I receive during my placement?', a: 'You are never on your own. Our team provides regular check-ins throughout your engagement and you have ongoing access to mentors, peers and the wider CertiMinds community.' },
+  { q: 'What happens when my contract ends?', a: 'Many of our consultants move into permanent roles, extended placements, or explore opportunities further afield. You also become part of our alumni network with lifelong access to support and connections.' },
+  { q: 'What makes CertiMinds different?', a: 'We do not just place you into a role. We develop you, support you throughout your engagement and invest in your long-term career. You are not just a consultant. You are part of a community helping to shape Qatar\'s technology future.' },
+];
+
+const FAQs = () => {
+  const [open, setOpen] = React.useState(null);
+  const toggle = (i) => setOpen(prev => prev === i ? null : i);
+
+  const half = Math.ceil(faqs.length / 2);
+  const col1 = faqs.slice(0, half);
+  const col2 = faqs.slice(half);
+
+  const Item = ({ faq, idx }) => {
+    const isOpen = open === idx;
+    return (
+      <div
+        onClick={() => toggle(idx)}
+        style={{
+          borderRadius: 16,
+          background: isOpen ? '#0a1628' : '#ffffff',
+          border: `1.5px solid ${isOpen ? '#1560b0' : 'rgba(0,0,0,0.07)'}`,
+          padding: '22px 24px',
+          cursor: 'pointer',
+          transition: 'all 0.25s ease',
+          boxShadow: isOpen ? '0 8px 32px rgba(21,96,176,0.18)' : '0 1px 4px rgba(0,0,0,0.04)',
+          userSelect: 'none',
+        }}
+        onMouseEnter={e => { if (!isOpen) e.currentTarget.style.borderColor = 'rgba(21,96,176,0.3)'; }}
+        onMouseLeave={e => { if (!isOpen) e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'; }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, color: isOpen ? 'rgba(255,255,255,0.35)' : '#9ca3af', letterSpacing: '1px', flexShrink: 0, paddingTop: 2 }}>{String(idx + 1).padStart(2, '0')}</span>
+            <span style={{ fontSize: '0.975rem', fontWeight: 700, color: isOpen ? '#ffffff' : '#0a1628', lineHeight: 1.4 }}>{faq.q}</span>
+          </div>
+          <div style={{
+            flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
+            background: isOpen ? 'rgba(255,255,255,0.1)' : '#f3f4f6',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'transform 0.25s ease, background 0.25s ease',
+            transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+          }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isOpen ? '#ffffff' : '#6b7280'} strokeWidth="2.5" strokeLinecap="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </div>
+        </div>
+        {isOpen && (
+          <p style={{ fontSize: '0.925rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: '16px 0 0 28px' }}>{faq.a}</p>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <section style={{ background: '#f8fafc', padding: '100px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 64 }}>
+          <div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 07 — FAQs</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-1.5px', lineHeight: 1.1, margin: 0 }}>
+              Got Questions?<br /><span style={{ color: '#1560b0' }}>We Have Answers.</span>
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.975rem', color: '#6b7280', maxWidth: 340, lineHeight: 1.75, margin: 0 }}>Everything you need to know about joining the CertiMinds programme.</p>
+        </div>
+
+        {/* Two-column accordion */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {col1.map((faq, i) => <Item key={i} faq={faq} idx={i} />)}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {col2.map((faq, i) => <Item key={i + half} faq={faq} idx={i + half} />)}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+/* ── Apply CTA ────────────────────────────────────────────────── */
+const ApplyCTA = () => {
+  const [form, setForm] = React.useState({ name: '', email: '', phone: '', background: '', interest: '', motivation: '', cv: null });
+  const [submitted, setSubmitted] = React.useState(false);
+  const [focused, setFocused] = React.useState(null);
+  const [cvName, setCvName] = React.useState('');
+
+  const set = (k, v) => setForm(p => ({ ...p, [k]: v }));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const inputStyle = (k) => ({
+    width: '100%', padding: '14px 18px', borderRadius: 12, outline: 'none',
+    border: `1.5px solid ${focused === k ? '#1560b0' : 'rgba(255,255,255,0.12)'}`,
+    background: focused === k ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.04)',
+    color: '#ffffff', fontSize: '0.95rem', fontFamily: 'inherit',
+    transition: 'border-color 0.2s, background 0.2s',
+    boxSizing: 'border-box',
+  });
+
+  const labelStyle = { fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: 8 };
+
+  const interests = ['Cloud & Infrastructure', 'Cybersecurity', 'Data & Analytics', 'AI & Machine Learning', 'Software Development', 'GovTech', 'FinTech', 'Other'];
+
+  return (
+    <section style={{ background: '#0a1628', padding: '110px 24px', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* bg glows */}
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 900, height: 600, background: 'radial-gradient(ellipse, rgba(21,96,176,0.2) 0%, transparent 65%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', top: 0, right: 0, width: 400, height: 300, background: 'radial-gradient(ellipse at top right, rgba(56,189,248,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: 0, left: 0, width: 350, height: 280, background: 'radial-gradient(ellipse at bottom left, rgba(139,92,246,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: 860, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: 64 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 9999, padding: '5px 16px', marginBottom: 28 }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#38bdf8' }} />
+            <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.6)', letterSpacing: '2.5px', textTransform: 'uppercase' }}>Section 08 — Apply</span>
+          </div>
+          <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 20px' }}>
+            Take the step.<br /><span style={{ color: '#38bdf8' }}>We'll handle the rest.</span>
+          </h2>
+          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, maxWidth: 480, margin: '0 auto' }}>
+            Apply to the CertiMinds programme and take the first step toward a career in tech that's built to last.
+          </p>
+        </div>
+
+        {/* Form card */}
+        {submitted ? (
+          <div style={{ background: 'rgba(255,255,255,0.05)', border: '1.5px solid rgba(56,189,248,0.3)', borderRadius: 24, padding: '64px 48px', textAlign: 'center' }}>
+            <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(56,189,248,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.8px', marginBottom: 12 }}>Application Received</h3>
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, maxWidth: 420, margin: '0 auto' }}>
+              Thank you for applying. Our team will review your application and be in touch within 3–5 business days.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{ background: 'rgba(255,255,255,0.04)', border: '1.5px solid rgba(255,255,255,0.1)', borderRadius: 24, padding: '52px 52px 48px' }}>
+            <style>{`
+              input::placeholder, textarea::placeholder, select option:first-child { color: rgba(255,255,255,0.25) !important; }
+              select option { background: #0f1f3a; color: #fff; }
+              input[type="file"] { display: none; }
+            `}</style>
+
+            {/* Row 1: Full name + Email */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+              <div>
+                <label style={labelStyle}>Full Name *</label>
+                <input required type="text" placeholder="Your full name" value={form.name}
+                  onChange={e => set('name', e.target.value)}
+                  onFocus={() => setFocused('name')} onBlur={() => setFocused(null)}
+                  style={inputStyle('name')} />
+              </div>
+              <div>
+                <label style={labelStyle}>Email Address *</label>
+                <input required type="email" placeholder="you@email.com" value={form.email}
+                  onChange={e => set('email', e.target.value)}
+                  onFocus={() => setFocused('email')} onBlur={() => setFocused(null)}
+                  style={inputStyle('email')} />
+              </div>
+            </div>
+
+            {/* Row 2: Phone + Background */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+              <div>
+                <label style={labelStyle}>Phone Number</label>
+                <input type="tel" placeholder="+974 xxxx xxxx" value={form.phone}
+                  onChange={e => set('phone', e.target.value)}
+                  onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)}
+                  style={inputStyle('phone')} />
+              </div>
+              <div>
+                <label style={labelStyle}>Degree or Background *</label>
+                <input required type="text" placeholder="e.g. BSc Computer Science" value={form.background}
+                  onChange={e => set('background', e.target.value)}
+                  onFocus={() => setFocused('background')} onBlur={() => setFocused(null)}
+                  style={inputStyle('background')} />
+              </div>
+            </div>
+
+            {/* Row 3: Area of interest */}
+            <div style={{ marginBottom: 20 }}>
+              <label style={labelStyle}>Area of Interest *</label>
+              <select required value={form.interest} onChange={e => set('interest', e.target.value)}
+                onFocus={() => setFocused('interest')} onBlur={() => setFocused(null)}
+                style={{ ...inputStyle('interest'), appearance: 'none', cursor: 'pointer', color: form.interest ? '#ffffff' : 'rgba(255,255,255,0.25)' }}>
+                <option value="" disabled>Select your area of interest</option>
+                {interests.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+              </select>
+            </div>
+
+            {/* Row 4: Motivation */}
+            <div style={{ marginBottom: 20 }}>
+              <label style={labelStyle}>Short Motivation Statement *</label>
+              <textarea required rows={4} placeholder="Tell us why you want to join the CertiMinds programme and what you hope to achieve..." value={form.motivation}
+                onChange={e => set('motivation', e.target.value)}
+                onFocus={() => setFocused('motivation')} onBlur={() => setFocused(null)}
+                style={{ ...inputStyle('motivation'), resize: 'vertical', minHeight: 110, lineHeight: 1.7 }} />
+            </div>
+
+            {/* Row 5: CV upload */}
+            <div style={{ marginBottom: 40 }}>
+              <label style={labelStyle}>Upload CV</label>
+              <label htmlFor="cv-upload" style={{
+                display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px',
+                borderRadius: 12, border: `1.5px dashed ${focused === 'cv' ? '#1560b0' : 'rgba(255,255,255,0.18)'}`,
+                background: 'rgba(255,255,255,0.03)', cursor: 'pointer', transition: 'border-color 0.2s',
+              }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(21,96,176,0.6)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'}
+              >
+                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(21,96,176,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <span style={{ fontSize: '0.9rem', color: cvName ? '#ffffff' : 'rgba(255,255,255,0.35)' }}>
+                  {cvName || 'Click to upload your CV (PDF, DOC, DOCX)'}
+                </span>
+                {cvName && <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
+              </label>
+              <input id="cv-upload" type="file" accept=".pdf,.doc,.docx"
+                onChange={e => { const f = e.target.files[0]; if (f) { set('cv', f); setCvName(f.name); } }} />
+            </div>
+
+            {/* Submit */}
+            <button type="submit" style={{
+              width: '100%', padding: '18px', borderRadius: 14, border: 'none',
+              background: 'linear-gradient(135deg, #1560b0, #3b82f6)',
+              color: '#ffffff', fontSize: '1rem', fontWeight: 800, letterSpacing: '0.2px',
+              cursor: 'pointer', transition: 'opacity 0.2s, transform 0.2s',
+              boxShadow: '0 10px 32px rgba(21,96,176,0.4)',
+            }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
+            >
+              Apply to the Programme →
+            </button>
+
+            <p style={{ textAlign: 'center', marginTop: 18, fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
+              Your information is kept private and never shared with third parties.
+            </p>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+};
+
+const App = () => (
+  <>
+    <Nav />
+    <Hero />
+    <Journey />
+    <WhatYouGain />
+    <FAQs />
+    <ApplyCTA />
+    <Footer />
+  </>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
