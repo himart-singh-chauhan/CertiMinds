@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -201,9 +201,9 @@
       }, [displayed, deleting, paused, wordIdx]);
 
       return (
-        <span style={{ color: '#1560b0', borderRight: '2px solid #1560b0', paddingRight: 2, animation: 'blink 0.9s step-end infinite' }}>
+        <span style={{ display: 'inline-block', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', borderRight: '2.5px solid #6d28d9', paddingRight: 3, animation: 'blink 0.9s step-end infinite' }}>
           {displayed}
-          <style>{`@keyframes blink { 0%,100%{border-color:#1560b0} 50%{border-color:transparent} }`}</style>
+          <style>{`@keyframes blink { 0%,100%{border-color:#6d28d9} 50%{border-color:transparent} }`}</style>
         </span>
       );
     };
@@ -355,7 +355,7 @@
             {/* H1 — large centered */}
             <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 0, fontFeatureSettings: '"lnum"' }}>
               We Build The<br />
-              <span style={{ color: '#1560b0' }}><HeroTyped /></span><br />
+              <HeroTyped /><br />
               <span style={{ color: '#0a1628' }}>Your Business Needs.</span>
             </h1>
 
@@ -524,10 +524,10 @@
           <div ref={innerRef} style={{ background: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.25)' }}>
 
             {/* Step badge */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#111111', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
-              <span style={{ width: 24, height: 1, background: 'rgba(30,50,120,0.2)' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: '#111111', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 22 }}>
+              <span style={{ fontSize: 16, fontWeight: 800, color: '#111111', letterSpacing: '2.5px', textTransform: 'uppercase' }}>Step {step}</span>
+              <span style={{ width: 36, height: 2, background: 'rgba(30,50,120,0.25)', borderRadius: 2 }} />
+              <span style={{ fontSize: 16, fontWeight: 800, color: '#111111', letterSpacing: '2.5px', textTransform: 'uppercase' }}>{label}</span>
             </div>
 
             <div style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
