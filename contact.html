@@ -29,6 +29,7 @@
       border-color: #0075de !important;
       box-shadow: 0 0 0 3px rgba(9,127,232,0.15) !important;
     }
+    /* ── Scroll Reveal ─────────────────────────────────────── */
   </style>
 </head>
 <body>
@@ -38,45 +39,88 @@
     /* ── Nav ──────────────────────────────────────────────────────── */
     const Nav = () => {
       const [menuOpen, setMenuOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
+      const [hidden, setHidden] = React.useState(false);
+      const lastY = React.useRef(0);
+
+      React.useEffect(() => {
+        const fn = () => {
+          const y = window.scrollY;
+          setScrolled(y > 16);
+          if (y > lastY.current && y > 80) setHidden(true);
+          else setHidden(false);
+          lastY.current = y;
+        };
+        window.addEventListener('scroll', fn, { passive: true });
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
       const links = [
-        { label: 'Build Your Team', href: 'build-your-team.html' },
+        { label: 'Build Your Team',   href: 'build-your-team.html' },
         { label: 'Build Your Career', href: 'build-your-career.html' },
-        { label: 'Our Launchpad', href: 'our-launchpad.html' },
-        { label: 'About Us', href: 'about-us.html' },
-        { label: 'Contact', href: 'contact.html', active: true },
+        { label: 'Our Launchpad',     href: 'our-launchpad.html' },
+        { label: 'About Us',          href: 'about-us.html' },
+        { label: 'Contact',           href: 'contact.html' },
       ];
+
       return (
-        <nav style={{ background: '#fff', borderBottom: '1px solid rgba(0,0,0,0.1)', position: 'sticky', top: 0, zIndex: 100 }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <header style={{
+          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+          background: '#ffffff',
+          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.06)' : 'none',
+          transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
+          transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
+        }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
             <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64 }} />
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52 }} />
             </a>
-            <div className="nav-links" style={{ display: 'flex', gap: 2 }}>
-              {links.map(l => (
-                <a key={l.label} href={l.href} style={{ fontSize: 14, fontWeight: 600, color: l.active ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.6)', padding: '6px 10px', borderRadius: 5, textDecoration: 'none', transition: 'all 0.15s', whiteSpace: 'nowrap', background: l.active ? 'rgba(0,0,0,0.04)' : 'transparent' }}
-                  onMouseEnter={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.95)'; e.currentTarget.style.background='rgba(0,0,0,0.04)'; }}}
-                  onMouseLeave={e => { if (!l.active) { e.currentTarget.style.color='rgba(0,0,0,0.6)'; e.currentTarget.style.background='transparent'; }}}>{l.label}</a>
-              ))}
+            <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}>
+              {links.map(({ label, href }) => {
+                const isActive = window.location.pathname.includes('contact') && href === 'contact.html';
+                return (
+                  <a key={label} href={href} style={{
+                    fontSize: 13.5, fontWeight: isActive ? 600 : 500,
+                    color: isActive ? '#0a1628' : '#111111',
+                    padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
+                    transition: 'color 0.18s', whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
+                  onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#111111'}>
+                    {label}
+                  </a>
+                );
+              })}
             </div>
-            <div className="nav-cta">
-              <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 14, fontWeight: 600, padding: '8px 18px', borderRadius: 4, textDecoration: 'none' }}>Let's Talk</a>
+            <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+              <a href="contact.html"
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
+                Let's Talk
+              </a>
             </div>
-            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: 6 }}
-              onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px' }}
+              onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
               {[0,1,2].map(i => (
-                <span key={i} style={{ width: 22, height: 2, background: 'rgba(0,0,0,0.8)', borderRadius: 2, display: 'block', transition: 'all 0.2s',
-                  transform: i===0&&menuOpen?'rotate(45deg) translateY(7px)':i===2&&menuOpen?'rotate(-45deg) translateY(-7px)':'none',
-                  opacity: i===1&&menuOpen?0:1 }} />
+                <span key={i} style={{ width: 22, height: 2, background: '#0a1628', borderRadius: 2, display: 'block', transition: 'all 0.22s',
+                  transform: i===0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i===2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+                  opacity: i===1 && menuOpen ? 0 : 1 }} />
               ))}
             </button>
           </div>
           {menuOpen && (
-            <div style={{ background: '#fff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px 24px 24px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {links.map(l => <a key={l.label} href={l.href} style={{ fontSize: 16, fontWeight: 600, color: 'rgba(0,0,0,0.8)', padding: '10px 0', borderBottom: '1px solid rgba(0,0,0,0.06)', textDecoration: 'none' }}>{l.label}</a>)}
-              <a href="contact.html" style={{ fontSize: 16, fontWeight: 600, color: '#fff', padding: '10px 16px', textDecoration: 'none', background: '#0075de', borderRadius: 4, marginTop: 8, textAlign: 'center' }}>Let's Talk</a>
+            <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
+              {links.map(({ label, href }) => (
+                <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#111111', padding: '11px 12px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(10,22,40,0.05)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{label}</a>
+              ))}
+              <a href="contact.html" style={{ textAlign: 'center', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
             </div>
           )}
-        </nav>
+        </header>
       );
     };
 
@@ -114,110 +158,112 @@
       };
 
       return (
-        <section style={{ background: '#fff', minHeight: 'calc(100vh - 60px)' }}>
-          <div className="contact-layout" style={{ display: 'grid', gridTemplateColumns: '420px 1fr', minHeight: 'calc(100vh - 60px)' }}>
+        <section style={{ background: '#fff', minHeight: '100vh', paddingTop: 82 }}>
+          <div className="contact-layout" style={{ display: 'grid', gridTemplateColumns: '420px 1fr', minHeight: 'calc(100vh - 82px)' }}>
 
-            {/* ── Left: details ──────────────────────────────────── */}
-            <div style={{ background: '#f6f5f4', padding: '72px 56px', borderRight: '1px solid rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ flex: 1 }}>
-                <span style={{ fontSize: 12, fontWeight: 600, color: '#097fe8', letterSpacing: '0.125px', background: '#f2f9ff', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 28 }}>Get in touch</span>
-                <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-1.5px', color: 'rgba(0,0,0,0.95)', marginBottom: 20, fontFeatureSettings: '"lnum","locl"' }}>
+            {/* ── Left: details — dark navy ───────────────────────── */}
+            <div style={{ background: '#0a1628', padding: '64px 48px', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+              {/* glows */}
+              <div style={{ position: 'absolute', top: -80, right: -80, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(0,117,222,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', bottom: -60, left: -60, width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(33,49,131,0.22) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+              <div style={{ flex: 1, position: 'relative' }}>
+                {/* badge */}
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 9999, padding: '4px 14px', marginBottom: 28 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#38bdf8', display: 'inline-block' }} />
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Get in touch</span>
+                </div>
+
+                <h1 style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.6rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-1.5px', color: '#fff', marginBottom: 18 }}>
                   We'd like to<br />hear from you.
                 </h1>
-                <p style={{ fontSize: 15, lineHeight: 1.75, color: '#615d59', marginBottom: 52 }}>
+                <p style={{ fontSize: 14.5, lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', marginBottom: 48 }}>
                   Whether you're an organisation looking to close a technology capability gap, or an individual ready to launch a career in tech — tell us about your situation and we'll respond directly.
                 </p>
 
                 {/* Contact details */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de', flexShrink: 0 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: '#a39e98', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 4 }}>Location</div>
-                      <div style={{ fontSize: 14, fontWeight: 600, color: 'rgba(0,0,0,0.85)', lineHeight: 1.5 }}>Doha, Qatar<br /><span style={{ fontWeight: 400, color: '#615d59' }}>Serving Qatar and the Gulf region</span></div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de', flexShrink: 0 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: '#a39e98', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 4 }}>Email</div>
-                      <a href="mailto:hello@certiminds.qa" style={{ fontSize: 14, fontWeight: 600, color: '#0075de', textDecoration: 'none', lineHeight: 1.5 }}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                  {[
+                    {
+                      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+                      label: 'Location',
+                      content: <span style={{ fontSize: 13.5, fontWeight: 600, color: 'rgba(255,255,255,0.85)', lineHeight: 1.5 }}>Doha, Qatar<br /><span style={{ fontWeight: 400, color: 'rgba(255,255,255,0.45)', fontSize: 13 }}>Serving Qatar and the Gulf region</span></span>
+                    },
+                    {
+                      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
+                      label: 'Email',
+                      content: <a href="mailto:hello@certiminds.qa" style={{ fontSize: 13.5, fontWeight: 600, color: '#60a5fa', textDecoration: 'none' }}
                         onMouseEnter={e => e.currentTarget.style.textDecoration='underline'}
                         onMouseLeave={e => e.currentTarget.style.textDecoration='none'}>hello@certiminds.qa</a>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de', flexShrink: 0 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.59 4.4 2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: '#a39e98', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 4 }}>Phone</div>
-                      <a href="tel:+97412345678" style={{ fontSize: 14, fontWeight: 600, color: '#0075de', textDecoration: 'none' }}
+                    },
+                    {
+                      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.59 4.4 2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+                      label: 'Phone',
+                      content: <a href="tel:+97412345678" style={{ fontSize: 13.5, fontWeight: 600, color: '#60a5fa', textDecoration: 'none' }}
                         onMouseEnter={e => e.currentTarget.style.textDecoration='underline'}
                         onMouseLeave={e => e.currentTarget.style.textDecoration='none'}>+974 1234 5678</a>
+                    },
+                    {
+                      icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+                      label: 'Response time',
+                      content: <span style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.5)' }}>Within one business day.</span>
+                    },
+                  ].map(({ icon, label, content }) => (
+                    <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                      <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', flexShrink: 0 }}>
+                        {icon}
+                      </div>
+                      <div style={{ paddingTop: 2 }}>
+                        <div style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.8px', textTransform: 'uppercase', marginBottom: 4 }}>{label}</div>
+                        {content}
+                      </div>
                     </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(0,117,222,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0075de', flexShrink: 0 }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: '#a39e98', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 4 }}>Response time</div>
-                      <div style={{ fontSize: 14, fontWeight: 500, color: '#615d59' }}>We respond to all enquiries within one business day.</div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
-              {/* LinkedIn */}
-              <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#a39e98', letterSpacing: '0.5px', textTransform: 'uppercase', marginBottom: 12 }}>Follow us</div>
+              {/* Follow */}
+              <div style={{ marginTop: 48, paddingTop: 28, borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative' }}>
+                <div style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.8px', textTransform: 'uppercase', marginBottom: 12 }}>Follow us</div>
                 <div style={{ display: 'flex', gap: 8 }}>
                   {['LinkedIn','Twitter'].map(s => (
-                    <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#615d59', textDecoration: 'none', padding: '5px 12px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'all 0.15s' }}
-                      onMouseEnter={e => { e.currentTarget.style.color='rgba(0,0,0,0.9)'; e.currentTarget.style.borderColor='rgba(0,0,0,0.25)'; }}
-                      onMouseLeave={e => { e.currentTarget.style.color='#615d59'; e.currentTarget.style.borderColor='rgba(0,0,0,0.1)'; }}>{s}</a>
+                    <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.5)', textDecoration: 'none', padding: '6px 14px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 9999, transition: 'all 0.15s', background: 'rgba(255,255,255,0.04)' }}
+                      onMouseEnter={e => { e.currentTarget.style.color='rgba(255,255,255,0.9)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.25)'; e.currentTarget.style.background='rgba(255,255,255,0.08)'; }}
+                      onMouseLeave={e => { e.currentTarget.style.color='rgba(255,255,255,0.5)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.1)'; e.currentTarget.style.background='rgba(255,255,255,0.04)'; }}>{s}</a>
                   ))}
                 </div>
               </div>
             </div>
 
             {/* ── Right: form ────────────────────────────────────── */}
-            <div style={{ padding: '72px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+            <div style={{ padding: '48px 60px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', background: '#fff' }}>
               {submitted ? (
                 <div style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 20 }}>
-                  <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(26,174,57,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1aae39" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <div style={{ width: 56, height: 56, borderRadius: 16, background: 'rgba(26,174,57,0.08)', border: '1px solid rgba(26,174,57,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1aae39" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
                   <div>
-                    <h2 style={{ fontSize: '1.75rem', fontWeight: 700, letterSpacing: '-0.75px', color: 'rgba(0,0,0,0.95)', marginBottom: 12 }}>Message received.</h2>
-                    <p style={{ fontSize: 15, lineHeight: 1.75, color: '#615d59', maxWidth: 400 }}>
+                    <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.75px', color: '#111111', marginBottom: 12 }}>Message received.</h2>
+                    <p style={{ fontSize: 15, lineHeight: 1.8, color: '#111111', maxWidth: 400 }}>
                       Thanks for getting in touch. We'll review your message and get back to you within one business day. We'll be direct — no chase emails, no sales calls.
                     </p>
                   </div>
                   <button onClick={() => { setSubmitted(false); setForm({ name:'', organisation:'', email:'', phone:'', reachingAs:'', message:'' }); }}
-                    style={{ marginTop: 8, fontSize: 14, fontWeight: 600, color: '#0075de', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}
+                    style={{ marginTop: 4, fontSize: 14, fontWeight: 600, color: '#0075de', background: 'none', border: 'none', cursor: 'pointer', padding: 0, fontFamily: 'inherit' }}
                     onMouseEnter={e => e.currentTarget.style.textDecoration='underline'}
                     onMouseLeave={e => e.currentTarget.style.textDecoration='none'}>
                     Send another message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={submit} style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 24 }} noValidate>
-                  <div>
-                    <h2 style={{ fontSize: '1.625rem', fontWeight: 700, letterSpacing: '-0.5px', color: 'rgba(0,0,0,0.95)', marginBottom: 8 }}>Send us a message</h2>
-                    <p style={{ fontSize: 14, color: '#a39e98' }}>Fields marked <span style={{ color: '#0075de' }}>*</span> are required.</p>
+                <form onSubmit={submit} style={{ maxWidth: 520, display: 'flex', flexDirection: 'column', gap: 22 }} noValidate>
+                  <div style={{ marginBottom: 4 }}>
+                    <h2 style={{ fontSize: '1.7rem', fontWeight: 800, letterSpacing: '-0.75px', color: '#111111', marginBottom: 8 }}>Send us a message</h2>
+                    <p style={{ fontSize: 13.5, color: '#111111' }}>Fields marked <span style={{ color: '#0075de' }}>*</span> are required.</p>
                   </div>
 
                   {/* Name + Organisation */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                     <Field label="Full name" required error={errors.name}>
                       <input type="text" placeholder="Your full name" value={form.name}
                         onChange={e => set('name', e.target.value)}
@@ -231,7 +277,7 @@
                   </div>
 
                   {/* Email + Phone */}
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                     <Field label="Email address" required error={errors.email}>
                       <input type="email" placeholder="you@example.com" value={form.email}
                         onChange={e => set('email', e.target.value)}
@@ -246,11 +292,11 @@
 
                   {/* Reaching as */}
                   <Field label="I am reaching out as" required error={errors.reachingAs}>
-                    <div style={{ display: 'flex', gap: 10 }}>
+                    <div style={{ display: 'flex', gap: 8 }}>
                       {['Organisation', 'Candidate', 'Other'].map(opt => (
                         <button key={opt} type="button"
                           onClick={() => set('reachingAs', opt)}
-                          style={{ flex: 1, padding: '10px 8px', borderRadius: 6, border: `1.5px solid ${form.reachingAs===opt ? '#0075de' : 'rgba(0,0,0,0.12)'}`, background: form.reachingAs===opt ? '#f2f9ff' : '#fff', color: form.reachingAs===opt ? '#0075de' : 'rgba(0,0,0,0.6)', fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.15s', fontFamily: 'inherit' }}>
+                          style={{ flex: 1, padding: '10px 8px', borderRadius: 10, border: `1.5px solid ${form.reachingAs===opt ? '#0075de' : 'rgba(0,0,0,0.1)'}`, background: form.reachingAs===opt ? '#eef6ff' : '#fafafa', color: form.reachingAs===opt ? '#0075de' : 'rgba(0,0,0,0.55)', fontSize: 13.5, fontWeight: 700, cursor: 'pointer', transition: 'all 0.15s', fontFamily: 'inherit' }}>
                           {opt}
                         </button>
                       ))}
@@ -269,17 +315,22 @@
                   {/* Submit */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 16, paddingTop: 4 }}>
                     <button type="submit" disabled={submitting}
-                      style={{ background: submitting ? '#a39e98' : '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '12px 28px', borderRadius: 4, border: 'none', cursor: submitting ? 'default' : 'pointer', transition: 'background 0.15s', fontFamily: 'inherit', display: 'flex', alignItems: 'center', gap: 8 }}
-                      onMouseEnter={e => { if (!submitting) e.currentTarget.style.background='#005bab'; }}
-                      onMouseLeave={e => { if (!submitting) e.currentTarget.style.background='#0075de'; }}>
+                      style={{ background: submitting ? '#6b7280' : 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 14, fontWeight: 700, padding: '13px 28px', borderRadius: 9999, border: 'none', cursor: submitting ? 'default' : 'pointer', transition: 'all 0.2s', fontFamily: 'inherit', display: 'inline-flex', alignItems: 'center', gap: 8, boxShadow: submitting ? 'none' : 'rgba(109,40,217,0.28) 0 6px 20px', letterSpacing: '0.1px' }}
+                      onMouseEnter={e => { if (!submitting) { e.currentTarget.style.background='linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.transform='translateY(-1px)'; e.currentTarget.style.boxShadow='rgba(109,40,217,0.45) 0 8px 24px'; } }}
+                      onMouseLeave={e => { if (!submitting) { e.currentTarget.style.background='linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='rgba(109,40,217,0.28) 0 6px 20px'; } }}>
                       {submitting ? (
                         <>
                           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" style={{ animation: 'spin 0.8s linear infinite' }}/></svg>
                           Sending…
                         </>
-                      ) : 'Send message'}
+                      ) : (
+                        <>
+                          Send message
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </>
+                      )}
                     </button>
-                    <p style={{ fontSize: 13, color: '#a39e98', lineHeight: 1.5 }}>We respond within one business day.</p>
+                    <p style={{ fontSize: 12.5, color: '#111111', lineHeight: 1.5 }}>Within one business day.</p>
                   </div>
                 </form>
               )}
@@ -292,7 +343,7 @@
     /* ── Field wrapper ────────────────────────────────────────────── */
     const Field = ({ label, required, error, children }) => (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        <label style={{ fontSize: 13, fontWeight: 600, color: 'rgba(0,0,0,0.75)', display: 'flex', gap: 4, alignItems: 'center' }}>
+        <label style={{ fontSize: 12.5, fontWeight: 700, color: '#111111', letterSpacing: '0.3px', display: 'flex', gap: 4, alignItems: 'center', textTransform: 'uppercase' }}>
           {label}
           {required && <span style={{ color: '#0075de' }}>*</span>}
         </label>
@@ -304,58 +355,74 @@
     /* ── Input style helper ───────────────────────────────────────── */
     const inputStyle = (hasError) => ({
       width: '100%',
-      padding: '10px 14px',
-      border: `1.5px solid ${hasError ? '#dd5b00' : 'rgba(0,0,0,0.12)'}`,
-      borderRadius: 6,
-      fontSize: 15,
-      color: 'rgba(0,0,0,0.9)',
-      background: hasError ? '#fff9f7' : '#fff',
-      lineHeight: 1.5,
-      transition: 'border-color 0.15s, box-shadow 0.15s',
+      padding: '11px 14px',
+      border: `1.5px solid ${hasError ? '#dd5b00' : 'rgba(0,0,0,0.1)'}`,
+      borderRadius: 10,
+      fontSize: 14,
+      color: '#111111',
+      background: hasError ? '#fff9f7' : '#fafafa',
+      lineHeight: 1.55,
+      transition: 'border-color 0.15s, box-shadow 0.15s, background 0.15s',
     });
 
     /* ── Footer ───────────────────────────────────────────────────── */
-    const Footer = () => (
-      <footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
-            <div>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
-              <p style={{ fontSize: 14, color: '#615d59', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {['LinkedIn','Twitter'].map(s => (
-                  <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4 }}
-                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.7)'}
-                    onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{s}</a>
+    const Footer = () => {
+      const navCols = [
+        { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
+        { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
+      ];
+      const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+      return (
+        <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
+          <div style={{ maxWidth:1200, margin:'0 auto' }}>
+            <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+              <div>
+                <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+                <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+                  Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
+                </p>
+                <div style={{ display:'flex', gap:10 }}>
+                  {[
+                    { href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+                  ].map(({ href, title, svg }) => (
+                    <a key={title} href={href} target="_blank" rel="noopener noreferrer" title={title}
+                      onMouseEnter={e=>{ e.currentTarget.style.background='rgba(11,17,32,0.07)'; e.currentTarget.style.color='#0b1120'; }}
+                      onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#111111'; }}
+                      style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#111111', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
+                      {svg}
+                    </a>
+                  ))}
+                </div>
+              </div>
+              {navCols.map(col => (
+                <div key={col.heading}>
+                  <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+                  <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
+                    {col.links.map(({ label, href }) => (
+                      <a key={label} href={href}
+                        onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                        onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                        style={linkStyle}>{label}</a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
+              <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+              <div style={{ display:'flex', gap:24 }}>
+                {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+                  <a key={label} href={href}
+                    onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                    onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                    style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
                 ))}
               </div>
             </div>
-            {[
-              { heading: 'For organisations', links: ['Build Your Team', 'Our Launchpad', "Let's Talk"] },
-              { heading: 'For candidates', links: ['Build Your Career', 'Our Launchpad', 'Apply now'] },
-              { heading: 'Company', links: ['About Us', 'Contact', 'Privacy', 'Terms'] },
-            ].map(col => (
-              <div key={col.heading}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {col.links.map(l => <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#615d59', textDecoration: 'none' }}
-                    onMouseEnter={e => e.currentTarget.style.color='rgba(0,0,0,0.9)'}
-                    onMouseLeave={e => e.currentTarget.style.color='#615d59'}>{l}</a>)}
-                </div>
-              </div>
-            ))}
           </div>
-          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
-            <div style={{ display: 'flex', gap: 20 }}>
-              {['Privacy','Terms'].map(l => <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
-                onMouseEnter={e => e.currentTarget.style.color='#615d59'}
-                onMouseLeave={e => e.currentTarget.style.color='#a39e98'}>{l}</a>)}
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
+        </footer>
+      );
+    };
 
     /* ── App ─────────────────────────────────────────────────────── */
     const App = () => (
@@ -375,6 +442,17 @@
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 
+  <script>
+  (function(){
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(ens){ens.forEach(function(en){if(en.isIntersecting){var el=en.target;el.style.opacity='1';el.style.transform='none';io.unobserve(el);}});},{threshold:0.09,rootMargin:'0px 0px -32px 0px'});
+    function boot(){document.querySelectorAll('section,footer').forEach(function(el){var r=el.getBoundingClientRect();if(r.top>=window.innerHeight*0.88){el.style.cssText+=';opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;';io.observe(el);}});}
+    var root=document.getElementById('root');
+    if(root&&root.firstChild){boot();}
+    else if(root){var mo=new MutationObserver(function(){if(root.firstChild){mo.disconnect();setTimeout(boot,80);}});mo.observe(root,{childList:true});}
+  })();
+  </script>
+
   <style>
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
@@ -383,7 +461,7 @@
     <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:14px;">Tweaks</div>
     <div style="display:flex;flex-direction:column;gap:12px;">
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Left panel width</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">Left panel width</label>
         <select onchange="document.querySelector('.contact-layout').style.gridTemplateColumns=this.value+' 1fr'" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;">
           <option value="380px">Narrow</option>
           <option value="420px" selected>Default</option>
@@ -391,7 +469,7 @@
         </select>
       </div>
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Left panel bg</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">Left panel bg</label>
         <div style="display:flex;gap:6px;">
           <button onclick="document.querySelector('.contact-layout > div').style.background='#f6f5f4'" style="width:24px;height:24px;borderRadius:4px;background:#f6f5f4;border:2px solid rgba(0,0,0,0.2);cursor:pointer;"></button>
           <button onclick="document.querySelector('.contact-layout > div').style.background='#31302e'" style="width:24px;height:24px;borderRadius:4px;background:#31302e;border:2px solid transparent;cursor:pointer;"></button>

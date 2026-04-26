@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,10 +34,12 @@
       0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+    .track-inner { display: flex; gap: 12px; animation: scroll-tracks 30s linear infinite; width: max-content; will-change: transform; }
     .animate-up { animation: fadeUp 0.65s ease both; }
     .animate-up-2 { animation: fadeUp 0.65s 0.12s ease both; }
     .animate-up-3 { animation: fadeUp 0.65s 0.24s ease both; }
     .animate-up-4 { animation: fadeUp 0.65s 0.36s ease both; }
+    /* ── Scroll Reveal ─────────────────────────────────────── */
   </style>
 </head>
 <body>
@@ -79,18 +81,18 @@ const Nav = () => {
       transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
       transition: 'all 0.3s ease',
     }}>
-      <div style={{ maxWidth: 1160, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
         <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38, width: 'auto' }} />
+          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52 }} />
         </a>
         <div className="nav-links" style={{ display: 'flex', gap: 4 }}>
           {links.map(({ label, href, active }) => {
             const isActive = active || false;
             return (
               <a key={label} href={href}
-                style={{ fontSize: 13.5, fontWeight: isActive ? 600 : 500, color: isActive ? '#0a1628' : '#6b7280', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', transition: 'color 0.18s', whiteSpace: 'nowrap' }}
+                style={{ fontSize: 13.5, fontWeight: isActive ? 600 : 500, color: isActive ? '#0a1628' : '#111111', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', transition: 'color 0.18s', whiteSpace: 'nowrap' }}
                 onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
-                onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#6b7280'}>
+                onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#111111'}>
                 {label}
               </a>
             );
@@ -98,9 +100,9 @@ const Nav = () => {
         </div>
         <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <a href="contact.html"
-            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#ffffff', textDecoration: 'none', padding: '9px 22px', background: '#0a1628', borderRadius: 9999, border: '1.5px solid #0a1628', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#0a1628'; e.currentTarget.style.borderColor = '#0a1628'; }}>
+            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#ffffff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
             Let's Talk
           </a>
         </div>
@@ -116,9 +118,9 @@ const Nav = () => {
       {menuOpen && (
         <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
           {links.map(({ label, href }) => (
-            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
+            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#111111', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
           ))}
-          <a href="contact.html" style={{ textAlign: 'center', background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
+          <a href="contact.html" style={{ textAlign: 'center', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
         </div>
       )}
     </header>
@@ -135,7 +137,7 @@ const Hero = () => {
     { step: '05', label: 'Grow',   sub: 'Structured career path' },
   ];
 
-  const tracks = ['AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis', 'AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis'];
+  const tracks = ['AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis', 'Project Management', 'DevOps', 'Data Engineering', 'Machine Learning', 'GovTech'];
 
   return (
     <section style={{ background: '#ffffff', minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -155,7 +157,7 @@ const Hero = () => {
           <div>
             {/* Eyebrow */}
             <div className="animate-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 36 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block', animation: 'pulse-dot 2s ease-in-out infinite' }} />
+              
               <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.5px' }}>For Candidates · Qatar</span>
             </div>
 
@@ -163,20 +165,20 @@ const Hero = () => {
             <h1 className="animate-up-2" style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628', marginBottom: 28 }}>
               Build a Career<br />
               in <span style={{ color: '#1560b0' }}>Technology.</span><br />
-              <span style={{ color: 'rgba(10,22,40,0.35)', fontWeight: 700, fontSize: '0.72em', letterSpacing: '-1.5px' }}>Starting in Qatar.</span>
+              <span style={{ color: '#111111', fontWeight: 700, fontSize: '0.72em', letterSpacing: '-1.5px' }}>Starting in Qatar.</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="animate-up-3" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#4b5563', maxWidth: 520, marginBottom: 40 }}>
+            <p className="animate-up-3" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#111111', maxWidth: 520, marginBottom: 40 }}>
               If you have the drive and the foundation, we provide the path. A structured training that develops real capability and places you with ambitious organizations across Qatar.
             </p>
 
             {/* CTAs */}
             <div className="animate-up-4" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 48 }}>
               <a href="contact.html"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1560b0', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 32px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(21,96,176,0.4)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#3b82f6'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(59,130,246,0.4)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(21,96,176,0.4)'; }}>
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 32px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(109,40,217,0.4)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(109,40,217,0.5)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(109,40,217,0.4)'; }}>
                 Apply Now →
               </a>
               <a href="our-launchpad.html"
@@ -196,7 +198,7 @@ const Hero = () => {
               ].map(({ val, lbl }) => (
                 <div key={lbl} style={{ borderLeft: '2px solid rgba(21,96,176,0.35)', paddingLeft: 12 }}>
                   <div style={{ fontSize: 16, fontWeight: 800, color: '#0a1628', lineHeight: 1 }}>{val}</div>
-                  <div style={{ fontSize: 12, color: '#6b7280', marginTop: 3, fontWeight: 500 }}>{lbl}</div>
+                  <div style={{ fontSize: 12, color: '#111111', marginTop: 3, fontWeight: 500 }}>{lbl}</div>
                 </div>
               ))}
             </div>
@@ -218,7 +220,7 @@ const Hero = () => {
                     </div>
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: i === 0 ? '#0a1628' : 'rgba(0,0,0,0.45)', lineHeight: 1.2 }}>{label}</div>
-                      <div style={{ fontSize: 11.5, color: '#9ca3af', marginTop: 2 }}>{sub}</div>
+                      <div style={{ fontSize: 11.5, color: '#111111', marginTop: 2 }}>{sub}</div>
                     </div>
                   </div>
                 );
@@ -235,13 +237,12 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom track strip — scrolling marquee */}
+      {/* Bottom track strip — seamless scrolling marquee */}
       <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '18px 0', overflow: 'hidden', position: 'relative', zIndex: 1, background: '#f8f9fc' }}>
-        <div style={{ display: 'flex', gap: 16, animation: 'scroll-tracks 28s linear infinite', width: 'max-content' }}>
-          {tracks.map((t, i) => (
-            <div key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '6px 18px', whiteSpace: 'nowrap' }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
-              <span style={{ fontSize: 12.5, fontWeight: 600, color: '#4b5563' }}>{t}</span>
+        <div className="track-inner">
+          {[...tracks, ...tracks].map((t, i) => (
+            <div key={i} style={{ display: 'inline-flex', alignItems: 'center', background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '7px 20px', whiteSpace: 'nowrap', flexShrink: 0 }}>
+              <span style={{ fontSize: 12.5, fontWeight: 600, color: '#111111' }}>{t}</span>
             </div>
           ))}
         </div>
@@ -252,50 +253,61 @@ const Hero = () => {
 };
 
 /* ── Footer ───────────────────────────────────────────────────── */
-const Footer = () =>
-<footer style={{ background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
-  <div style={{ maxWidth: 1160, margin: '0 auto' }}>
-    <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
-      <div>
-        <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38, width: 'auto', marginBottom: 16 }} />
-        <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar.</p>
-        <div style={{ display: 'flex', gap: 8 }}>
-          {['LinkedIn', 'Twitter'].map(s =>
-            <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'all 0.15s' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'rgba(0,0,0,0.7)'}
-              onMouseLeave={e => e.currentTarget.style.color = '#a39e98'}>{s}</a>
-          )}
+const Footer = () => {
+  const navCols = [
+    { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
+    { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
+  ];
+  const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+  return (
+    <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
+      <div style={{ maxWidth:1200, margin:'0 auto' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+          <div>
+            <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+            <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+              Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
+            </p>
+            <div style={{ display:'flex', gap:10 }}>
+              {[{ href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> }].map(({ href, title, svg }) => (
+                <a key={title} href={href} target="_blank" rel="noopener noreferrer" title={title}
+                  onMouseEnter={e=>{ e.currentTarget.style.background='rgba(11,17,32,0.07)'; e.currentTarget.style.color='#0b1120'; }}
+                  onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#111111'; }}
+                  style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#111111', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
+                  {svg}
+                </a>
+              ))}
+            </div>
+          </div>
+          {navCols.map(col => (
+            <div key={col.heading}>
+              <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+              <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
+                {col.links.map(({ label, href }) => (
+                  <a key={label} href={href}
+                    onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                    onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                    style={linkStyle}>{label}</a>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-      {[
-        { heading: 'For Organisations', links: [{ l: 'Build Your Team', h: 'build-your-team.html' }, { l: 'Our Launchpad', h: 'our-launchpad.html' }, { l: "Let's Talk", h: 'contact.html' }] },
-        { heading: 'For Candidates', links: [{ l: 'Build Your Career', h: 'build-your-career.html' }, { l: 'Our Launchpad', h: 'our-launchpad.html' }, { l: 'Apply Now', h: 'contact.html' }] },
-        { heading: 'Company', links: [{ l: 'About Us', h: 'about-us.html' }, { l: 'Contact', h: 'contact.html' }, { l: 'Privacy', h: '#' }, { l: 'Terms', h: '#' }] },
-      ].map(col =>
-        <div key={col.heading}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {col.links.map(({ l, h }) =>
-              <a key={l} href={h} style={{ fontSize: 14, fontWeight: 500, color: '#4b5563', textDecoration: 'none', transition: 'color 0.15s' }}
-                onMouseEnter={e => e.currentTarget.style.color = 'rgba(0,0,0,0.9)'}
-                onMouseLeave={e => e.currentTarget.style.color = '#4b5563'}>{l}</a>
-            )}
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
+          <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+          <div style={{ display:'flex', gap:24 }}>
+            {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+              <a key={label} href={href}
+                onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+            ))}
           </div>
         </div>
-      )}
-    </div>
-    <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-      <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
-      <div style={{ display: 'flex', gap: 20 }}>
-        {['Privacy', 'Terms'].map(l =>
-          <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none', transition: 'color 0.15s' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#4b5563'}
-            onMouseLeave={e => e.currentTarget.style.color = '#a39e98'}>{l}</a>
-        )}
       </div>
-    </div>
-  </div>
-</footer>;
+    </footer>
+  );
+};
 
 /* ── Journey ─────────────────────────────────────────────────── */
 const STEPS = [
@@ -348,14 +360,11 @@ const Journey = () => {
 
         {/* Section label + heading */}
         <div style={{ marginBottom: 64 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
-            <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 03 — Your Journey With Us</span>
-          </div>
-          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-1.5px', lineHeight: 1.1, marginBottom: 16 }}>
-            Five Steps.<br /><span style={{ color: '#1560b0' }}>One Destination.</span>
+          <div style={{ display: 'none' }}></div>
+          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, marginBottom: 16, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            Five Steps.<br /><span>One Destination.</span>
           </h2>
-          <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.75, maxWidth: 480 }}>
+          <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, maxWidth: 480 }}>
             From your first message to a thriving career in tech — here is exactly how it works.
           </p>
         </div>
@@ -391,14 +400,14 @@ const Journey = () => {
                   }}>
                     {isDone
                       ? <span style={{ fontSize: 16, color: '#22a822' }}>✓</span>
-                      : <span style={{ fontSize: 11, fontWeight: 800, color: isAct ? '#fff' : '#9ca3af', letterSpacing: '0.5px' }}>{s.num}</span>
+                      : <span style={{ fontSize: 11, fontWeight: 800, color: isAct ? '#fff' : '#111111', letterSpacing: '0.5px' }}>{s.num}</span>
                     }
                   </div>
 
                   {/* Title + tag */}
                   <div>
                     <div style={{ fontSize: 15, fontWeight: 700, color: isAct ? '#fff' : '#0a1628', lineHeight: 1.2, marginBottom: 4, transition: 'color 0.2s' }}>{s.title}</div>
-                    <div style={{ fontSize: 11.5, fontWeight: 600, color: isAct ? 'rgba(255,255,255,0.5)' : '#9ca3af', transition: 'color 0.2s' }}>{s.tag}</div>
+                    <div style={{ fontSize: 11.5, fontWeight: 600, color: isAct ? 'rgba(255,255,255,0.5)' : '#111111', transition: 'color 0.2s' }}>{s.tag}</div>
                   </div>
 
                   {/* Arrow */}
@@ -422,25 +431,24 @@ const Journey = () => {
 
               {/* Tag pill */}
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 20 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
                 <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.4px' }}>{step.tag}</span>
               </div>
 
               {/* Step counter */}
-              <div style={{ fontSize: 11, fontWeight: 800, color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Step {step.num} of 05</div>
+              <div style={{ fontSize: 11, fontWeight: 800, color: '#111111', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Step {step.num} of 05</div>
 
               {/* Title */}
               <h3 style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.9rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-0.8px', lineHeight: 1.15, marginBottom: 20 }}>{step.title}</h3>
 
               {/* Body */}
-              <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.8, marginBottom: 36 }}>{step.body}</p>
+              <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.8, marginBottom: 36 }}>{step.body}</p>
 
               {/* Progress bar */}
               <div style={{ background: 'rgba(0,0,0,0.07)', borderRadius: 99, height: 4, marginBottom: 12, overflow: 'hidden' }}>
                 <div style={{ height: '100%', width: `${((active + 1) / STEPS.length) * 100}%`, background: 'linear-gradient(90deg, #1560b0, #3b82f6)', borderRadius: 99, transition: 'width 0.35s ease' }} />
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>{active + 1} of {STEPS.length} steps</span>
+                <span style={{ fontSize: 12, color: '#111111', fontWeight: 500 }}>{active + 1} of {STEPS.length} steps</span>
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button onClick={() => setActive(a => Math.max(0, a - 1))} disabled={active === 0}
                     style={{ width: 34, height: 34, borderRadius: '50%', border: '1.5px solid rgba(0,0,0,0.12)', background: '#fff', cursor: active === 0 ? 'not-allowed' : 'pointer', opacity: active === 0 ? 0.35 : 1, fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s' }}
@@ -466,7 +474,7 @@ const gainCards = [
     num: '01',
     bg: 'linear-gradient(135deg, #c8dff8 0%, #b8ccf0 40%, #ccc8f0 100%)',
     textColor: '#0a1628',
-    subColor: 'rgba(10,22,40,0.6)',
+    subcolor: '#111111',
     tagBg: 'rgba(21,96,176,0.12)',
     tagColor: '#1560b0',
     checkColor: '#1560b0',
@@ -479,7 +487,7 @@ const gainCards = [
     num: '02',
     bg: 'linear-gradient(135deg, #d4c8f0 0%, #c4b8ec 40%, #e0c8e8 100%)',
     textColor: '#0a1628',
-    subColor: 'rgba(10,22,40,0.6)',
+    subcolor: '#111111',
     tagBg: 'rgba(109,40,217,0.12)',
     tagColor: '#5b21b6',
     checkColor: '#5b21b6',
@@ -492,7 +500,7 @@ const gainCards = [
     num: '03',
     bg: 'linear-gradient(135deg, #b8d4f0 0%, #c8c0ec 40%, #d8b8e4 100%)',
     textColor: '#0a1628',
-    subColor: 'rgba(10,22,40,0.6)',
+    subcolor: '#111111',
     tagBg: 'rgba(8,145,178,0.12)',
     tagColor: '#0e7490',
     checkColor: '#0e7490',
@@ -565,15 +573,12 @@ const WhatYouGain = () => {
   const sectionRef = React.useRef(null);
   return (
     <div style={{ background: '#f1f5f9' }}>
-      <div style={{ padding: '100px 24px 60px', maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
-          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 05 — What You Gain</span>
-        </div>
-        <h2 style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628' }}>
-          Why Organizations Trust<br /><span style={{ color: '#1560b0' }}>CertiMinds Consultants</span>
+      <div style={{ padding: '100px 24px 0', maxWidth: 1100, margin: '0 auto' }}>
+        <div style={{ display: 'none' }}></div>
+        <h2 style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-3px', paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          Why Organizations Trust<br /><span>CertiMinds Consultants</span>
         </h2>
-        <p style={{ fontSize: '1rem', color: '#4b5563', lineHeight: 1.75, marginTop: 16, maxWidth: 480 }}>Every consultant we develop is built around three core principles.</p>
+        <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, marginTop: 16, maxWidth: 480 }}>Every consultant we develop is built around three core principles.</p>
       </div>
       <section ref={sectionRef}>
         {gainCards.map((c, i) => (
@@ -625,7 +630,7 @@ const FAQs = () => {
       >
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-            <span style={{ fontSize: 11, fontWeight: 800, color: isOpen ? 'rgba(255,255,255,0.35)' : '#9ca3af', letterSpacing: '1px', flexShrink: 0, paddingTop: 2 }}>{String(idx + 1).padStart(2, '0')}</span>
+            <span style={{ fontSize: 11, fontWeight: 800, color: isOpen ? 'rgba(255,255,255,0.35)' : '#111111', letterSpacing: '1px', flexShrink: 0, paddingTop: 2 }}>{String(idx + 1).padStart(2, '0')}</span>
             <span style={{ fontSize: '0.975rem', fontWeight: 700, color: isOpen ? '#ffffff' : '#0a1628', lineHeight: 1.4 }}>{faq.q}</span>
           </div>
           <div style={{
@@ -635,7 +640,7 @@ const FAQs = () => {
             transition: 'transform 0.25s ease, background 0.25s ease',
             transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
           }}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isOpen ? '#ffffff' : '#6b7280'} strokeWidth="2.5" strokeLinecap="round">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isOpen ? '#ffffff' : '#111111'} strokeWidth="2.5" strokeLinecap="round">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
           </div>
@@ -654,15 +659,12 @@ const FAQs = () => {
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 64 }}>
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
-              <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>Section 07 — FAQs</span>
-            </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-1.5px', lineHeight: 1.1, margin: 0 }}>
-              Got Questions?<br /><span style={{ color: '#1560b0' }}>We Have Answers.</span>
+
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, margin: 0, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              Got Questions?<br /><span>We Have Answers.</span>
             </h2>
           </div>
-          <p style={{ fontSize: '0.975rem', color: '#6b7280', maxWidth: 340, lineHeight: 1.75, margin: 0 }}>Everything you need to know about joining the CertiMinds programme.</p>
+          <p style={{ fontSize: '0.975rem', color: '#111111', maxWidth: 340, lineHeight: 1.75, margin: 0 }}>Everything you need to know about joining the CertiMinds programme.</p>
         </div>
 
         {/* Two-column accordion */}
@@ -718,10 +720,7 @@ const ApplyCTA = () => {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', borderRadius: 9999, padding: '5px 16px', marginBottom: 28 }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#38bdf8' }} />
-            <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.6)', letterSpacing: '2.5px', textTransform: 'uppercase' }}>Section 08 — Apply</span>
-          </div>
+
           <h2 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)', fontWeight: 900, color: '#ffffff', letterSpacing: '-2px', lineHeight: 1.05, margin: '0 0 20px' }}>
             Take the step.<br /><span style={{ color: '#38bdf8' }}>We'll handle the rest.</span>
           </h2>
@@ -805,28 +804,7 @@ const ApplyCTA = () => {
                 style={{ ...inputStyle('motivation'), resize: 'vertical', minHeight: 110, lineHeight: 1.7 }} />
             </div>
 
-            {/* Row 5: CV upload */}
-            <div style={{ marginBottom: 40 }}>
-              <label style={labelStyle}>Upload CV</label>
-              <label htmlFor="cv-upload" style={{
-                display: 'flex', alignItems: 'center', gap: 14, padding: '14px 18px',
-                borderRadius: 12, border: `1.5px dashed ${focused === 'cv' ? '#1560b0' : 'rgba(255,255,255,0.18)'}`,
-                background: 'rgba(255,255,255,0.03)', cursor: 'pointer', transition: 'border-color 0.2s',
-              }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(21,96,176,0.6)'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'}
-              >
-                <div style={{ width: 38, height: 38, borderRadius: 10, background: 'rgba(21,96,176,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                </div>
-                <span style={{ fontSize: '0.9rem', color: cvName ? '#ffffff' : 'rgba(255,255,255,0.35)' }}>
-                  {cvName || 'Click to upload your CV (PDF, DOC, DOCX)'}
-                </span>
-                {cvName && <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>}
-              </label>
-              <input id="cv-upload" type="file" accept=".pdf,.doc,.docx"
-                onChange={e => { const f = e.target.files[0]; if (f) { set('cv', f); setCvName(f.name); } }} />
-            </div>
+
 
             {/* Submit */}
             <button type="submit" style={{
@@ -839,7 +817,7 @@ const ApplyCTA = () => {
               onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
               onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
             >
-              Apply to the Programme →
+              Apply Now →
             </button>
 
             <p style={{ textAlign: 'center', marginTop: 18, fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
@@ -865,6 +843,17 @@ const App = () => (
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+
+  <script>
+  (function(){
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(ens){ens.forEach(function(en){if(en.isIntersecting){var el=en.target;el.style.opacity='1';el.style.transform='none';io.unobserve(el);}});},{threshold:0.09,rootMargin:'0px 0px -32px 0px'});
+    function boot(){document.querySelectorAll('section,footer').forEach(function(el){var r=el.getBoundingClientRect();if(r.top>=window.innerHeight*0.88){el.style.cssText+=';opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;';io.observe(el);}});}
+    var root=document.getElementById('root');
+    if(root&&root.firstChild){boot();}
+    else if(root){var mo=new MutationObserver(function(){if(root.firstChild){mo.disconnect();setTimeout(boot,80);}});mo.observe(root,{childList:true});}
+  })();
   </script>
 </body>
 </html>

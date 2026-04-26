@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,9 +26,26 @@
       .hero-ctas { flex-direction: column !important; align-items: stretch !important; }
       .hero-ctas a { text-align: center; justify-content: center; }
     }
+    /* ── Intro & Scroll Reveal ─────────────────────────────── */
+    #page-intro{position:fixed;inset:0;z-index:99999;background:#0a1628;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;animation:__piUp 0.6s cubic-bezier(0.76,0,0.24,1) 1.55s forwards}
+    .pi-brand{font-size:2rem;font-weight:900;letter-spacing:-1px;color:#fff;font-family:'Inter',system-ui,sans-serif;animation:__piDrop 0.7s cubic-bezier(0.34,1.2,0.64,1) 0.18s both}
+    .pi-sub{font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);font-family:'Inter',system-ui,sans-serif;animation:__piFade 0.5s ease 0.6s both}
+    .pi-bar{height:2px;border-radius:9999px;background:linear-gradient(90deg,#6d28d9,#3b82f6);margin-top:4px;animation:__piBar 1.1s cubic-bezier(0.25,1,0.5,1) 0.45s forwards}
+    .pi-dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#3b82f6);display:inline-block;vertical-align:middle;margin-left:4px;animation:__piPulse 1.1s ease 0.8s infinite}
+    @keyframes __piDrop{from{opacity:0;transform:translateY(16px) scale(0.92)}to{opacity:1;transform:none}}
+    @keyframes __piFade{from{opacity:0}to{opacity:1}}
+    @keyframes __piBar{from{width:0}to{width:72px}}
+    @keyframes __piUp{to{transform:translateY(-100%)}}
+    @keyframes __piPulse{0%,100%{opacity:0.35;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
+    body.pi-active{overflow:hidden}
   </style>
 </head>
 <body>
+  <div id="page-intro" role="presentation" aria-hidden="true">
+    <div class="pi-brand">CertiMinds<span class="pi-dot"></span></div>
+    <div class="pi-sub">Qatar &middot; Tech Talent</div>
+    <div class="pi-bar"></div>
+  </div>
   <div id="root"></div>
 
   <script type="text/babel">
@@ -73,11 +90,11 @@
           transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
         }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
 
             {/* Logo */}
             <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38, transition: 'opacity 0.2s' }}
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52, transition: 'opacity 0.2s' }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
             </a>
@@ -93,9 +110,9 @@
             {/* CTA buttons */}
             <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
               <a href="contact.html"
-                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: '#0a1628', borderRadius: 9999, border: '1.5px solid #0a1628', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#0a1628'; e.currentTarget.style.borderColor = '#0a1628'; }}>
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
                 Let's Talk
               </a>
             </div>
@@ -115,12 +132,12 @@
           {menuOpen && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
               {links.map(({ label, href }) => (
-                <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '11px 12px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.15s' }}
+                <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#111111', padding: '11px 12px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.15s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'rgba(10,22,40,0.05)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{label}</a>
               ))}
               <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-                <a href="contact.html" style={{ flex: 1, textAlign: 'center', background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none' }}>Let's Talk</a>
+                <a href="contact.html" style={{ flex: 1, textAlign: 'center', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none' }}>Let's Talk</a>
               </div>
             </div>
           )}
@@ -137,7 +154,7 @@
           style={{
             fontSize: 13.5,
             fontWeight: active ? 600 : 500,
-            color: active ? '#0a1628' : hov ? '#0a1628' : '#6b7280',
+            color: active ? '#0a1628' : hov ? '#0a1628' : '#111111',
             padding: '8px 16px',
             textDecoration: 'none',
             borderRadius: 6,
@@ -245,7 +262,7 @@
             <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', marginBottom: 14 }} />
 
             {/* Recent placements label */}
-            <div style={{ fontSize: 10.5, fontWeight: 700, color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 9 }}>Recent Placements</div>
+            <div style={{ fontSize: 10.5, fontWeight: 700, color: '#111111', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 9 }}>Recent Placements</div>
 
             {/* Placement rows */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -254,11 +271,11 @@
                   <div style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0, boxShadow: `0 0 6px ${color}88` }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 12.5, fontWeight: 700, color: '#0a1628', lineHeight: 1.2 }}>{role}</div>
-                    <div style={{ fontSize: 11, color: '#6b7280', marginTop: 1 }}>{company}</div>
+                    <div style={{ fontSize: 11, color: '#111111', marginTop: 1 }}>{company}</div>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
                     <span style={{ fontSize: 10.5, fontWeight: 600, color, background: `${color}18`, padding: '3px 9px', borderRadius: 999 }}>{tag}</span>
-                    <span style={{ fontSize: 11, color: '#9ca3af', whiteSpace: 'nowrap' }}>{days}d</span>
+                    <span style={{ fontSize: 11, color: '#111111', whiteSpace: 'nowrap' }}>{days}d</span>
                   </div>
                 </div>
               ))}
@@ -270,7 +287,7 @@
                 {[{ val: '95%', lbl: 'Retention' }, { val: '6 mo', lbl: 'Avg. time' }, { val: '100%', lbl: 'Local' }].map(({ val, lbl }) => (
                   <div key={lbl}>
                     <div style={{ fontSize: 14, fontWeight: 800, color: '#0a1628', lineHeight: 1 }}>{val}</div>
-                    <div style={{ fontSize: 10, color: '#9ca3af', marginTop: 2, fontWeight: 500 }}>{lbl}</div>
+                    <div style={{ fontSize: 10, color: '#111111', marginTop: 2, fontWeight: 500 }}>{lbl}</div>
                   </div>
                 ))}
               </div>
@@ -294,16 +311,44 @@
       return (
         <section style={{ background: '#ffffff', minHeight: 'calc(100vh - 90px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 24px', position: 'relative', overflow: 'hidden' }}>
 
-          {/* Grid background */}
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(21,96,176,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(21,96,176,0.06) 1px, transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
-          {/* Fade edges */}
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, #ffffff 100%)', pointerEvents: 'none' }} />
+          {/* Soft ambient blobs */}
+          <div style={{ position: 'absolute', top: '-12%', left: '-10%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(21,96,176,0.1) 0%, transparent 70%)', pointerEvents: 'none', filter: 'blur(48px)' }} />
+          <div style={{ position: 'absolute', bottom: '-8%', right: '-8%', width: 460, height: 460, borderRadius: '50%', background: 'radial-gradient(circle, rgba(109,40,217,0.09) 0%, transparent 70%)', pointerEvents: 'none', filter: 'blur(48px)' }} />
+          <div style={{ position: 'absolute', top: '40%', right: '3%', width: 260, height: 260, borderRadius: '50%', background: 'radial-gradient(circle, rgba(6,182,212,0.09) 0%, transparent 70%)', pointerEvents: 'none', filter: 'blur(36px)' }} />
+          <div style={{ position: 'absolute', bottom: '18%', left: '2%', width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%)', pointerEvents: 'none', filter: 'blur(32px)' }} />
+
+          {/* Floating geometric shapes */}
+          {/* Large circle — top left */}
+          <div style={{ position: 'absolute', top: '12%', left: '4%', width: 72, height: 72, borderRadius: '50%', background: 'linear-gradient(135deg,#1560b0,#3b82f6)', opacity: 0.18, pointerEvents: 'none', animation: 'floatA 6s ease-in-out infinite' }} />
+          {/* Small circle — top left inner */}
+          <div style={{ position: 'absolute', top: '22%', left: '9%', width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg,#06b6d4,#0ea5e9)', opacity: 0.25, pointerEvents: 'none', animation: 'floatB 5s ease-in-out infinite' }} />
+          {/* Rounded square — top right */}
+          <div style={{ position: 'absolute', top: '14%', right: '5%', width: 54, height: 54, borderRadius: 14, background: 'linear-gradient(135deg,#7c3aed,#a78bfa)', opacity: 0.22, pointerEvents: 'none', animation: 'floatC 7s ease-in-out infinite', transform: 'rotate(18deg)' }} />
+          {/* Large ring — right mid */}
+          <div style={{ position: 'absolute', top: '35%', right: '3%', width: 80, height: 80, borderRadius: '50%', border: '6px solid rgba(109,40,217,0.2)', pointerEvents: 'none', animation: 'floatA 8s ease-in-out infinite' }} />
+          {/* Small ring — left mid */}
+          <div style={{ position: 'absolute', top: '45%', left: '4%', width: 48, height: 48, borderRadius: '50%', border: '5px solid rgba(21,96,176,0.2)', pointerEvents: 'none', animation: 'floatB 9s ease-in-out infinite' }} />
+          {/* Triangle-ish — bottom left */}
+          <div style={{ position: 'absolute', bottom: '28%', left: '5%', width: 0, height: 0, borderLeft: '22px solid transparent', borderRight: '22px solid transparent', borderBottom: '38px solid rgba(16,185,129,0.2)', pointerEvents: 'none', animation: 'floatC 6s ease-in-out infinite' }} />
+          {/* Rounded square — bottom right */}
+          <div style={{ position: 'absolute', bottom: '22%', right: '5%', width: 44, height: 44, borderRadius: 10, background: 'linear-gradient(135deg,#f59e0b,#fbbf24)', opacity: 0.2, pointerEvents: 'none', animation: 'floatA 7s ease-in-out infinite', transform: 'rotate(-14deg)' }} />
+          {/* Tiny circle — bottom right */}
+          <div style={{ position: 'absolute', bottom: '32%', right: '10%', width: 20, height: 20, borderRadius: '50%', background: '#10b981', opacity: 0.22, pointerEvents: 'none', animation: 'floatB 5s ease-in-out infinite' }} />
+          {/* Dot cluster — bottom center-left */}
+          <div style={{ position: 'absolute', bottom: '14%', left: '14%', width: 12, height: 12, borderRadius: '50%', background: '#1560b0', opacity: 0.2, pointerEvents: 'none', animation: 'floatC 4s ease-in-out infinite' }} />
+          <div style={{ position: 'absolute', bottom: '18%', left: '17%', width: 8, height: 8, borderRadius: '50%', background: '#7c3aed', opacity: 0.2, pointerEvents: 'none', animation: 'floatA 4.5s ease-in-out infinite' }} />
+
+          <style>{`
+            @keyframes floatA { 0%,100%{transform:translateY(0px) rotate(0deg)} 50%{transform:translateY(-12px) rotate(4deg)} }
+            @keyframes floatB { 0%,100%{transform:translateY(0px) rotate(0deg)} 50%{transform:translateY(-16px) rotate(-5deg)} }
+            @keyframes floatC { 0%,100%{transform:translateY(0px) rotate(0deg)} 50%{transform:translateY(-9px) rotate(6deg)} }
+            @media(max-width:900px){ .hero-shapes { display: none !important; } }
+          `}</style>
 
           <div style={{ maxWidth: 860, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 1, padding: '48px 0 48px' }}>
 
             {/* Eyebrow badge */}
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 20 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
               <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.3px' }}>Qatar</span>
             </div>
 
@@ -315,36 +360,34 @@
             </h1>
 
             {/* Subheadline */}
-            <p style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1rem)', lineHeight: 1.7, color: '#4b5563', maxWidth: 560, margin: '16px auto 24px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+            <p style={{ fontSize: 'clamp(0.9rem, 1.3vw, 1rem)', lineHeight: 1.7, color: '#111111', maxWidth: 560, margin: '16px auto 20px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
               CertiMinds doesn't fill roles — we craft the professionals. Our Launchpad develops local Qatar talent around your exact technology requirements, assessed and job-ready from day one.
             </p>
 
-            {/* Stats table */}
-            <div style={{ marginTop: 32, border: '1px solid rgba(0,0,0,0.1)', borderRadius: 14, overflow: 'hidden', background: '#fff' }}>
-              {/* Top row — headings */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-                {[
-                  { value: '2% Acceptance Rate' },
-                  { value: '100% Qatar-Based Talent' },
-                  { value: '3-Track Programme' },
-                ].map(({ value }, i) => (
-                  <div key={value} style={{ padding: '18px 24px', fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', fontWeight: 800, color: '#0a1628', borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
-                    {value}
-                  </div>
-                ))}
-              </div>
-              {/* Bottom row — subtexts */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-                {[
-                  { label: 'Rigorous selection, not open enrolment' },
-                  { label: 'Qatar-first talent pipeline' },
-                  { label: 'Technical · Professional · AI-Native' },
-                ].map(({ label }, i) => (
-                  <div key={label} style={{ padding: '14px 24px', fontSize: 'clamp(0.8rem, 1.1vw, 0.9rem)', color: '#6b7280', fontWeight: 500, borderRight: i < 2 ? '1px solid rgba(0,0,0,0.08)' : 'none' }}>
-                    {label}
-                  </div>
-                ))}
-              </div>
+            {/* Stats table — colorful */}
+            <div style={{ marginTop: 32, borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
+              {[
+                { value: '2% Acceptance Rate', label: 'Rigorous selection, not open enrolment', gradient: 'linear-gradient(135deg,#eef5ff 0%,#dceeff 100%)', accent: '#1560b0', borderR: true },
+                { value: '100% Qatar-Based Talent', label: 'Qatar-first talent pipeline', gradient: 'linear-gradient(135deg,#f3e8ff 0%,#e9d5ff 100%)', accent: '#7c3aed', borderR: true },
+                { value: '3-Track Programme', label: 'Technical · Professional · AI-Native', gradient: 'linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%)', accent: '#059669', borderR: false },
+              ].map(({ value, label, gradient, accent, borderR }, i) => (
+                <div key={i} style={{ background: gradient, padding: '22px 24px 20px', borderRight: borderR ? `1px solid rgba(0,0,0,0.06)` : 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <div style={{ fontSize: 'clamp(0.85rem, 1.2vw, 1rem)', fontWeight: 800, color: accent, lineHeight: 1.3 }}>{value}</div>
+                  <div style={{ fontSize: 'clamp(0.78rem, 1vw, 0.88rem)', color: '#111111', fontWeight: 500, lineHeight: 1.5 }}>{label}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Explore our services CTA */}
+            <div style={{ marginTop: 28, display: 'flex', justifyContent: 'center' }}>
+              <a href="#certiminds-model"
+                onClick={e => { e.preventDefault(); document.getElementById('certiminds-model').scrollIntoView({ behavior: 'smooth' }); }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 14, fontWeight: 700, padding: '11px 26px', borderRadius: 9999, textDecoration: 'none', border: 'none', boxShadow: '0 4px 18px rgba(109,40,217,0.32)', transition: 'all 0.2s', cursor: 'pointer' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(109,40,217,0.48)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 18px rgba(109,40,217,0.32)'; e.currentTarget.style.transform = 'none'; }}>
+                Explore our services
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+              </a>
             </div>
           </div>
         </section>
@@ -362,7 +405,7 @@
             {/* Section label */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 56, justifyContent: 'center' }}>
               <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block' }} />
-              <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Who We Work With</span>
+              <span style={{ fontSize: 17.5, fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Who We Work With</span>
               <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block' }} />
             </div>
 
@@ -407,7 +450,7 @@
                   </div>
                   <span style={{ fontSize: 11, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For candidates</span>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#0b1120', marginBottom: 16 }}>Launch<br />Your Career</h3>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#6b7280', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Structured, employer-aligned training across technical, professional, and AI skills. Designed to get you hired and keep you there.</p>
+                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#111111', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Structured, employer-aligned training across technical, professional, and AI skills. Designed to get you hired and keep you there.</p>
                 </div>
 
                 <a href="#" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#2d6faa', textDecoration: 'none', background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.2)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
@@ -482,16 +525,16 @@
 
             {/* Step badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(30,50,120,0.5)', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#111111', letterSpacing: '2px', textTransform: 'uppercase' }}>Step {step}</span>
               <span style={{ width: 24, height: 1, background: 'rgba(30,50,120,0.2)' }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(30,50,120,0.5)', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: '#111111', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</span>
             </div>
 
             <div style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
               {/* Left */}
               <div style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#0a1628', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
-                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: 'rgba(20,40,100,0.65)' }}>{desc}</p>
+                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#111111' }}>{desc}</p>
 
               </div>
 
@@ -541,10 +584,10 @@
     const HowItWorks = () => {
       const cardsRef = React.useRef(null);
       return (
-        <div style={{ background: '#ffffff' }}>
+        <div id="certiminds-model" style={{ background: '#ffffff' }}>
           {/* Heading — scrolls away before cards stick */}
-          <div style={{ padding: '100px 24px 60px', maxWidth: 1200, margin: '0 auto' }}>
-            <h2 style={{ fontSize: 'clamp(3rem, 6.5vw, 5.5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', color: '#0a1628', fontFeatureSettings: '"lnum","locl"' }}>The CertiMinds Model</h2>
+          <div style={{ padding: '100px 24px 32px', maxWidth: 1200, margin: '0 auto' }}>
+            <h2 style={{ fontSize: 'clamp(3rem, 6.5vw, 5.5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', fontFeatureSettings: '"lnum","locl"', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>The CertiMinds Model</h2>
           </div>
 
           {/* Stacking cards */}
@@ -593,7 +636,7 @@
       ];
 
       return (
-        <section style={{ background: '#f8fafc', padding: '90px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+        <div style={{ background: '#f8fafc', padding: '90px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
           <style>{`
             @media (max-width: 768px) {
               .adv-layout { grid-template-columns: 1fr !important; }
@@ -607,7 +650,7 @@
             {/* Left — photo */}
             <div className="adv-img" style={{ borderRadius:28, overflow:'hidden', minHeight:500, background:'#cbd5e1', position:'relative' }}>
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80"
+                src="uploads/learn_img.png"
                 alt="CertiMinds consulting team"
                 style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', position:'absolute', inset:0 }}
               />
@@ -618,7 +661,7 @@
 
               {/* Title card */}
               <div style={{ borderRadius:24, background:'linear-gradient(130deg, #93c5fd 0%, #c4b5fd 100%)', padding:'44px 44px', display:'flex', alignItems:'center', minHeight:160 }}>
-                <h2 style={{ fontSize:'clamp(2rem,3.2vw,2.7rem)', fontWeight:900, color:'#0a0f1e', letterSpacing:'-1.5px', lineHeight:1.1, margin:0 }}>
+                <h2 style={{ fontSize:'clamp(2.6rem,4vw,3.8rem)', fontWeight:900, color:'#0a0f1e', letterSpacing:'-2px', lineHeight:1.05, margin:0 }}>
                   The CertiMinds<br/>Advantage
                 </h2>
               </div>
@@ -629,14 +672,14 @@
                   <div key={i} style={{ borderRadius:20, background:'linear-gradient(150deg, #bfdbfe 0%, #ddd6fe 100%)', padding:'28px 22px', display:'flex', flexDirection:'column', gap:14 }}>
                     <div>{f.icon}</div>
                     <div style={{ fontSize:14, fontWeight:800, color:'#0a0f1e', lineHeight:1.3 }}>{f.title}</div>
-                    <p style={{ fontSize:12.5, color:'#334155', lineHeight:1.7, margin:0 }}>{f.desc}</p>
+                    <p style={{ fontSize:12.5, color:'#111111', lineHeight:1.7, margin:0 }}>{f.desc}</p>
                   </div>
                 ))}
               </div>
 
             </div>
           </div>
-        </section>
+        </div>
       );
     };
 
@@ -664,17 +707,17 @@
           {/* Right — text */}
           <div style={{ display:'flex', flexDirection:'column', gap:24 }}>
             <span style={{ fontSize:12, fontWeight:700, color:'#6d28d9', letterSpacing:'2.5px', textTransform:'uppercase' }}>The Reality Qatar's Tech Market Faces</span>
-            <h2 style={{ fontSize:'clamp(2.2rem,3.8vw,3.4rem)', fontWeight:900, color:'#0a1628', letterSpacing:'-2px', lineHeight:1.05, margin:0 }}>
+            <h2 style={{ fontSize:'clamp(2.2rem,3.8vw,3.4rem)', fontWeight:900, letterSpacing:'-2px', lineHeight:1.05, margin:0, background:'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
               Demand Isn't the Problem.<br/>Ready Talent Is.
             </h2>
             <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
-              <p style={{ fontSize:'1.05rem', color:'#4b5563', lineHeight:1.85, margin:0 }}>
+              <p style={{ fontSize:'1.05rem', color:'#111111', lineHeight:1.85, margin:0 }}>
                 Most organisations aren't short of ambition. They're short of people who can walk in and actually get things done.
               </p>
               <p style={{ fontSize:'1.05rem', color:'#6d28d9', lineHeight:1.85, margin:0 }}>
                 Finding the right person takes time. Getting them up to speed takes more. And while that's happening, your projects don't wait.
               </p>
-              <p style={{ fontSize:'1.05rem', color:'#4b5563', lineHeight:1.85, margin:0 }}>
+              <p style={{ fontSize:'1.05rem', color:'#111111', lineHeight:1.85, margin:0 }}>
                 At CertiMinds, we do the heavy lifting before the hire. Every consultant we place has been put through a structured development process built around technical skills, workplace readiness, and the kind of AI fluency that modern teams actually need. By the time they join you, the work is already done.
               </p>
               <p style={{ fontSize:'1.1rem', fontWeight:700, color:'#0a1628', margin:0 }}>That's how we close the gap.</p>
@@ -722,7 +765,7 @@
               <a href="contact.html"
                 onMouseEnter={e=>{ setHov(true); e.currentTarget.querySelector('[data-arr]').style.transform='rotate(0deg)'; }}
                 onMouseLeave={e=>{ setHov(false); e.currentTarget.querySelector('[data-arr]').style.transform='rotate(-45deg)'; }}
-                style={{ display:'inline-flex', alignItems:'center', gap:10, background: hov ? '#1048a0' : '#1560b0', color:'#fff', fontSize:15, fontWeight:700, padding:'15px 34px', borderRadius:9999, textDecoration:'none', transition:'background 0.2s, box-shadow 0.2s, transform 0.2s', boxShadow: hov ? '0 12px 40px rgba(21,96,176,0.5)' : '0 6px 28px rgba(21,96,176,0.45)', transform: hov ? 'translateY(-2px)' : 'none', letterSpacing:'-0.1px' }}>
+                style={{ display:'inline-flex', alignItems:'center', gap:10, background: hov ? 'linear-gradient(135deg, #5b21b6, #2563eb)' : 'linear-gradient(135deg, #6d28d9, #3b82f6)', color:'#fff', fontSize:15, fontWeight:700, padding:'15px 34px', borderRadius:9999, textDecoration:'none', transition:'background 0.2s, box-shadow 0.2s, transform 0.2s', boxShadow: hov ? '0 12px 40px rgba(109,40,217,0.5)' : '0 6px 28px rgba(109,40,217,0.4)', transform: hov ? 'translateY(-2px)' : 'none', letterSpacing:'-0.1px' }}>
                 Talk to Our Team
                 <span data-arr="1" style={{ fontSize:18, display:'inline-block', transform:'rotate(-45deg)', transition:'transform 0.25s cubic-bezier(0.34,1.56,0.64,1)' }}>→</span>
               </a>
@@ -744,7 +787,7 @@
         { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'our-launchpad.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
         { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
       ];
-      const linkStyle = { fontSize:14, color:'#1f2937', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+      const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
       return (
         <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
@@ -754,21 +797,18 @@
               {/* brand col */}
               <div>
                 <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
-                <p style={{ fontSize:14, color:'#374151', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+                <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
                   Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
                 </p>
                 {/* Social icons */}
                 <div style={{ display:'flex', gap:10 }}>
                   {[
-                    { href:'#', title:'Instagram', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg> },
-                    { href:'#', title:'Facebook', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> },
-                    { href:'#', title:'X / Twitter', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> },
                     { href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
                   ].map(({ href, title, svg }) => (
                     <a key={title} href={href} target="_blank" rel="noopener noreferrer" title={title}
                       onMouseEnter={e=>{ e.currentTarget.style.background='rgba(11,17,32,0.07)'; e.currentTarget.style.color='#0b1120'; }}
-                      onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#8a9ab0'; }}
-                      style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#8a9ab0', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
+                      onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#111111'; }}
+                      style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#111111', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
                       {svg}
                     </a>
                   ))}
@@ -778,12 +818,12 @@
               {/* link cols */}
               {navCols.map(col => (
                 <div key={col.heading}>
-                  <div style={{ fontSize:11, fontWeight:700, color:'rgba(0,0,0,0.5)', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+                  <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
                   <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
                     {col.links.map(({ label, href }) => (
                       <a key={label} href={href}
                         onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
-                        onMouseLeave={e=>e.currentTarget.style.color='#1f2937'}
+                        onMouseLeave={e=>e.currentTarget.style.color='#111111'}
                         style={linkStyle}>{label}</a>
                     ))}
                   </div>
@@ -793,13 +833,13 @@
 
             {/* bottom bar */}
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
-              <span style={{ fontSize:13, color:'rgba(0,0,0,0.55)' }}>© CertiMinds 2026. All rights reserved.</span>
+              <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
               <div style={{ display:'flex', gap:24 }}>
                 {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
                   <a key={label} href={href}
                     onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
-                    onMouseLeave={e=>e.currentTarget.style.color='rgba(0,0,0,0.35)'}
-                    style={{ fontSize:13, color:'rgba(0,0,0,0.55)', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                    onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                    style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
                 ))}
               </div>
             </div>
@@ -870,12 +910,25 @@
     ReactDOM.createRoot(document.getElementById('root')).render(<App />);
   </script>
 
+  <script>
+  (function(){
+    var pi=document.getElementById('page-intro');
+    if(pi){document.body.classList.add('pi-active');pi.addEventListener('animationend',function(e){if(e.animationName==='__piUp'){pi.style.display='none';document.body.classList.remove('pi-active');}});}
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(ens){ens.forEach(function(en){if(en.isIntersecting){var el=en.target;el.style.opacity='1';el.style.transform='none';io.unobserve(el);}});},{threshold:0.09,rootMargin:'0px 0px -32px 0px'});
+    function boot(){document.querySelectorAll('section,footer').forEach(function(el){var r=el.getBoundingClientRect();if(r.top>=window.innerHeight*0.88){el.style.cssText+=';opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;';io.observe(el);}});}
+    var root=document.getElementById('root');
+    if(root&&root.firstChild){boot();}
+    else if(root){var mo=new MutationObserver(function(){if(root.firstChild){mo.disconnect();setTimeout(boot,80);}});mo.observe(root,{childList:true});}
+  })();
+  </script>
+
   <!-- Tweaks panel -->
   <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px, rgba(0,0,0,0.03) 0 2px 8px; padding:20px; width:228px; z-index:9999; font-family:'Inter',sans-serif;">
     <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:16px;">Tweaks</div>
     <div style="display:flex;flex-direction:column;gap:14px;">
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">Section padding</label>
         <select onchange="setPad(this.value)" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
           <option value="normal">Normal</option>
           <option value="airy">Airy</option>
@@ -883,7 +936,7 @@
         </select>
       </div>
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">CTA emphasis</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">CTA emphasis</label>
         <div style="display:flex;flex-direction:column;gap:6px;">
           <button onclick="setCtaStyle('split')" style="text-align:left;background:none;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:6px 10px;font-size:12px;font-family:inherit;cursor:pointer;color:rgba(0,0,0,0.7);">Split audience cards</button>
           <button onclick="setCtaStyle('single')" style="text-align:left;background:none;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:6px 10px;font-size:12px;font-family:inherit;cursor:pointer;color:rgba(0,0,0,0.7);">Single primary CTA</button>

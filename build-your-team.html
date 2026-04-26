@@ -20,6 +20,7 @@
     @media (max-width: 520px) {
       .footer-grid { grid-template-columns: 1fr !important; }
     }
+    /* ── Scroll Reveal ─────────────────────────────────────── */
   </style>
 </head>
 <body>
@@ -63,9 +64,9 @@ const Nav = () => {
       transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
       transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
         <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 38 }} />
+          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52 }} />
         </a>
         <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}>
           {links.map(({ label, href }) => {
@@ -73,12 +74,12 @@ const Nav = () => {
             return (
               <a key={label} href={href} style={{
                 fontSize: 13.5, fontWeight: isActive ? 600 : 500,
-                color: isActive ? '#0a1628' : '#6b7280',
+                color: isActive ? '#0a1628' : '#111111',
                 padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
                 transition: 'color 0.18s', whiteSpace: 'nowrap',
               }}
               onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
-              onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#6b7280'}>
+              onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#111111'}>
                 {label}
               </a>
             );
@@ -86,9 +87,9 @@ const Nav = () => {
         </div>
         <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <a href="contact.html"
-            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: '#0a1628', borderRadius: 9999, border: '1.5px solid #0a1628', transition: 'all 0.2s', whiteSpace: 'nowrap' }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.borderColor = '#1560b0'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#0a1628'; e.currentTarget.style.borderColor = '#0a1628'; }}>
+            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
             Let's Talk
           </a>
         </div>
@@ -104,9 +105,9 @@ const Nav = () => {
       {menuOpen && (
         <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2, background: '#ffffff' }}>
           {links.map(({ label, href }) => (
-            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#374151', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
+            <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#111111', padding: '11px 12px', borderRadius: 8, textDecoration: 'none' }}>{label}</a>
           ))}
-          <a href="contact.html" style={{ textAlign: 'center', background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
+          <a href="contact.html" style={{ textAlign: 'center', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none', marginTop: 10 }}>Let's Talk</a>
         </div>
       )}
     </header>
@@ -139,7 +140,7 @@ const Hero = () => {
         {/* LEFT */}
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 28 }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+            
             <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0' }}>For Organisations · Qatar</span>
           </div>
 
@@ -149,15 +150,15 @@ const Hero = () => {
             Has Been Looking For
           </h1>
 
-          <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#4b5563', maxWidth: 500, marginBottom: 32 }}>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#111111', maxWidth: 500, marginBottom: 32 }}>
             Finding AI-native professionals with leading technology and business skills in Qatar is harder than it should be. We solve that — developing and placing the right talent directly with your organization.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 40 }}>
             <a href="contact.html"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#1560b0', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(21,96,176,0.28)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#1048a0'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#1560b0'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 15, fontWeight: 700, padding: '14px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(109,40,217,0.28)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(109,40,217,0.45)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 18px rgba(109,40,217,0.28)'; }}>
               Request a Consultation →
             </a>
             <a href="our-launchpad.html"
@@ -169,82 +170,23 @@ const Hero = () => {
           </div>
 
           {/* trust strip */}
-          <div style={{ display: 'flex', gap: 32, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 24, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'nowrap' }}>
             {[
-              { icon: '✓', text: 'Gulf-grown talent' },
-              { icon: '✓', text: 'Day-one productive' },
-              { icon: '✓', text: 'Ongoing partnership' },
+              { icon: '✓', text: 'Qatar-Based Talent' },
+              { icon: '✓', text: 'Day-one Productive' },
+              { icon: '✓', text: 'Assessed Before Arrival' },
             ].map(({ icon, text }) => (
               <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                 <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(21,96,176,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: '#1560b0', fontWeight: 800, flexShrink: 0 }}>{icon}</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#4b5563' }}>{text}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#111111' }}>{text}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* RIGHT — visual card */}
-        <div style={{ position: 'relative' }}>
-          <div style={{ background: '#ffffff', borderRadius: 24, border: '1px solid rgba(0,0,0,0.09)', boxShadow: '0 24px 64px rgba(10,22,40,0.1), 0 4px 16px rgba(0,0,0,0.05)', padding: '28px 28px 24px', position: 'relative', zIndex: 2 }}>
-
-            {/* header */}
-            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 20 }}>
-              <div>
-                <div style={{ fontSize: 10.5, fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: 3 }}>Active Capability Tracks</div>
-                <div style={{ fontSize: 15, fontWeight: 800, color: '#0a1628' }}>Available for Placement</div>
-              </div>
-              <div style={{ background: '#eef5ff', borderRadius: 8, padding: '6px 12px', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#10b981', display: 'inline-block' }} />
-                <span style={{ fontSize: 11, fontWeight: 700, color: '#1560b0' }}>Hiring Now</span>
-              </div>
-            </div>
-
-            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', marginBottom: 16 }} />
-
-            {/* rotating active track highlight */}
-            <div style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 10.5, fontWeight: 700, color: '#9ca3af', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Featured Track</div>
-              <div style={{ background: 'linear-gradient(135deg,#eef5ff,#f0f4ff)', border: '1px solid #c7ddf8', borderRadius: 12, padding: '14px 18px', display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'linear-gradient(135deg,#1560b0,#3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                </div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 800, color: '#0a1628' }}>{tracks[activeTrack]}</div>
-                  <div style={{ fontSize: 11, color: '#6b7280', marginTop: 2 }}>Developed &amp; ready to deploy</div>
-                </div>
-              </div>
-            </div>
-
-            {/* all tracks */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
-              {tracks.map((t, idx) => (
-                <span key={t} style={{ fontSize: 11.5, fontWeight: 600, color: idx === activeTrack ? '#1560b0' : '#6b7280', background: idx === activeTrack ? '#eef5ff' : '#f9fafb', border: `1px solid ${idx === activeTrack ? '#c7ddf8' : 'rgba(0,0,0,0.07)'}`, borderRadius: 999, padding: '4px 12px', transition: 'all 0.3s' }}>{t}</span>
-              ))}
-            </div>
-
-            <div style={{ height: 1, background: 'rgba(0,0,0,0.06)', marginBottom: 16 }} />
-
-            {/* stats grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              {stats.map(({ value, label }) => (
-                <div key={label} style={{ background: '#f8faff', borderRadius: 12, padding: '14px 16px', border: '1px solid rgba(0,0,0,0.05)' }}>
-                  <div style={{ fontSize: 22, fontWeight: 900, color: '#0a1628', letterSpacing: '-1px', lineHeight: 1 }}>{value}</div>
-                  <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginTop: 4 }}>{label}</div>
-                </div>
-              ))}
-            </div>
-
-            <a href="contact.html" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 18, background: '#0a1628', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '12px 20px', borderRadius: 12, textDecoration: 'none', transition: 'all 0.2s' }}
-              onMouseEnter={e => e.currentTarget.style.background = '#1560b0'}
-              onMouseLeave={e => e.currentTarget.style.background = '#0a1628'}>
-              Request a Consultation →
-            </a>
-          </div>
-
-          {/* floating pill */}
-          <div style={{ position: 'absolute', top: -18, right: -12, background: '#ffffff', border: '1.5px solid rgba(16,185,129,0.3)', borderRadius: 999, padding: '6px 14px', fontSize: 11.5, fontWeight: 700, color: '#10b981', boxShadow: '0 4px 14px rgba(0,0,0,0.08)', zIndex: 3 }}>
-            🇶🇦 Qatar-Based Talent Only
-          </div>
+        {/* RIGHT — visual card replaced with image */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 420 }}>
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Tech team collaboration" style={{ maxWidth: 440, width: '100%', borderRadius: 24, boxShadow: '0 8px 32px rgba(21,96,176,0.18)', objectFit: 'cover', height: 420 }} />
         </div>
 
       </div>
@@ -319,10 +261,9 @@ const EngagementModel = () => {
 
         {/* Header */}
         <div style={{ marginBottom: 48 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#1560b0', letterSpacing: '2px', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>Section 03 — The Engagement Model</span>
           <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2px', color: '#0a1628', margin: 0 }}>Working With Us</h2>
-            <p style={{ fontSize: '0.95rem', color: '#6b7280', maxWidth: 340, lineHeight: 1.7, margin: 0 }}>A transparent, low-friction process from first conversation to placed consultant.</p>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, lineHeight: 1.15, letterSpacing: '-2px', margin: 0, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Working With Us</h2>
+            <p style={{ fontSize: '0.95rem', color: '#111111', maxWidth: 340, lineHeight: 1.7, margin: 0 }}>A transparent, low-friction process from first conversation to placed consultant.</p>
           </div>
         </div>
 
@@ -355,13 +296,13 @@ const EngagementModel = () => {
                   {step.icon}
                 </div>
                 <div>
-                  <div style={{ fontSize: 10.5, fontWeight: 700, color: '#9ca3af', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: 3 }}>Step {step.n} of {STEPS.length}</div>
+                  <div style={{ fontSize: 10.5, fontWeight: 700, color: '#111111', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: 3 }}>Step {step.n} of {STEPS.length}</div>
                   <div style={{ fontSize: 14, fontWeight: 700, color: '#1560b0', lineHeight: 1 }}>{step.label}</div>
                 </div>
               </div>
 
               <h3 style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.75rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.75px', color: '#0a1628', marginBottom: 16 }}>{step.headline}</h3>
-              <p style={{ fontSize: 15, lineHeight: 1.8, color: '#4b5563', marginBottom: 32 }}>{step.body}</p>
+              <p style={{ fontSize: 15, lineHeight: 1.8, color: '#111111', marginBottom: 32 }}>{step.body}</p>
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: '#eef5ff', border: '1px solid #c7ddf8', color: '#1560b0', fontSize: 12, fontWeight: 600, padding: '6px 14px', borderRadius: 9999 }}>
@@ -399,7 +340,7 @@ const EngagementModel = () => {
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ fontSize: 13.5, fontWeight: 700, color: i === activeStep ? '#0a1628' : 'rgba(0,0,0,0.55)', lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.label}</div>
-                    <div style={{ fontSize: 11.5, color: '#9ca3af', marginTop: 2 }}>{s.detail}</div>
+                    <div style={{ fontSize: 11.5, color: '#111111', marginTop: 2 }}>{s.detail}</div>
                   </div>
                   {i === activeStep && (
                     <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', flexShrink: 0 }} />
@@ -416,8 +357,8 @@ const EngagementModel = () => {
           <div style={{ height: '100%', background: 'linear-gradient(90deg, #1560b0, #3b82f6)', borderRadius: 99, width: `${((activeStep + 1) / STEPS.length) * 100}%`, transition: 'width 0.3s ease' }} />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
-          <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Step {activeStep + 1} of {STEPS.length}</span>
-          <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>{Math.round(((activeStep + 1) / STEPS.length) * 100)}% complete</span>
+          <span style={{ fontSize: 12, color: '#111111', fontWeight: 500 }}>Step {activeStep + 1} of {STEPS.length}</span>
+          <span style={{ fontSize: 12, color: '#111111', fontWeight: 500 }}>{Math.round(((activeStep + 1) / STEPS.length) * 100)}% complete</span>
         </div>
 
       </div>
@@ -441,35 +382,85 @@ const FAQS = [
 
 const FAQ = () => {
   const [open, setOpen] = React.useState(null);
-  return (
-    <section style={{ background: '#fff', padding: '88px 24px' }}>
-          <div style={{ maxWidth: 800, margin: '0 auto' }}>
-            <div style={{ marginBottom: 48 }}>
-          <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0', letterSpacing: '0.5px', background: 'rgba(21,96,176,0.08)', padding: '4px 10px', borderRadius: 9999, display: 'inline-block', marginBottom: 16 }}>Common questions</span>
-              <h2 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-1px', color: '#0a1628' }}>Questions we get asked.</h2>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-              {FAQS.map((faq, i) =>
-          <div key={i} style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.09)', borderRadius: 8, overflow: 'hidden' }}>
-                  <button onClick={() => setOpen(open === i ? null : i)}
-            style={{ width: '100%', textAlign: 'left', padding: '20px 24px', background: open === i ? '#f0f7ff' : '#fff', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, transition: 'background 0.15s', fontFamily: 'inherit' }}>
-                    <span style={{ fontSize: 15, fontWeight: 600, color: 'rgba(0,0,0,0.9)', lineHeight: 1.4 }}>{faq.q}</span>
-            <span style={{ width: 24, height: 24, borderRadius: '50%', background: open === i ? '#1560b0' : 'rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.2s' }}>
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <line x1="5" y1="1" x2="5" y2="9" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" style={{ transform: open === i ? 'scaleY(0)' : 'scaleY(1)', transition: 'transform 0.2s', transformOrigin: 'center' }} />
-                        <line x1="1" y1="5" x2="9" y2="5" stroke={open === i ? '#fff' : 'rgba(0,0,0,0.5)'} strokeWidth="1.5" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                  </button>
-                  {open === i &&
-            <div style={{ padding: '4px 24px 22px', fontSize: 14, lineHeight: 1.8, color: '#4b5563' }}>{faq.a}</div>
-            }
-                </div>
-          )}
-            </div>
-          </div>
-        </section>);
+  const toggle = (i) => setOpen(prev => prev === i ? null : i);
 
+  const half = Math.ceil(FAQS.length / 2);
+  const col1 = FAQS.slice(0, half);
+  const col2 = FAQS.slice(half);
+
+  const Item = ({ faq, idx }) => {
+    const isOpen = open === idx;
+    return (
+      <div
+        onClick={() => toggle(idx)}
+        style={{
+          borderRadius: 16,
+          background: isOpen ? '#0a1628' : '#ffffff',
+          border: `1.5px solid ${isOpen ? '#1560b0' : 'rgba(0,0,0,0.07)'}`,
+          padding: '22px 24px',
+          cursor: 'pointer',
+          transition: 'all 0.25s ease',
+          boxShadow: isOpen ? '0 8px 32px rgba(21,96,176,0.18)' : '0 1px 4px rgba(0,0,0,0.04)',
+          userSelect: 'none',
+        }}
+        onMouseEnter={e => { if (!isOpen) e.currentTarget.style.borderColor = 'rgba(21,96,176,0.3)'; }}
+        onMouseLeave={e => { if (!isOpen) e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'; }}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+            <span style={{ fontSize: 11, fontWeight: 800, color: isOpen ? 'rgba(255,255,255,0.35)' : '#111111', letterSpacing: '1px', flexShrink: 0, paddingTop: 2 }}>{String(idx + 1).padStart(2, '0')}</span>
+            <span style={{ fontSize: '0.975rem', fontWeight: 700, color: isOpen ? '#ffffff' : '#0a1628', lineHeight: 1.4 }}>{faq.q}</span>
+          </div>
+          <div style={{
+            flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
+            background: isOpen ? 'rgba(255,255,255,0.1)' : '#f3f4f6',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'transform 0.25s ease, background 0.25s ease',
+            transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+          }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isOpen ? '#ffffff' : '#111111'} strokeWidth="2.5" strokeLinecap="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </div>
+        </div>
+        {isOpen && (
+          <p style={{ fontSize: '0.925rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: '16px 0 0 28px' }}>{faq.a}</p>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <section style={{ background: '#f8fafc', padding: '100px 24px', borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 64 }}>
+          <div>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1560b0', display: 'inline-block' }} />
+              <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>FAQs</span>
+            </div>
+            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-1.5px', lineHeight: 1.1, margin: 0 }}>
+              Got Questions?<br /><span style={{ color: '#1560b0' }}>We Have Answers.</span>
+            </h2>
+          </div>
+          <p style={{ fontSize: '0.975rem', color: '#111111', maxWidth: 340, lineHeight: 1.75, margin: 0 }}>Everything you need to know about working with CertiMinds.</p>
+        </div>
+
+        {/* Two-column accordion */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {col1.map((faq, i) => <Item key={i} faq={faq} idx={i} />)}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {col2.map((faq, i) => <Item key={i + half} faq={faq} idx={i + half} />)}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
 /* ── Footer CTA ───────────────────────────────────────────────── */
@@ -483,9 +474,9 @@ const FooterCTA = () =>
             No lengthy procurement process. No placement fees. Just a direct conversation about your capability needs.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#ffffff', color: '#0a1628', fontSize: 15, fontWeight: 700, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 4px 18px rgba(0,0,0,0.25)' }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = '#f0f7ff'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.transform = 'translateY(0)'; }}>
+            <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#ffffff', fontSize: 15, fontWeight: 700, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 6px 28px rgba(109,40,217,0.4)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(109,40,217,0.55)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(109,40,217,0.4)'; }}>
               Book a Discovery Call →
             </a>
             <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'transparent', color: '#fff', fontSize: 15, fontWeight: 600, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', border: '1.5px solid rgba(255,255,255,0.3)', transition: 'all 0.2s' }}
@@ -499,50 +490,63 @@ const FooterCTA = () =>
 
 
 /* ── Footer ───────────────────────────────────────────────────── */
-const Footer = () =>
-<footer style={{ background: '#f8f9fc', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
-            <div>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 64, marginBottom: 16 }} />
-              <p style={{ fontSize: 14, color: '#4b5563', lineHeight: 1.7, maxWidth: 240, marginBottom: 20 }}>Developing the next generation of tech professionals in Qatar and the Gulf.</p>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {['LinkedIn', 'Twitter'].map((s) =>
-          <a key={s} href="#" style={{ fontSize: 12, fontWeight: 600, color: '#a39e98', textDecoration: 'none', padding: '4px 10px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 4, transition: 'color 0.15s' }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.7)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#a39e98'}>{s}</a>
-          )}
-              </div>
+const Footer = () => {
+  const navCols = [
+    { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
+    { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
+  ];
+  const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+  return (
+    <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
+      <div style={{ maxWidth:1200, margin:'0 auto' }}>
+        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+          <div>
+            <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+            <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+              Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
+            </p>
+            <div style={{ display:'flex', gap:10 }}>
+              {[
+                { href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+              ].map(({ href, title, svg }) => (
+                <a key={title} href={href} target="_blank" rel="noopener noreferrer" title={title}
+                  onMouseEnter={e=>{ e.currentTarget.style.background='rgba(11,17,32,0.07)'; e.currentTarget.style.color='#0b1120'; }}
+                  onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.04)'; e.currentTarget.style.color='#111111'; }}
+                  style={{ width:38, height:38, borderRadius:'50%', background:'rgba(0,0,0,0.04)', border:'1px solid rgba(0,0,0,0.08)', display:'flex', alignItems:'center', justifyContent:'center', color:'#111111', textDecoration:'none', transition:'background 0.18s, color 0.18s' }}>
+                  {svg}
+                </a>
+              ))}
             </div>
-            {[
-      { heading: 'For organisations', links: ['Build Your Team', 'Our Launchpad', "Let's Talk"] },
-      { heading: 'For candidates', links: ['Build Your Career', 'Our Launchpad', 'Apply now'] },
-      { heading: 'Company', links: ['About Us', 'Contact', 'Privacy', 'Terms'] }].
-      map((col) =>
-      <div key={col.heading}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: 'rgba(0,0,0,0.35)', letterSpacing: '0.6px', textTransform: 'uppercase', marginBottom: 14 }}>{col.heading}</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {col.links.map((l) =>
-          <a key={l} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#4b5563', textDecoration: 'none', transition: 'color 0.15s' }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'rgba(0,0,0,0.9)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = '#4b5563'}>{l}</a>
-          )}
-                </div>
-              </div>
-      )}
           </div>
-          <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <span style={{ fontSize: 13, color: '#a39e98' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
-            <div style={{ display: 'flex', gap: 20 }}>
-              {['Privacy', 'Terms'].map((l) =>
-        <a key={l} href="#" style={{ fontSize: 13, color: '#a39e98', textDecoration: 'none' }}
-        onMouseEnter={(e) => e.currentTarget.style.color = '#4b5563'}
-        onMouseLeave={(e) => e.currentTarget.style.color = '#a39e98'}>{l}</a>
-        )}
+          {navCols.map(col => (
+            <div key={col.heading}>
+              <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+              <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
+                {col.links.map(({ label, href }) => (
+                  <a key={label} href={href}
+                    onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                    onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                    style={linkStyle}>{label}</a>
+                ))}
+              </div>
             </div>
+          ))}
+        </div>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
+          <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+          <div style={{ display:'flex', gap:24 }}>
+            {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+              <a key={label} href={href}
+                onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
+                onMouseLeave={e=>e.currentTarget.style.color='#111111'}
+                style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+            ))}
           </div>
         </div>
-      </footer>;
+      </div>
+    </footer>
+  );
+};
 
 
 /* ── App ─────────────────────────────────────────────────────── */
@@ -567,11 +571,22 @@ window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 
+  <script>
+  (function(){
+    if(!('IntersectionObserver' in window))return;
+    var io=new IntersectionObserver(function(ens){ens.forEach(function(en){if(en.isIntersecting){var el=en.target;el.style.opacity='1';el.style.transform='none';io.unobserve(el);}});},{threshold:0.09,rootMargin:'0px 0px -32px 0px'});
+    function boot(){document.querySelectorAll('section,footer').forEach(function(el){var r=el.getBoundingClientRect();if(r.top>=window.innerHeight*0.88){el.style.cssText+=';opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;';io.observe(el);}});}
+    var root=document.getElementById('root');
+    if(root&&root.firstChild){boot();}
+    else if(root){var mo=new MutationObserver(function(){if(root.firstChild){mo.disconnect();setTimeout(boot,80);}});mo.observe(root,{childList:true});}
+  })();
+  </script>
+
   <div id="tweaks-panel" style="display:none; position:fixed; bottom:24px; right:24px; background:#fff; border:1px solid rgba(0,0,0,0.12); border-radius:12px; box-shadow:rgba(0,0,0,0.04) 0 4px 18px; padding:20px; width:220px; z-index:9999; font-family:'Inter',sans-serif;">
     <div style="font-size:13px;font-weight:700;color:rgba(0,0,0,0.85);margin-bottom:14px;">Tweaks</div>
     <div style="display:flex;flex-direction:column;gap:12px;">
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">Section padding</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">Section padding</label>
         <select onchange="document.querySelectorAll('section').forEach(s=>{s.style.paddingTop=this.value;s.style.paddingBottom=this.value})" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
           <option value="88px">Normal</option>
           <option value="112px">Airy</option>
@@ -579,7 +594,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
         </select>
       </div>
       <div>
-        <label style="font-size:11px;font-weight:600;color:#615d59;display:block;margin-bottom:6px;">FAQ default</label>
+        <label style="font-size:11px;font-weight:600;color:#111111;display:block;margin-bottom:6px;">FAQ default</label>
         <select onchange="setFaqDefault(this.value)" style="width:100%;border:1px solid rgba(0,0,0,0.15);border-radius:4px;padding:5px 8px;font-size:13px;font-family:inherit;color:rgba(0,0,0,0.8);">
           <option value="closed">All closed</option>
           <option value="first">First open</option>
