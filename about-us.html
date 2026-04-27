@@ -11,15 +11,28 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    /* ── Responsive ─────────────────────────────────────────────── */
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none !important; }
       .nav-hamburger { display: flex !important; }
-      .values-grid { grid-template-columns: 1fr !important; }
-      .footer-grid { grid-template-columns: 1fr 1fr !important; }
-      .mission-layout { grid-template-columns: 1fr !important; }
+      .nav-inner { padding: 0 16px !important; }
+      .nav-logo { height: 48px !important; }
+      /* Mission & WhatWeAreNot layouts */
+      .mission-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .mission-sticky { position: static !important; }
+      .mission-img { min-height: 280px !important; height: 280px !important; }
+      /* Values */
+      .values-grid { grid-template-columns: 1fr 1fr !important; }
+      /* Footer CTA buttons */
+      .cta-btns { flex-direction: column !important; align-items: stretch !important; }
+      .cta-btns a { text-align: center !important; justify-content: center !important; }
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+      .footer-top > div:first-child { grid-column: 1 / -1; }
     }
     @media (max-width: 520px) {
-      .footer-grid { grid-template-columns: 1fr !important; }
+      .values-grid { grid-template-columns: 1fr !important; }
+      .footer-top { grid-template-columns: 1fr !important; }
     }
     /* ── Scroll Reveal ─────────────────────────────────────── */
   </style>
@@ -159,7 +172,7 @@
         color: '#1560b0',
         gradient: 'linear-gradient(135deg, rgba(21,96,176,0.12), rgba(21,96,176,0.06))',
         headline: 'We do not cut corners.',
-        body: 'Everything we do is held to a high standard. From the way we select candidates to the way we support organisations, we do not cut corners.',
+        body: 'Everything we do is held to a high standard. From the way we select candidates to the way we support organisations.',
         icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
       },
       {
@@ -167,7 +180,7 @@
         color: '#6d28d9',
         gradient: 'linear-gradient(135deg, rgba(109,40,217,0.12), rgba(109,40,217,0.06))',
         headline: 'Trust is built through transparency.',
-        body: 'We are honest with our clients, our consultants and ourselves. If something is not working we say so. If a match is not right we find a better one. Trust is built through transparency, not promises.',
+        body: 'We are honest with our clients, our consultants and ourselves. If something is not working we say so. If a match is not right we find a better one.',
         icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>,
       },
       {
@@ -175,7 +188,7 @@
         color: '#0075de',
         gradient: 'linear-gradient(135deg, rgba(0,117,222,0.12), rgba(0,117,222,0.06))',
         headline: 'Every placement contributes to something bigger.',
-        body: 'We exist to make a real difference to the organisations we serve, to the consultants we develop, and to Qatar\'s growing technology sector. Every placement is a contribution to something bigger than a single role.',
+        body: 'We exist to make a real difference to the organisations we serve, to the consultants we develop, and to Qatar\'s growing technology sector.',
         icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
       },
     ];
@@ -229,10 +242,10 @@
         <section style={{ background: '#fff', padding: '100px 24px', position: 'relative', overflow: 'hidden' }}>
 
           <div style={{ maxWidth: 1200, margin: '0 auto', position: 'relative' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }} className="mission-layout">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2.3fr', gap: 80, alignItems: 'stretch' }} className="mission-layout">
 
               {/* Left: text */}
-              <div style={{ position: 'sticky', top: 120 }}>
+              <div className="mission-sticky" style={{ position: 'sticky', top: 120 }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: '#097fe8', letterSpacing: '1.5px', textTransform: 'uppercase', background: '#eef6ff', padding: '5px 14px', borderRadius: 9999, display: 'inline-block', marginBottom: 28, border: '1px solid rgba(0,117,222,0.15)' }}>Our positioning</span>
                 <h2 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', marginBottom: 24, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>What CertiMinds is not.</h2>
                 <p style={{ fontSize: '1.05rem', lineHeight: 1.8, color: '#111111', maxWidth: 360 }}>
@@ -242,36 +255,9 @@
                 <div style={{ marginTop: 40, width: 48, height: 3, borderRadius: 9999, background: 'linear-gradient(90deg, #1560b0, #7c3aed)' }} />
               </div>
 
-              {/* Right: items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {items.map(({ not, because }, i) => (
-                  <div key={i}
-                    onMouseEnter={() => setHovered(i)}
-                    onMouseLeave={() => setHovered(null)}
-                    style={{
-                      display: 'flex', alignItems: 'flex-start', gap: 18,
-                      padding: '22px 24px', borderRadius: 14,
-                      background: hovered === i ? '#f0f7ff' : '#f8f9fc',
-                      border: `1px solid ${hovered === i ? 'rgba(21,96,176,0.2)' : 'rgba(0,0,0,0.07)'}`,
-                      transition: 'all 0.22s', cursor: 'default',
-                      transform: hovered === i ? 'translateX(4px)' : 'translateX(0)',
-                    }}>
-                    {/* X badge */}
-                    <div style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(239,68,68,0.12)', border: '1px solid rgba(239,68,68,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <line x1="2" y1="2" x2="8" y2="8" stroke="#f87171" strokeWidth="1.75" strokeLinecap="round"/>
-                        <line x1="8" y1="2" x2="2" y2="8" stroke="#f87171" strokeWidth="1.75" strokeLinecap="round"/>
-                      </svg>
-                    </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: '#0a1628', marginBottom: 5, display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <span style={{ fontSize: 10, fontWeight: 800, color: 'rgba(0,0,0,0.2)', letterSpacing: '0.5px' }}>0{i+1}</span>
-                        Not {not.toLowerCase()}
-                      </div>
-                      <div style={{ fontSize: 13.5, lineHeight: 1.7, color: '#111111' }}>{because}</div>
-                    </div>
-                  </div>
-                ))}
+              {/* Right: items - IMAGE REPLACE */}
+              <div className="mission-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 14, overflow: 'hidden', background: 'transparent', border: 'none', height: '100%', minHeight: 320 }}>
+                <img src="uploads/img.jpg" alt="What we are not" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: 14 }} />
               </div>
 
             </div>
@@ -289,14 +275,13 @@
         <div style={{ position: 'absolute', bottom: -80, left: -60, width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(21,96,176,0.3) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center', position: 'relative' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '1.5px', textTransform: 'uppercase', background: 'rgba(255,255,255,0.08)', padding: '5px 16px', borderRadius: 9999, display: 'inline-block', marginBottom: 28, border: '1px solid rgba(255,255,255,0.12)' }}>Work with us</span>
           <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-1.5px', marginBottom: 20, background: 'linear-gradient(135deg, #ffffff 0%, #bfdbfe 60%, #ddd6fe 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             Ready to work with us?
           </h2>
-          <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.55)', maxWidth: 460, margin: '0 auto 44px' }}>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#ffffff', maxWidth: 460, margin: '0 auto 44px' }}>
             Whether you're an organisation closing a capability gap or a candidate ready to build a career in tech - we'd like to hear from you.
           </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="cta-btns" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="build-your-team.html"
               style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 15, fontWeight: 700, padding: '13px 28px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 6px 28px rgba(109,40,217,0.4)' }}
               onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 12px 40px rgba(109,40,217,0.55)'; }}
@@ -324,7 +309,7 @@
       return (
         <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
-            <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+            <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
               <div>
                 <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
                 <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>

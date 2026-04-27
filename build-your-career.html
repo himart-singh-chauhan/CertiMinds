@@ -11,16 +11,37 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fff; color: rgba(0,0,0,0.95); -webkit-font-smoothing: antialiased; }
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      /* Hero: hide right visualizer */
+      .hero-right { display: none !important; }
+    }
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none !important; }
       .nav-hamburger { display: flex !important; }
-      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .nav-inner { padding: 0 16px !important; }
+      .nav-logo { height: 48px !important; }
+      /* Hero */
       .hero-grid { grid-template-columns: 1fr !important; }
-      .track-strip { gap: 8px !important; }
+      /* Journey (Five Steps) */
       .journey-grid { grid-template-columns: 1fr !important; }
+      .journey-sticky { position: static !important; }
+      /* Gain Cards (Why Organisations Trust...) */
+      .gain-card-inner { width: 96% !important; height: auto !important; min-height: unset !important; flex-direction: column !important; top: 0 !important; }
+      .gain-card-left { width: 100% !important; border-right: none !important; border-bottom: 1px solid rgba(10,22,40,0.08) !important; flex-direction: row !important; padding: 12px 16px !important; gap: 10px !important; }
+      .gain-card-body { flex-direction: column !important; gap: 16px !important; padding: 24px 20px !important; }
+      .gain-card-checks { margin-left: 0 !important; flex: none !important; }
+      /* FAQ two-column */
+      .faq-grid { grid-template-columns: 1fr !important; }
+      /* Form rows */
+      .form-row { grid-template-columns: 1fr !important; }
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+      .footer-top > div:first-child { grid-column: 1 / -1; }
     }
     @media (max-width: 520px) {
-      .footer-grid { grid-template-columns: 1fr !important; }
+      .footer-top { grid-template-columns: 1fr !important; }
+      .hero-ctas { flex-direction: column !important; align-items: stretch !important; }
     }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -137,7 +158,7 @@ const Hero = () => {
     { step: '05', label: 'Grow',   sub: 'Structured career path' },
   ];
 
-  const tracks = ['AI & Data', 'Cloud & Infrastructure', 'Cybersecurity', 'Software Engineering', 'Business Analysis', 'Project Management', 'DevOps', 'Data Engineering', 'Machine Learning', 'GovTech'];
+  const tracks = ['Software Engineering', 'Data Engineering', 'AI Engineering', 'Machine Learning', 'Cloud Services', 'DevOps', 'Business Analytics', 'Agile Delivery', 'GovTech', 'Cybersecurity'];
 
   return (
     <section style={{ background: '#ffffff', minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -162,10 +183,10 @@ const Hero = () => {
             </div>
 
             {/* H1 */}
-            <h1 className="animate-up-2" style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', marginBottom: 28, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-              Build a Career<br />
-              in Technology.<br />
-              <span style={{ fontWeight: 700, fontSize: '0.72em', letterSpacing: '-1.5px' }}>Starting in Qatar.</span>
+            <h1 className="animate-up-2" style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', marginBottom: 28 }}>
+              <span style={{ color: '#000000' }}>Build a Career</span><br />
+              <span style={{ background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>in Technology.</span><br />
+              <span style={{ fontWeight: 700, fontSize: '1em', letterSpacing: '-1.5px', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Starting in Qatar.</span>
             </h1>
 
             {/* Subheadline */}
@@ -193,7 +214,7 @@ const Hero = () => {
             <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
               {[
                 { val: '16 Weeks', lbl: 'Intensive training' },
-                { val: '5 Tracks', lbl: 'Specialisation paths' },
+                { val: '6 Tracks', lbl: 'Specialisation paths' },
                 { val: '100%', lbl: 'Qatar-based placements' },
               ].map(({ val, lbl }) => (
                 <div key={lbl} style={{ borderLeft: '2px solid rgba(21,96,176,0.35)', paddingLeft: 12 }}>
@@ -205,7 +226,7 @@ const Hero = () => {
           </div>
 
           {/* RIGHT - career path visualizer */}
-          <div style={{ width: 220, flexShrink: 0, position: 'relative' }}>
+          <div className="hero-right" style={{ width: 220, flexShrink: 0, position: 'relative' }}>
             {/* vertical line */}
             <div style={{ position: 'absolute', left: 22, top: 28, bottom: 28, width: 2, background: 'linear-gradient(180deg, #1560b0 0%, rgba(21,96,176,0.08) 100%)', borderRadius: 99 }} />
 
@@ -219,8 +240,8 @@ const Hero = () => {
                       <span style={{ fontSize: 10.5, fontWeight: 800, color: i === 0 ? '#fff' : 'rgba(0,0,0,0.3)', letterSpacing: '0.5px' }}>{step}</span>
                     </div>
                     <div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: i === 0 ? '#0a1628' : 'rgba(0,0,0,0.45)', lineHeight: 1.2 }}>{label}</div>
-                      <div style={{ fontSize: 11.5, color: '#111111', marginTop: 2 }}>{sub}</div>
+                      <div style={{ fontSize: 18, fontWeight: 700, color: i === 0 ? '#0a1628' : 'rgba(0,0,0,0.45)', lineHeight: 1.2 }}>{label}</div>
+                      <div style={{ fontSize: 14.5, color: '#111111', marginTop: 2 }}>{sub}</div>
                     </div>
                   </div>
                 );
@@ -262,7 +283,7 @@ const Footer = () => {
   return (
     <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
-        <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+        <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
           <div>
             <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
             <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
@@ -330,7 +351,7 @@ const STEPS = [
     title: 'Launchpad',
     body: 'Selected candidates join our intensive training programme - hands-on technical and professional development with AI training built in throughout.',
     icon: '⬡',
-    tag: '16 Weeks · Full-Time',
+    tag: 'Full-Time',
   },
   {
     num: '04',
@@ -361,10 +382,10 @@ const Journey = () => {
         {/* Section label + heading */}
         <div style={{ marginBottom: 64 }}>
           <div style={{ display: 'none' }}></div>
-          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, marginBottom: 16, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, marginBottom: 16, paddingBottom: 6, background: 'linear-gradient(135deg, #6d28d9 0%, #3b82f6 60%, #06b6d4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             Five Steps.<br /><span>One Destination.</span>
           </h2>
-          <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, maxWidth: 480 }}>
+          <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, maxWidth: 480, display: 'none' }}>
             From your first message to a thriving career in tech - here is exactly how it works.
           </p>
         </div>
@@ -385,7 +406,7 @@ const Journey = () => {
                     background: isAct ? '#0a1628' : 'transparent',
                     cursor: 'pointer', textAlign: 'left', transition: 'all 0.22s',
                     marginBottom: 4,
-                    boxShadow: isAct ? '0 8px 32px rgba(10,22,40,0.13)' : 'none',
+                    boxShadow: isAct ? '0 8px 32px rgba(10,22,40,0.3)' : 'none',
                   }}
                   onMouseEnter={e => { if (!isAct) e.currentTarget.style.background = '#f4f6f9'; }}
                   onMouseLeave={e => { if (!isAct) e.currentTarget.style.background = 'transparent'; }}>
@@ -393,13 +414,13 @@ const Journey = () => {
                   {/* Step number bubble */}
                   <div style={{
                     width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-                    background: isAct ? '#1560b0' : isDone ? '#e8f4e8' : '#f0f4fa',
-                    border: `2px solid ${isAct ? '#1560b0' : isDone ? '#6ec96e' : 'rgba(0,0,0,0.08)'}`,
+                    background: isAct ? '#1560b0' : isDone ? '#10b981' : '#f0f4fa',
+                    border: `2px solid ${isAct ? '#1560b0' : isDone ? '#10b981' : 'rgba(0,0,0,0.08)'}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all 0.22s',
                   }}>
                     {isDone
-                      ? <span style={{ fontSize: 16, color: '#22a822' }}>✓</span>
+                      ? <span style={{ fontSize: 16, color: '#fff' }}>✓</span>
                       : <span style={{ fontSize: 11, fontWeight: 800, color: isAct ? '#fff' : '#111111', letterSpacing: '0.5px' }}>{s.num}</span>
                     }
                   </div>
@@ -418,19 +439,19 @@ const Journey = () => {
           </div>
 
           {/* Right: detail card */}
-          <div style={{ position: 'sticky', top: 100 }}>
+          <div className="journey-sticky" style={{ position: 'sticky', top: 100 }}>
             <div style={{ background: '#f8f9fc', border: '1px solid rgba(0,0,0,0.07)', borderRadius: 20, padding: '44px 44px 40px', overflow: 'hidden', position: 'relative' }}>
 
               {/* Large faint step number watermark */}
               <div style={{ position: 'absolute', top: -12, right: 24, fontSize: 120, fontWeight: 900, color: 'rgba(21,96,176,0.05)', lineHeight: 1, pointerEvents: 'none', userSelect: 'none' }}>{step.num}</div>
 
               {/* Icon badge */}
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: '#eef5ff', border: '1px solid #c7ddf8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, marginBottom: 28, color: '#1560b0' }}>
+              <div style={{ width: 52, height: 52, borderRadius: 14, background: '#eef5ff', border: '1px solid #c7ddf8', display: 'none', alignItems: 'center', justifyContent: 'center', fontSize: 22, marginBottom: 28, color: '#1560b0' }}>
                 {step.icon}
               </div>
 
               {/* Tag pill */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 20 }}>
+              <div style={{ display: 'none', alignItems: 'center', gap: 6, background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 20 }}>
                 <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.4px' }}>{step.tag}</span>
               </div>
 
@@ -438,7 +459,7 @@ const Journey = () => {
               <div style={{ fontSize: 11, fontWeight: 800, color: '#111111', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: 10 }}>Step {step.num} of 05</div>
 
               {/* Title */}
-              <h3 style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.9rem)', fontWeight: 900, color: '#0a1628', letterSpacing: '-0.8px', lineHeight: 1.15, marginBottom: 20 }}>{step.title}</h3>
+              <h3 style={{ fontSize: 'clamp(1.5rem, 2.2vw, 1.9rem)', fontWeight: 900, letterSpacing: '-0.8px', lineHeight: 1.15, marginBottom: 20, background: 'linear-gradient(135deg, #6d28d9 0%, #3b82f6 60%, #06b6d4 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{step.title}</h3>
 
               {/* Body */}
               <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.8, marginBottom: 36 }}>{step.body}</p>
@@ -535,30 +556,30 @@ const GainCard = React.memo(({ i, c, total, sectionRef }) => {
 
   return (
     <div ref={containerRef} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, zIndex: i + 1 }}>
-      <div ref={innerRef} style={{ background: c.bg, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '78%', height: 420, borderRadius: 24, overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.22)', display: 'flex' }}>
+      <div ref={innerRef} className="gain-card-inner" style={{ background: c.bg, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '78%', height: 420, borderRadius: 24, overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.22)', display: 'flex' }}>
         <div style={{ position: 'absolute', bottom: -20, right: 32, fontSize: 180, fontWeight: 900, lineHeight: 1, color: 'rgba(10,22,40,0.05)', pointerEvents: 'none', userSelect: 'none', letterSpacing: '-10px' }}>{c.num}</div>
-        <div style={{ flexShrink: 0, width: 110, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, borderRight: '1px solid rgba(10,22,40,0.08)' }}>
-          <div style={{ width: 52, height: 52, borderRadius: 16, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{c.icon}</div>
-          <span style={{ fontSize: 10.5, fontWeight: 800, color: c.tagColor, letterSpacing: '1.5px' }}>{c.num} / 03</span>
+        <div className="gain-card-left" style={{ flexShrink: 0, width: 110, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12, borderRight: '1px solid rgba(10,22,40,0.08)' }}>
+          <div style={{ width: 60, height: 60, borderRadius: 16, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26 }}>{c.icon}</div>
+          <span style={{ fontSize: 12, fontWeight: 800, color: c.tagColor, letterSpacing: '1.5px' }}>{c.num} / 03</span>
         </div>
-        <div style={{ flex: 1, padding: '40px 48px 40px 40px', display: 'flex', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="gain-card-body" style={{ flex: 1, padding: '40px 48px 40px 40px', display: 'flex', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
+          <div style={{ flex: 1, minWidth: 0, marginRight: 40 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: c.tagBg, borderRadius: 9999, padding: '4px 12px', marginBottom: 16 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, color: c.tagColor, letterSpacing: '0.3px' }}>Core Principle {c.num}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: c.tagColor, letterSpacing: '0.3px' }}>Core Principle {c.num}</span>
             </div>
-            <h3 style={{ fontSize: 'clamp(1.3rem, 1.8vw, 1.65rem)', fontWeight: 900, color: c.textColor, letterSpacing: '-0.5px', lineHeight: 1.2, marginBottom: 14 }}>{c.title}</h3>
-            <p style={{ fontSize: '0.925rem', color: c.subColor, lineHeight: 1.85, margin: 0, maxWidth: 420 }}>{c.body}</p>
+            <h3 style={{ fontSize: 'clamp(1.45rem, 2vw, 1.85rem)', fontWeight: 900, color: c.textColor, letterSpacing: '-0.5px', lineHeight: 1.2, marginBottom: 14 }}>{c.title}</h3>
+            <p style={{ fontSize: '1.1rem', color: c.subColor, lineHeight: 1.85, margin: 0, maxWidth: 420 }}>{c.body}</p>
           </div>
-          <div style={{ width: 1, alignSelf: 'stretch', background: 'rgba(10,22,40,0.1)', flexShrink: 0 }} />
-          <div style={{ flex: '0 0 260px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-            <div style={{ fontSize: 10, fontWeight: 800, color: c.tagColor, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 18 }}>You Will Leave With</div>
+          <div style={{ display: 'none' }} />
+          <div className="gain-card-checks" style={{ flex: '0 0 260px', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: -230 }}>
+            <div style={{ fontSize: 11, fontWeight: 800, color: c.tagColor, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 18 }}>You Will Leave With</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {c.checks.map((chk, j) => (
                 <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                   <div style={{ flexShrink: 0, width: 22, height: 22, borderRadius: 7, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 1 }}>
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={c.checkColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
-                  <span style={{ fontSize: '0.875rem', color: c.subColor, lineHeight: 1.6 }}>{chk}</span>
+                  <span style={{ fontSize: '1rem', color: c.subColor, lineHeight: 1.6 }}>{chk}</span>
                 </div>
               ))}
             </div>
@@ -575,10 +596,9 @@ const WhatYouGain = () => {
     <div style={{ background: '#f1f5f9' }}>
       <div style={{ padding: '100px 24px 0', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'none' }}></div>
-        <h2 style={{ fontSize: 'clamp(2.8rem, 5.5vw, 4.8rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-3px', paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+        <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-3px', paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           Why Organizations Trust<br /><span>CertiMinds Consultants</span>
         </h2>
-        <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, marginTop: 16, maxWidth: 480 }}>Every consultant we develop is built around three core principles.</p>
       </div>
       <section ref={sectionRef}>
         {gainCards.map((c, i) => (
@@ -612,6 +632,15 @@ const FAQs = () => {
 
   const Item = ({ faq, idx }) => {
     const isOpen = open === idx;
+    const bodyRef = React.useRef(null);
+    const [height, setHeight] = React.useState(0);
+
+    React.useEffect(() => {
+      if (bodyRef.current) {
+        setHeight(isOpen ? bodyRef.current.scrollHeight : 0);
+      }
+    }, [isOpen]);
+
     return (
       <div
         onClick={() => toggle(idx)}
@@ -621,7 +650,7 @@ const FAQs = () => {
           border: `1.5px solid ${isOpen ? '#1560b0' : 'rgba(0,0,0,0.07)'}`,
           padding: '22px 24px',
           cursor: 'pointer',
-          transition: 'all 0.25s ease',
+          transition: 'background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease',
           boxShadow: isOpen ? '0 8px 32px rgba(21,96,176,0.18)' : '0 1px 4px rgba(0,0,0,0.04)',
           userSelect: 'none',
         }}
@@ -637,7 +666,7 @@ const FAQs = () => {
             flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
             background: isOpen ? 'rgba(255,255,255,0.1)' : '#f3f4f6',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'transform 0.25s ease, background 0.25s ease',
+            transition: 'transform 0.35s ease, background 0.35s ease',
             transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
           }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={isOpen ? '#ffffff' : '#111111'} strokeWidth="2.5" strokeLinecap="round">
@@ -645,9 +674,13 @@ const FAQs = () => {
             </svg>
           </div>
         </div>
-        {isOpen && (
+        <div ref={bodyRef} style={{
+          maxHeight: height,
+          overflow: 'hidden',
+          transition: 'max-height 0.4s cubic-bezier(0.4,0,0.2,1)',
+        }}>
           <p style={{ fontSize: '0.925rem', color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, margin: '16px 0 0 28px' }}>{faq.a}</p>
-        )}
+        </div>
       </div>
     );
   };
@@ -664,11 +697,10 @@ const FAQs = () => {
               Got Questions?<br /><span>We Have Answers.</span>
             </h2>
           </div>
-          <p style={{ fontSize: '0.975rem', color: '#111111', maxWidth: 340, lineHeight: 1.75, margin: 0 }}>Everything you need to know about joining the CertiMinds programme.</p>
         </div>
 
         {/* Two-column accordion */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(440px, 1fr))', gap: 12 }}>
+        <div className="faq-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 12 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             {col1.map((faq, i) => <Item key={i} faq={faq} idx={i} />)}
           </div>
@@ -725,7 +757,7 @@ const ApplyCTA = () => {
             Take the step.<br /><span style={{ color: '#38bdf8' }}>We'll handle the rest.</span>
           </h2>
           <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, maxWidth: 480, margin: '0 auto' }}>
-            Apply to the CertiMinds programme and take the first step toward a career in tech that's built to last.
+            Apply to CertiMinds and take the first step toward a career in tech that's built to last.
           </p>
         </div>
 
@@ -749,7 +781,7 @@ const ApplyCTA = () => {
             `}</style>
 
             {/* Row 1: Full name + Email */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
               <div>
                 <label style={labelStyle}>Full Name *</label>
                 <input required type="text" placeholder="Your full name" value={form.name}
@@ -767,7 +799,7 @@ const ApplyCTA = () => {
             </div>
 
             {/* Row 2: Phone + Background */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+            <div className="form-row" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
               <div>
                 <label style={labelStyle}>Phone Number</label>
                 <input type="tel" placeholder="+974 xxxx xxxx" value={form.phone}

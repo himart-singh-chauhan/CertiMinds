@@ -12,19 +12,43 @@
     html { scroll-behavior: smooth; font-size: 118%; }
     body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #ffffff; color: rgba(0,0,0,0.9); -webkit-font-smoothing: antialiased; }
 
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .how-card-inner { width: 85% !important; }
+    }
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none !important; }
       .nav-hamburger { display: flex !important; }
-      .hero-grid { grid-template-columns: 1fr !important; }
-      .how-grid { grid-template-columns: 1fr !important; }
-      .adv-grid { grid-template-columns: 1fr 1fr !important; }
-      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+      .nav-inner { padding: 0 16px !important; }
+      .nav-logo { height: 48px !important; }
+      /* Audience cards */
+      .hero-ctas { grid-template-columns: 1fr !important; }
+      /* Stats table */
+      .stats-table { grid-template-columns: 1fr !important; border-radius: 12px !important; }
+      .stats-table > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.06) !important; }
+      .stats-table > div:last-child { border-bottom: none !important; }
+      /* How It Works stacking cards */
+      .how-card-inner { width: 94% !important; height: auto !important; min-height: unset !important; padding: 22px 20px !important; top: 0 !important; }
+      .how-card-body { flex-direction: column !important; gap: 16px !important; }
+      .how-card-left { width: 100% !important; }
+      .how-card-img { height: 200px !important; flex: none !important; }
+      /* Advantage section */
+      .adv-layout { grid-template-columns: 1fr !important; }
+      .adv-feat-grid { grid-template-columns: 1fr 1fr !important; }
+      .adv-img { min-height: 260px !important; max-height: 320px !important; }
+      /* Reality section */
+      .reality-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
+      .reality-img { height: 320px !important; }
+      /* Footer */
+      .footer-top { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+      .footer-top > div:first-child { grid-column: 1 / -1; }
     }
     @media (max-width: 520px) {
-      .adv-grid { grid-template-columns: 1fr !important; }
-      .footer-grid { grid-template-columns: 1fr !important; }
+      html { font-size: 100% !important; }
       .hero-ctas { flex-direction: column !important; align-items: stretch !important; }
-      .hero-ctas a { text-align: center; justify-content: center; }
+      .how-card-inner { width: 96% !important; padding: 18px 16px !important; }
+      .adv-feat-grid { grid-template-columns: 1fr !important; }
+      .footer-top { grid-template-columns: 1fr !important; }
     }
     /* ── Intro & Scroll Reveal ─────────────────────────────── */
     #page-intro{position:fixed;inset:0;z-index:99999;background:#0a1628;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;animation:__piUp 0.6s cubic-bezier(0.76,0,0.24,1) 1.55s forwards}
@@ -43,7 +67,7 @@
 <body>
   <div id="page-intro" role="presentation" aria-hidden="true">
     <div class="pi-brand">CertiMinds<span class="pi-dot"></span></div>
-    <div class="pi-sub">Qatar &middot; Tech Talent</div>
+    <div class="pi-sub">Qatar &middot; Powering Digital Growth</div>
     <div class="pi-bar"></div>
   </div>
   <div id="root"></div>
@@ -90,11 +114,11 @@
           transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
           transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
         }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+          <div className="nav-inner" style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
 
             {/* Logo */}
             <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52, transition: 'opacity 0.2s' }}
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" className="nav-logo" style={{ height: 72, transition: 'opacity 0.2s' }}
                 onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
                 onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
             </a>
@@ -152,7 +176,7 @@
           onMouseEnter={() => setHov(true)}
           onMouseLeave={() => setHov(false)}
           style={{
-            fontSize: 13.5,
+            fontSize: 16,
             fontWeight: active ? 600 : 500,
             color: active ? '#0a1628' : hov ? '#0a1628' : '#111111',
             padding: '8px 16px',
@@ -349,7 +373,7 @@
 
             {/* H1 - large centered */}
             <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 0, fontFeatureSettings: '"lnum"' }}>
-              We Build The<br />
+              We Build<br />
               <HeroTyped /><br />
               <span style={{ color: '#0a1628' }}>Your Business Needs.</span>
             </h1>
@@ -360,7 +384,7 @@
             </p>
 
             {/* Stats table - colorful */}
-            <div style={{ marginTop: 32, borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
+            <div className="stats-table" style={{ marginTop: 32, borderRadius: 16, overflow: 'hidden', boxShadow: '0 4px 32px rgba(0,0,0,0.07)', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0 }}>
               {[
                 { value: '2% Acceptance Rate', label: 'Rigorous selection, not open enrolment', gradient: 'linear-gradient(135deg,#eef5ff 0%,#dceeff 100%)', accent: '#1560b0', borderR: true },
                 { value: '100% Qatar-Based Talent', label: 'Qatar-first talent pipeline', gradient: 'linear-gradient(135deg,#f3e8ff 0%,#e9d5ff 100%)', accent: '#7c3aed', borderR: true },
@@ -398,10 +422,10 @@
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
             {/* Section label */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 56, justifyContent: 'center' }}>
-              <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block' }} />
-              <span style={{ fontSize: 17.5, fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Who We Work With</span>
-              <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 56, justifyContent: 'center', flexWrap: 'wrap', textAlign: 'center' }}>
+              <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
+              <span style={{ fontSize: 'clamp(12px, 1.3vw, 16.5px)', fontWeight: 700, color: '#1560b0', letterSpacing: '1.5px', textTransform: 'uppercase' }}>We Work With Organizations building the future , and the minds ready to build it with them</span>
+              <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
             </div>
 
             {/* Two cards side by side */}
@@ -416,12 +440,12 @@
                 <div style={{ position: 'absolute', bottom: 20, right: 28, fontSize: 96, fontWeight: 900, color: 'rgba(255,255,255,0.08)', lineHeight: 1, letterSpacing: '-4px', userSelect: 'none' }}>01</div>
 
                 <div style={{ position: 'relative', zIndex: 1 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', marginBottom: 28 }}>
-                    <BuildingIcon />
+                  <div style={{ marginBottom: 28 }}>
+                    <img src="uploads/workImg1.png" alt="For Organisations" style={{ width: 56, height: 56, objectFit: 'contain', borderRadius: 10 }} />
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.8)', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For organisations</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.8)', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For organisations</span>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#fff', marginBottom: 16 }}>Strengthen<br />Your Team</h3>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#fff', maxWidth: 320 }}>We don't forward CVs. We build professionals around your exact technology stack. Assessed, trained, and ready to contribute from day one.</p>
+                  <p style={{ fontSize: 17, lineHeight: 1.75, color: '#fff', maxWidth: 320 }}>We don't forward CVs. We build professionals around your exact technology stack. Assessed, trained, and ready to contribute from day one.</p>
                 </div>
 
                 <a href="build-your-team.html" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
@@ -440,12 +464,12 @@
                 <div style={{ position: 'absolute', bottom: 20, right: 28, fontSize: 96, fontWeight: 900, color: 'rgba(11,17,32,0.04)', lineHeight: 1, letterSpacing: '-4px', userSelect: 'none' }}>02</div>
 
                 <div style={{ position: 'relative', zIndex: 1 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#2d6faa', marginBottom: 28 }}>
-                    <PersonIcon />
+                  <div style={{ marginBottom: 28 }}>
+                    <img src="uploads/workImg2.png" alt="For Candidates" style={{ width: 56, height: 56, objectFit: 'contain', borderRadius: 10 }} />
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For candidates</span>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: '#2d6faa', letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: 14 }}>For candidates</span>
                   <h3 style={{ fontSize: 'clamp(1.4rem, 2vw, 1.9rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.5px', color: '#0b1120', marginBottom: 16 }}>Launch<br />Your Career</h3>
-                  <p style={{ fontSize: 14.5, lineHeight: 1.75, color: '#111111', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Structured, employer-aligned training across technical, professional, and AI skills. Designed to get you hired and keep you there.</p>
+                  <p style={{ fontSize: 17, lineHeight: 1.75, color: '#111111', maxWidth: 320 }}>Enter the CertiMinds Launchpad. Structured, employer-aligned training across technical, professional, and AI skills. Designed to get you hired and keep you there.</p>
                 </div>
 
                 <a href="#" style={{ position: 'relative', zIndex: 1, display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 32, fontSize: 13.5, fontWeight: 700, color: '#2d6faa', textDecoration: 'none', background: 'rgba(45,111,170,0.08)', border: '1px solid rgba(45,111,170,0.2)', borderRadius: 999, padding: '10px 20px', width: 'fit-content', transition: 'all 0.2s' }}
@@ -516,7 +540,7 @@
 
       return (
         <div ref={containerRef} style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'sticky', top: 0, zIndex: i + 1 }}>
-          <div ref={innerRef} style={{ background: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.25)' }}>
+          <div ref={innerRef} className="how-card-inner" style={{ background: color, transformOrigin: 'top center', position: 'relative', top: `calc(-5vh + ${i * 25}px)`, width: '70%', height: 440, borderRadius: 20, padding: '28px 32px', display: 'flex', flexDirection: 'column', overflow: 'hidden', willChange: 'transform', boxShadow: '0 20px 60px rgba(100,120,200,0.25)' }}>
 
             {/* Step badge */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 22 }}>
@@ -525,49 +549,32 @@
               <span style={{ fontSize: 16, fontWeight: 800, color: '#111111', letterSpacing: '2.5px', textTransform: 'uppercase' }}>{label}</span>
             </div>
 
-            <div style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
+            <div className="how-card-body" style={{ display: 'flex', flex: 1, gap: 32, minHeight: 0 }}>
               {/* Left */}
-              <div style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div className="how-card-left" style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#0a1628', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
-                <p style={{ fontSize: 13.5, lineHeight: 1.75, color: '#111111' }}>{desc}</p>
+                <p style={{ fontSize: 17, lineHeight: 1.75, color: '#111111' }}>{desc}</p>
 
               </div>
 
-              {/* ── Right panel 01 (Select): teal bg + 3 spaced pill cards ── */}
+              {/* ── Right panel 01 (Select): image ── */}
               {i === 0 && (
-                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', position: 'relative', background: 'linear-gradient(145deg,#0a1e3a 0%,#0f3060 55%,#1a4878 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center' }}>
-                  {/* dot grid texture */}
-                  <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(90,163,216,0.18) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: -40, left: -40, width: 160, height: 160, borderRadius: '50%', background: 'rgba(90,163,216,0.12)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: -30, right: -30, width: 130, height: 130, borderRadius: '50%', background: 'rgba(45,111,170,0.14)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', bottom: '12%', right: '-6%', width: 90, height: 90, borderRadius: '50%', background: 'rgba(90,163,216,0.1)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'absolute', top: '10%', left: '6%', width: 50, height: 50, borderRadius: '50%', background: 'rgba(142,198,232,0.12)', pointerEvents: 'none' }} />
-                  <div style={{ position: 'relative', zIndex: 1, width: '88%', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                    {[
-                      { text: 'Qatar-Based Talent Only', g: 'linear-gradient(135deg,#5aa3d8,#2d6faa)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> },
-                      { text: 'Capability-Led Assessment', g: 'linear-gradient(135deg,#2d6faa,#1a4878)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> },
-                      { text: 'Scored across 20+ criteria\'s', g: 'linear-gradient(135deg,#8ec6e8,#5aa3d8)', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
-                    ].map(({ text, g, icon }, idx) => (
-                      <div key={idx} style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 50, padding: '13px 18px', display: 'flex', alignItems: 'center', gap: 14, boxShadow: '0 6px 20px rgba(0,0,0,0.25)' }}>
-                        <div style={{ width: 44, height: 44, borderRadius: '50%', background: g, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(45,111,170,0.4)' }}>{icon}</div>
-                        <span style={{ fontSize: 14, fontWeight: 700, color: '#0b1120', lineHeight: 1.3 }}>{text}</span>
-                      </div>
-                    ))}
-                  </div>
+                <div ref={imgRef} className="how-card-img" style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
+                  <img src="uploads/imgCard 1.jpg" alt="Select" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
 
               {/* ── Right panel 02 (Develop): image ── */}
               {i === 1 && (
-                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
-                  <img src="uploads/imgCard 2.png" alt="Develop" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 12, display: 'block' }} />
+                <div ref={imgRef} className="how-card-img" style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
+                  <img src="uploads/imgCard 2.jpg" alt="Develop" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
 
               {/* ── Right panel 03 (Place): image ── */}
               {i === 2 && (
-                <div ref={imgRef} style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
-                  <img src="uploads/imgCard 3.png" alt="Place" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: 12, display: 'block' }} />
+                <div ref={imgRef} className="how-card-img" style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
+                  <img src="uploads/imgCard 3.jpg" alt="Place" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
             </div>
@@ -581,8 +588,8 @@
       return (
         <div id="certiminds-model" style={{ background: '#ffffff' }}>
           {/* Heading - scrolls away before cards stick */}
-          <div style={{ padding: '100px 24px 32px', maxWidth: 1200, margin: '0 auto' }}>
-            <h2 style={{ fontSize: 'clamp(3rem, 6.5vw, 5.5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', fontFeatureSettings: '"lnum","locl"', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>The CertiMinds Model</h2>
+          <div style={{ padding: '100px 24px 0px', maxWidth: 1200, margin: '0 auto' }}>
+            <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', fontFeatureSettings: '"lnum","locl"', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>The CertiMinds Model</h2>
           </div>
 
           {/* Stacking cards */}
@@ -667,7 +674,7 @@
                   <div key={i} style={{ borderRadius:20, background:'linear-gradient(150deg, #bfdbfe 0%, #ddd6fe 100%)', padding:'28px 22px', display:'flex', flexDirection:'column', gap:14 }}>
                     <div>{f.icon}</div>
                     <div style={{ fontSize:14, fontWeight:800, color:'#0a0f1e', lineHeight:1.3 }}>{f.title}</div>
-                    <p style={{ fontSize:12.5, color:'#111111', lineHeight:1.7, margin:0 }}>{f.desc}</p>
+                    <p style={{ fontSize:13.5, color:'#111111', lineHeight:1.7, margin:0 }}>{f.desc}</p>
                   </div>
                 ))}
               </div>
@@ -692,7 +699,7 @@
           {/* Left - image */}
           <div className="reality-img" style={{ borderRadius:28, overflow:'hidden', height:600, position:'relative', background:'#c7d2fe', flexShrink:0 }}>
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
+              src="uploads/girl.jpeg"
               alt="Tech professional at work"
               style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', position:'absolute', inset:0 }}
             />
@@ -787,7 +794,7 @@
         <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
             {/* top row */}
-            <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
+            <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
 
               {/* brand col */}
               <div>
