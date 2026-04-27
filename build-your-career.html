@@ -71,18 +71,11 @@
 const Nav = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-  const [hidden, setHidden] = React.useState(false);
-  const lastY = React.useRef(0);
 
   React.useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 10);
-      setHidden(y > lastY.current && y > 80);
-      lastY.current = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 16);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   const links = [
@@ -95,16 +88,24 @@ const Nav = () => {
 
   return (
     <header style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-      background: scrolled ? 'rgba(255,255,255,0.97)' : 'rgba(255,255,255,0.0)',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
-      borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : 'none',
-      transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
-      transition: 'all 0.3s ease',
+      position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)',
+      zIndex: 200,
+      width: 'calc(100% - 48px)',
+      maxWidth: 1200,
+      background: 'transparent',
+      backdropFilter: 'blur(14px)',
+      WebkitBackdropFilter: 'blur(14px)',
+      border: '1px solid rgba(255,255,255,0.2)',
+      borderRadius: 20,
+      boxShadow: scrolled ? '0 8px 36px rgba(0,0,0,0.13)' : '0 2px 18px rgba(0,0,0,0.07)',
+      transition: 'box-shadow 0.3s',
+      overflow: 'hidden',
     }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+      <div style={{ padding: '0 28px', height: 80, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
         <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52 }} />
+          <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" className="nav-logo" style={{ height: 115, transition: 'opacity 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
         </a>
         <div className="nav-links" style={{ display: 'flex', gap: 4 }}>
           {links.map(({ label, href, active }) => {
@@ -158,7 +159,7 @@ const Hero = () => {
     { step: '05', label: 'Grow',   sub: 'Structured career path' },
   ];
 
-  const tracks = ['Software Engineering', 'Data Engineering', 'AI Engineering', 'Machine Learning', 'Cloud Services', 'DevOps', 'Business Analytics', 'Agile Delivery', 'GovTech', 'Cybersecurity'];
+  const tracks = ['Software Engineering', 'Data Engineering', 'AI Engineering', 'Machine Learning', 'Cloud Services', 'DevOps', 'Business Analytics', 'Agile Delivery', 'GovTech'];
 
   return (
     <section style={{ background: '#ffffff', minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -285,7 +286,7 @@ const Footer = () => {
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
           <div>
-            <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+            <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
             <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
               Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
             </p>
@@ -563,16 +564,16 @@ const GainCard = React.memo(({ i, c, total, sectionRef }) => {
           <span style={{ fontSize: 12, fontWeight: 800, color: c.tagColor, letterSpacing: '1.5px' }}>{c.num} / 03</span>
         </div>
         <div className="gain-card-body" style={{ flex: 1, padding: '40px 48px 40px 40px', display: 'flex', gap: 40, alignItems: 'center', position: 'relative', zIndex: 1 }}>
-          <div style={{ flex: 1, minWidth: 0, marginRight: 40 }}>
+          <div style={{ flex: 1, minWidth: 0, marginRight: 0 }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: c.tagBg, borderRadius: 9999, padding: '4px 12px', marginBottom: 16 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: c.tagColor, letterSpacing: '0.3px' }}>Core Principle {c.num}</span>
+              <span style={{ fontSize: 16, fontWeight: 700, color: c.tagColor, letterSpacing: '0.5px' }}>Core Principle {c.num}</span>
             </div>
-            <h3 style={{ fontSize: 'clamp(1.45rem, 2vw, 1.85rem)', fontWeight: 900, color: c.textColor, letterSpacing: '-0.5px', lineHeight: 1.2, marginBottom: 14 }}>{c.title}</h3>
+            <h3 style={{ fontSize: 'clamp(1.85rem, 2.6vw, 2.4rem)', fontWeight: 900, color: c.textColor, letterSpacing: '-0.5px', lineHeight: 1.2, marginBottom: 14 }}>{c.title}</h3>
             <p style={{ fontSize: '1.1rem', color: c.subColor, lineHeight: 1.85, margin: 0, maxWidth: 420 }}>{c.body}</p>
           </div>
-          <div style={{ display: 'none' }} />
-          <div className="gain-card-checks" style={{ flex: '0 0 260px', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: -230 }}>
-            <div style={{ fontSize: 11, fontWeight: 800, color: c.tagColor, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 18 }}>You Will Leave With</div>
+          <div style={{ width: '1px', background: 'rgba(10,22,40,0.12)', alignSelf: 'stretch', margin: '0 32px' }} />
+          <div className="gain-card-checks" style={{ flex: '0 0 260px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: c.tagColor, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 18 }}>You Will Leave With</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               {c.checks.map((chk, j) => (
                 <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
@@ -596,7 +597,7 @@ const WhatYouGain = () => {
     <div style={{ background: '#f1f5f9' }}>
       <div style={{ padding: '100px 24px 0', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'none' }}></div>
-        <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-3px', paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+        <h2 style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-3px', paddingBottom: 6, textAlign: 'center', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           Why Organizations Trust<br /><span>CertiMinds Consultants</span>
         </h2>
       </div>
@@ -616,7 +617,7 @@ const faqs = [
   { q: 'Am I guaranteed a placement after training?', a: 'Our focus is always on placing you into a meaningful role. While opportunities can vary, CertiMinds exists to connect capable professionals with real industry demand and we work hard to place every consultant we develop.' },
   { q: 'Can I choose which organization I work with?', a: 'We match you to opportunities where your skills and interests align with client needs. While consultants do not select their own placements, we make every effort to align you with industries and roles that suit your ambitions.' },
   { q: 'Do I need to be based in Qatar?', a: 'Yes. All placements are currently within Qatar.' },
-  { q: 'Do I need a computer science degree?', a: 'We welcome applicants from relevant technical backgrounds including Computer Science, Data, AI, Cybersecurity, Engineering and related fields. What matters most is your drive, problem-solving ability and passion for technology.' },
+  { q: 'Do I need a computer science degree?', a: 'We welcome applicants from relevant technical backgrounds including Computer Science, Data, AI, Engineering and related fields. What matters most is your drive, problem-solving ability and passion for technology.' },
   { q: 'What support do I receive during my placement?', a: 'You are never on your own. Our team provides regular check-ins throughout your engagement and you have ongoing access to mentors, peers and the wider CertiMinds community.' },
   { q: 'What happens when my contract ends?', a: 'Many of our consultants move into permanent roles, extended placements, or explore opportunities further afield. You also become part of our alumni network with lifelong access to support and connections.' },
   { q: 'What makes CertiMinds different?', a: 'We do not just place you into a role. We develop you, support you throughout your engagement and invest in your long-term career. You are not just a consultant. You are part of a community helping to shape Qatar\'s technology future.' },
@@ -739,7 +740,7 @@ const ApplyCTA = () => {
 
   const labelStyle = { fontSize: 12, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'block', marginBottom: 8 };
 
-  const interests = ['Cloud & Infrastructure', 'Cybersecurity', 'Data & Analytics', 'AI & Machine Learning', 'Software Development', 'GovTech', 'FinTech', 'Other'];
+  const interests = ['Cloud & Infrastructure', 'Data & Analytics', 'AI & Machine Learning', 'Software Development', 'GovTech', 'FinTech', 'Other'];
 
   return (
     <section style={{ background: '#0a1628', padding: '110px 24px', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.06)' }}>

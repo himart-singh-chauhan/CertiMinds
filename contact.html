@@ -52,17 +52,9 @@
     const Nav = () => {
       const [menuOpen, setMenuOpen] = React.useState(false);
       const [scrolled, setScrolled] = React.useState(false);
-      const [hidden, setHidden] = React.useState(false);
-      const lastY = React.useRef(0);
 
       React.useEffect(() => {
-        const fn = () => {
-          const y = window.scrollY;
-          setScrolled(y > 16);
-          if (y > lastY.current && y > 80) setHidden(true);
-          else setHidden(false);
-          lastY.current = y;
-        };
+        const fn = () => setScrolled(window.scrollY > 16);
         window.addEventListener('scroll', fn, { passive: true });
         return () => window.removeEventListener('scroll', fn);
       }, []);
@@ -77,16 +69,24 @@
 
       return (
         <header style={{
-          position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-          background: '#ffffff',
-          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.06)' : 'none',
-          transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
-          transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s',
+          position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)',
+          zIndex: 100,
+          width: 'calc(100% - 48px)',
+          maxWidth: 1200,
+          background: 'transparent',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          borderRadius: 20,
+          boxShadow: scrolled ? '0 8px 36px rgba(0,0,0,0.13)' : '0 2px 18px rgba(0,0,0,0.07)',
+          transition: 'box-shadow 0.3s',
+          overflow: 'hidden',
         }}>
-          <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 32px', height: 82, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+          <div style={{ padding: '0 28px', height: 80, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
             <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
-              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 52 }} />
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" className="nav-logo" style={{ height: 115, transition: 'opacity 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
             </a>
             <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}>
               {links.map(({ label, href }) => {
@@ -387,7 +387,7 @@
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
             <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
               <div>
-                <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
+                <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
                 <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
                   Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
                 </p>
