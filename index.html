@@ -365,7 +365,7 @@
             @media(max-width:900px){ .hero-shapes { display: none !important; } }
           `}</style>
 
-          <div style={{ maxWidth: 860, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 1, padding: '48px 0 48px' }}>
+          <div style={{ maxWidth: 960, margin: '0 auto', width: '100%', textAlign: 'center', position: 'relative', zIndex: 1, padding: '48px 0 48px' }}>
 
             {/* H1 - large centered */}
             <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 4rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', color: '#0a1628', marginBottom: 0, fontFeatureSettings: '"lnum"' }}>
@@ -380,7 +380,7 @@
             </p>
 
             {/* Stats table, colorful */}
-            <div className="stats-table" style={{ marginTop: 32, borderRadius: 16, overflow: 'visible', boxShadow: '0 4px 32px rgba(0,0,0,0.07)', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0, position: 'relative' }}>
+            <div className="stats-table" style={{ marginTop: 32, marginLeft: 0, marginRight: 'auto', maxWidth: 860, borderRadius: 16, overflow: 'visible', boxShadow: '0 4px 32px rgba(0,0,0,0.07)', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 0, position: 'relative' }}>
               {[
                 { value: '2% Acceptance Rate', label: 'Rigorous selection, not open enrolment', gradient: 'linear-gradient(135deg,#eef5ff 0%,#dceeff 100%)', accent: '#1560b0', borderR: true },
                 { value: '100% Qatar-Based Talent', label: 'Qatar-first talent pipeline', gradient: 'linear-gradient(135deg,#f3e8ff 0%,#e9d5ff 100%)', accent: '#7c3aed', borderR: true },
