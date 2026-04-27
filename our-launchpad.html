@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -152,7 +152,7 @@
               <div style={{ display: 'flex', flexDirection: 'column', gap: 30, paddingTop: 24 }}>
 
                 {/* Badge */}
-                <div className="lp-fade lp-d1">
+                <div className="lp-fade lp-d1" style={{ marginTop: 28 }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef6ff', color: '#097fe8', fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', padding: '6px 14px', borderRadius: 9999, border: '1px solid rgba(0,117,222,0.15)' }}>
                     The CertiMinds Programme
                   </span>
@@ -534,7 +534,7 @@
           <div className="crosslink-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
 
             {/* For organisations - dark card */}
-            <div style={{ background: '#0a1628', borderRadius: 22, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 0, position: 'relative', overflow: 'hidden' }}>
+            <div style={{ background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 22, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 0, position: 'relative', overflow: 'hidden' }}>
               {/* decorative glows */}
               <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(0,117,222,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
               <div style={{ position: 'absolute', bottom: -40, left: -40, width: 180, height: 180, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(33,49,131,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -565,9 +565,9 @@
                   ))}
                 </div>
 
-                <a href="build-your-team.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0075de', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '12px 24px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: 'rgba(0,117,222,0.4) 0 6px 20px', letterSpacing: '0.1px' }}
-                  onMouseEnter={e => { e.currentTarget.style.background='#005bab'; e.currentTarget.style.transform='translateY(-2px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.background='#0075de'; e.currentTarget.style.transform='none'; }}>
+                <a href="build-your-team.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(167,139,250,0.3)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '12px 24px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', border: '1.5px solid rgba(167,139,250,0.6)', letterSpacing: '0.1px' }}
+                  onMouseEnter={e => { e.currentTarget.style.background='rgba(167,139,250,0.5)'; e.currentTarget.style.borderColor='rgba(167,139,250,0.8)'; e.currentTarget.style.transform='translateY(-2px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background='rgba(167,139,250,0.3)'; e.currentTarget.style.borderColor='rgba(167,139,250,0.6)'; e.currentTarget.style.transform='none'; }}>
                   Build your team
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
