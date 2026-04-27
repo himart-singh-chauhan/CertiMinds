@@ -275,7 +275,6 @@ const EngagementModel = () => {
         <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', flexWrap:'wrap', gap:20, marginBottom:72 }}>
           <div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(109,40,217,0.08)', border:'1px solid rgba(109,40,217,0.2)', borderRadius:9999, padding:'6px 18px', marginBottom:20 }}>
-              <span style={{ width:7, height:7, borderRadius:'50%', background:`linear-gradient(135deg,${c.from},${c.to})`, display:'inline-block' }} />
               <span style={{ fontSize:11.5, fontWeight:700, color:'#6d28d9', letterSpacing:'1px', textTransform:'uppercase' }}>How It Works</span>
             </div>
             <h2 style={{ fontSize:'clamp(2.4rem,4.5vw,3.6rem)', fontWeight:900, lineHeight:1.05, letterSpacing:'-2.5px', margin:0,
@@ -453,9 +452,6 @@ const EngagementModel = () => {
           </div>
           <span style={{ fontSize:13, color:'rgba(0,0,0,0.4)', fontWeight:600, whiteSpace:'nowrap' }}>
             {activeStep + 1} / {STEPS.length}
-          </span>
-          <span style={{ fontSize:13, fontWeight:700, color:'#6d28d9', whiteSpace:'nowrap' }}>
-            {Math.round(((activeStep + 1) / STEPS.length) * 100)}%
           </span>
         </div>
 
