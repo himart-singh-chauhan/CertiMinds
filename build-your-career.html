@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build Your Career - CertiMinds</title>
+  <title>Build Your Career, CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -112,7 +112,7 @@ const Nav = () => {
             const isActive = active || false;
             return (
               <a key={label} href={href}
-                style={{ fontSize: 13.5, fontWeight: isActive ? 600 : 500, color: isActive ? '#0a1628' : '#111111', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', transition: 'color 0.18s', whiteSpace: 'nowrap' }}
+                style={{ fontSize: 16, fontWeight: isActive ? 600 : 500, color: isActive ? '#0a1628' : '#111111', padding: '8px 16px', borderRadius: 6, textDecoration: 'none', transition: 'color 0.18s', whiteSpace: 'nowrap' }}
                 onMouseEnter={e => e.currentTarget.style.color = '#0a1628'}
                 onMouseLeave={e => e.currentTarget.style.color = isActive ? '#0a1628' : '#111111'}>
                 {label}
@@ -122,7 +122,7 @@ const Nav = () => {
         </div>
         <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
           <a href="contact.html"
-            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#ffffff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+            style={{ display: 'inline-flex', alignItems: 'center', fontSize: 16, fontWeight: 700, color: '#ffffff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
             onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
             Let's Talk
@@ -175,7 +175,7 @@ const Hero = () => {
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', maxWidth: 1160, margin: '0 auto', padding: '120px 32px 60px', width: '100%', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center', width: '100%' }} className="hero-grid">
 
-          {/* LEFT - text */}
+          {/* LEFT, text */}
           <div>
             {/* Eyebrow */}
             <div className="animate-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 36 }}>
@@ -186,8 +186,8 @@ const Hero = () => {
             {/* H1 */}
             <h1 className="animate-up-2" style={{ fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.0, letterSpacing: '-3px', marginBottom: 28 }}>
               <span style={{ color: '#000000' }}>Build a Career</span><br />
-              <span style={{ background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>in Technology.</span><br />
-              <span style={{ fontWeight: 700, fontSize: '1em', letterSpacing: '-1.5px', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Starting in Qatar.</span>
+              <span style={{ background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>in Technology</span><br />
+              <span style={{ fontWeight: 900, fontSize: '1em', letterSpacing: '-1.5px', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Starting in Qatar.</span>
             </h1>
 
             {/* Subheadline */}
@@ -226,7 +226,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* RIGHT - career path visualizer */}
+          {/* RIGHT, career path visualizer */}
           <div className="hero-right" style={{ width: 220, flexShrink: 0, position: 'relative' }}>
             {/* vertical line */}
             <div style={{ position: 'absolute', left: 22, top: 28, bottom: 28, width: 2, background: 'linear-gradient(180deg, #1560b0 0%, rgba(21,96,176,0.08) 100%)', borderRadius: 99 }} />
@@ -259,7 +259,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom track strip - seamless scrolling marquee */}
+      {/* Bottom track strip, seamless scrolling marquee */}
       <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '18px 0', overflow: 'hidden', position: 'relative', zIndex: 1, background: '#f8f9fc' }}>
         <div className="track-inner">
           {[...tracks, ...tracks].map((t, i) => (
@@ -280,15 +280,15 @@ const Footer = () => {
     { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
     { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
   ];
-  const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+  const linkStyle = { fontSize:18, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
   return (
     <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
           <div>
             <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
-            <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
-              Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
+            <p style={{ fontSize:18, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+              Developing the next generation of tech professionals in Qatar and the Gulf, from day one to day one.
             </p>
             <div style={{ display:'flex', gap:10 }}>
               {[{ href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> }].map(({ href, title, svg }) => (
@@ -303,7 +303,7 @@ const Footer = () => {
           </div>
           {navCols.map(col => (
             <div key={col.heading}>
-              <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+              <div style={{ fontSize:14, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
               <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
                 {col.links.map(({ label, href }) => (
                   <a key={label} href={href}
@@ -316,13 +316,13 @@ const Footer = () => {
           ))}
         </div>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
-          <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+          <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
           <div style={{ display:'flex', gap:24 }}>
             {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
               <a key={label} href={href}
                 onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                 onMouseLeave={e=>e.currentTarget.style.color='#111111'}
-                style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                style={{ fontSize:17, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
             ))}
           </div>
         </div>
@@ -350,7 +350,7 @@ const STEPS = [
   {
     num: '03',
     title: 'Launchpad',
-    body: 'Selected candidates join our intensive training programme - hands-on technical and professional development with AI training built in throughout.',
+    body: 'Selected candidates join our intensive training programme, hands-on technical and professional development with AI training built in throughout.',
     icon: '⬡',
     tag: 'Full-Time',
   },
@@ -387,7 +387,7 @@ const Journey = () => {
             Five Steps.<br /><span>One Destination.</span>
           </h2>
           <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, maxWidth: 480, display: 'none' }}>
-            From your first message to a thriving career in tech - here is exactly how it works.
+            From your first message to a thriving career in tech, here is exactly how it works.
           </p>
         </div>
 
@@ -404,7 +404,7 @@ const Journey = () => {
                   style={{
                     display: 'flex', alignItems: 'center', gap: 20,
                     padding: '22px 24px', borderRadius: 14, border: 'none',
-                    background: isAct ? '#0a1628' : 'transparent',
+                    background: isAct ? 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)' : 'transparent',
                     cursor: 'pointer', textAlign: 'left', transition: 'all 0.22s',
                     marginBottom: 4,
                     boxShadow: isAct ? '0 8px 32px rgba(10,22,40,0.3)' : 'none',
@@ -490,7 +490,7 @@ const Journey = () => {
   );
 };
 
-/* ── What You Gain - Stacking Cards ──────────────────────────── */
+/* ── What You Gain, Stacking Cards ──────────────────────────── */
 const gainCards = [
   {
     num: '01',
@@ -515,7 +515,7 @@ const gainCards = [
     checkColor: '#5b21b6',
     icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>),
     title: 'AI Equipped',
-    body: "Every candidate will have hands-on experience with the latest AI tools. You will not just understand AI - you will know how to use it practically in a professional environment, giving you an immediate advantage in the workplace.",
+    body: "Every candidate will have hands-on experience with the latest AI tools. You will not just understand AI, you will know how to use it practically in a professional environment, giving you an immediate advantage in the workplace.",
     checks: ['Practical experience using AI tools in real work scenarios','The skills modern technology teams are actively looking for'],
   },
   {
@@ -542,7 +542,7 @@ const GainCard = React.memo(({ i, c, total, sectionRef }) => {
     const update = () => {
       if (!containerRef.current || !sectionRef.current || !innerRef.current) return;
       const secRect       = sectionRef.current.getBoundingClientRect();
-      const secScrollable = Math.max(1, sectionRef.current.scrollHeight - window.innerHeight);
+      const secScrollable = Math.max(1, sectionRef.current.scrollHeight, window.innerHeight);
       const secP          = Math.max(0, Math.min(1, -secRect.top / secScrollable));
       const targetScale   = 1 - (total - i) * 0.05;
       const start         = i / total;
@@ -647,7 +647,7 @@ const FAQs = () => {
         onClick={() => toggle(idx)}
         style={{
           borderRadius: 16,
-          background: isOpen ? '#0a1628' : '#ffffff',
+          background: isOpen ? 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)' : '#ffffff',
           border: `1.5px solid ${isOpen ? '#1560b0' : 'rgba(0,0,0,0.07)'}`,
           padding: '22px 24px',
           cursor: 'pointer',
@@ -694,7 +694,7 @@ const FAQs = () => {
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 64 }}>
           <div>
 
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, margin: 0, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <h2 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.2rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.15, margin: 0, paddingBottom: 6, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Got Questions?<br /><span>We Have Answers.</span>
             </h2>
           </div>

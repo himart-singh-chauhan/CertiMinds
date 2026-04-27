@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - CertiMinds</title>
+  <title>Contact Us, CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -93,7 +93,7 @@
                 const isActive = window.location.pathname.includes('contact') && href === 'contact.html';
                 return (
                   <a key={label} href={href} style={{
-                    fontSize: 13.5, fontWeight: isActive ? 600 : 500,
+                    fontSize: 16, fontWeight: isActive ? 600 : 500,
                     color: isActive ? '#0a1628' : '#111111',
                     padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
                     transition: 'color 0.18s', whiteSpace: 'nowrap',
@@ -107,7 +107,7 @@
             </div>
             <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
               <a href="contact.html"
-                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 16, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
                 Let's Talk
@@ -173,7 +173,7 @@
         <section style={{ background: '#fff', minHeight: '100vh', paddingTop: 82 }}>
           <div className="contact-layout" style={{ display: 'grid', gridTemplateColumns: '420px 1fr', minHeight: 'calc(100vh - 82px)' }}>
 
-            {/* ── Left: details - dark navy ───────────────────────── */}
+            {/* ── Left: details, dark navy ───────────────────────── */}
             <div className="contact-left" style={{ background: '#0a1628', padding: '64px 48px', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
               {/* glows */}
               <div style={{ position: 'absolute', top: -80, right: -80, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(0,117,222,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -189,7 +189,7 @@
                   We'd like to<br />hear from you.
                 </h1>
                 <p style={{ fontSize: 14.5, lineHeight: 1.8, color: '#ffffff', marginBottom: 48 }}>
-                  Whether you're an organisation looking to close a technology capability gap, or an individual ready to launch a career in tech - tell us about your situation and we'll respond directly.
+                  Whether you're an organisation looking to close a technology capability gap, or an individual ready to launch a career in tech, tell us about your situation and we'll respond directly.
                 </p>
 
                 {/* Contact details */}
@@ -255,7 +255,7 @@
                   <div>
                     <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.75px', color: '#111111', marginBottom: 12 }}>Message received.</h2>
                     <p style={{ fontSize: 15, lineHeight: 1.8, color: '#111111', maxWidth: 400 }}>
-                      Thanks for getting in touch. We'll review your message and get back to you within one business day. We'll be direct - no chase emails, no sales calls.
+                      Thanks for getting in touch. We'll review your message and get back to you within one business day. We'll be direct, no chase emails, no sales calls.
                     </p>
                   </div>
                   <button onClick={() => { setSubmitted(false); setForm({ name:'', organisation:'', email:'', phone:'', reachingAs:'', message:'' }); }}
@@ -316,7 +316,7 @@
 
                   {/* Message */}
                   <Field label="Your message" required error={errors.message}>
-                    <textarea placeholder="Tell us about your situation - what you're looking for, your timeline, and any relevant context." value={form.message}
+                    <textarea placeholder="Tell us about your situation, what you're looking for, your timeline, and any relevant context." value={form.message}
                       onChange={e => set('message', e.target.value)}
                       rows={5}
                       style={{ ...inputStyle(!!errors.message), resize: 'vertical', minHeight: 120 }} />
@@ -381,15 +381,15 @@
         { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
         { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
       ];
-      const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+      const linkStyle = { fontSize:18, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
       return (
         <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
             <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
               <div>
                 <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
-                <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
-                  Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
+                <p style={{ fontSize:18, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+                  Developing the next generation of tech professionals in Qatar and the Gulf, from day one to day one.
                 </p>
                 <div style={{ display:'flex', gap:10 }}>
                   {[
@@ -406,7 +406,7 @@
               </div>
               {navCols.map(col => (
                 <div key={col.heading}>
-                  <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+                  <div style={{ fontSize:14, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
                   <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
                     {col.links.map(({ label, href }) => (
                       <a key={label} href={href}
@@ -419,13 +419,13 @@
               ))}
             </div>
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
-              <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+              <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
               <div style={{ display:'flex', gap:24 }}>
                 {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
                   <a key={label} href={href}
                     onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                     onMouseLeave={e=>e.currentTarget.style.color='#111111'}
-                    style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                    style={{ fontSize:17, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
                 ))}
               </div>
             </div>

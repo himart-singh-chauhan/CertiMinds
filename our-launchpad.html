@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Launchpad - CertiMinds</title>
+  <title>Our Launchpad, CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -87,7 +87,7 @@
                 const isActive = window.location.pathname.includes('our-launchpad') && href === 'our-launchpad.html';
                 return (
                   <a key={label} href={href} style={{
-                    fontSize: 13.5, fontWeight: isActive ? 600 : 500,
+                    fontSize: 16, fontWeight: isActive ? 600 : 500,
                     color: isActive ? '#0a1628' : '#111111',
                     padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
                     transition: 'color 0.18s', whiteSpace: 'nowrap',
@@ -101,7 +101,7 @@
             </div>
             <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
               <a href="contact.html"
-                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 16, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
                 Let's Talk
@@ -154,7 +154,7 @@
             }
           `}</style>
 
-          {/* Background image - right side */}
+          {/* Background image, right side */}
           <div className="lp-hero-img" style={{
             position: 'absolute', inset: 0,
             background: 'linear-gradient(to right, #ffffff 35%, rgba(255,255,255,0.5) 55%, transparent 72%)',
@@ -203,7 +203,7 @@
               <p className="lp-fu lp-d3" style={{
                 fontSize: '1.1rem',
                 lineHeight: 1.8,
-                color: '#444',
+                color: '#000',
                 maxWidth: 520,
                 margin: '0 0 32px 0',
               }}>
@@ -240,7 +240,7 @@
           <div style={{ textAlign: 'center', marginBottom: 64 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: '#097fe8', letterSpacing: '1.5px', textTransform: 'uppercase', background: '#eef6ff', padding: '5px 14px', borderRadius: 9999, display: 'inline-block', marginBottom: 20, border: '1px solid rgba(0,117,222,0.15)' }}>Programme philosophy</span>
             <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 18, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Built on three pillars.</h2>
-            <p style={{ fontSize: '1rem', color: '#111111', maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>Every aspect of the Launchpad is designed around a clear philosophy. These three pillars shape everything - how we select, how we develop, and how we place.</p>
+            <p style={{ fontSize: '1rem', color: '#111111', maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>Every aspect of the Launchpad is designed around a clear philosophy. These three pillars shape everything, how we select, how we develop, and how we place.</p>
           </div>
 
           <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20 }}>
@@ -251,7 +251,7 @@
                 accentBg: '#eef6ff',
                 label: 'Depth over speed',
                 headline: 'Months, not weeks',
-                body: 'Short courses produce surface knowledge. The Launchpad runs over several months because that\'s what it takes to build genuine capability. We don\'t rush people into placements - we prepare them properly.',
+                body: 'Short courses produce surface knowledge. The Launchpad runs over several months because that\'s what it takes to build genuine capability. We don\'t rush people into placements, we prepare them properly.',
                 points: ['Structured multi-month curriculum', 'Milestone-based progression', 'No shortcuts, no padding'],
               },
               {
@@ -260,7 +260,7 @@
                 accentBg: '#eef0fb',
                 label: 'Whole professional, not just technician',
                 headline: 'Technical and professional, both',
-                body: 'A consultant who can write code but can\'t communicate with a client is half a professional. The Launchpad builds technical competence and professional foundations simultaneously - consulting skills, communication, and business context are not optional extras.',
+                body: 'A consultant who can write code but can\'t communicate with a client is half a professional. The Launchpad builds technical competence and professional foundations simultaneously, consulting skills, communication, and business context are not optional extras.',
                 points: ['Technical track + professional skills', 'Consulting and communication', 'Business and domain context'],
               },
               {
@@ -269,7 +269,7 @@
                 accentBg: '#edfafa',
                 label: 'Context is everything',
                 headline: 'Developed for the Gulf',
-                body: 'Generic international training programmes are designed for generic markets. The Launchpad is built for Qatar and the Gulf - the organisations, the culture, the regulatory environment, and the specific technology challenges that matter here.',
+                body: 'Generic international training programmes are designed for generic markets. The Launchpad is built for Qatar and the Gulf, the organisations, the culture, the regulatory environment, and the specific technology challenges that matter here.',
                 points: ['Qatar and Gulf market focus', 'Local organisational context', 'Relevant domain knowledge'],
               },
             ].map(({ n, color, accentBg, label, headline, body, points }) => (
@@ -335,7 +335,7 @@
         color: '#2a9d99',
         label: 'Software Engineering',
         headline: 'Software development',
-        body: 'Build full-stack software development capability. From web and mobile applications to APIs and system integration - focused on modern languages, frameworks, and engineering practices.',
+        body: 'Build full-stack software development capability. From web and mobile applications to APIs and system integration, focused on modern languages, frameworks, and engineering practices.',
         skills: ['Full-stack web development', 'API design & integration', 'Software architecture', 'Testing & code quality'],
         icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>,
       },
@@ -379,7 +379,7 @@
             <div style={{ textAlign: 'center', marginBottom: 64 }}>
               <span style={{ fontSize: 11, fontWeight: 700, color: '#097fe8', letterSpacing: '1.5px', textTransform: 'uppercase', background: '#eef6ff', padding: '5px 14px', borderRadius: 9999, display: 'inline-block', marginBottom: 20, border: '1px solid rgba(0,117,222,0.15)' }}>Capability tracks</span>
               <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 16, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Six tracks. One standard.</h2>
-              <p style={{ fontSize: '1rem', color: '#111111', maxWidth: 460, margin: '0 auto', lineHeight: 1.7 }}>Every track is built to the same standard of rigour. The technology changes - the depth of development doesn't.</p>
+              <p style={{ fontSize: '1rem', color: '#111111', maxWidth: 460, margin: '0 auto', lineHeight: 1.7 }}>Every track is built to the same standard of rigour. The technology changes, the depth of development doesn't.</p>
             </div>
 
             {/* Grid */}
@@ -494,7 +494,7 @@
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div className="crosslink-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
 
-            {/* For organisations - dark card */}
+            {/* For organisations, dark card */}
             <div style={{ background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 22, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 0, position: 'relative', overflow: 'hidden', flex: 1 }}>
               {/* decorative glows */}
               <div style={{ position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(0,117,222,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -502,7 +502,7 @@
 
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1 }}>
                 {/* eyebrow */}
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 9999, padding: '4px 12px', marginBottom: 24 }}>
+                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 9999, padding: '4px 12px', marginBottom: 24 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
                   <span style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '1.2px', textTransform: 'uppercase' }}>For organisations</span>
                 </div>
@@ -511,7 +511,7 @@
                   Use the Launchpad to close your capability gap.
                 </h3>
                 <p style={{ fontSize: 14.5, lineHeight: 1.8, color: '#ffffff', marginBottom: 36 }}>
-                  Partner with CertiMinds to have Launchpad graduates placed directly into your organisation. We build them, you benefit - with ongoing support from us throughout the engagement.
+                  Partner with CertiMinds to have Launchpad graduates placed directly into your organisation. We build them, you benefit, with ongoing support from us throughout the engagement.
                 </p>
 
                 {/* feature bullets */}
@@ -535,13 +535,13 @@
               </div>
             </div>
 
-            {/* For candidates - light card */}
+            {/* For candidates, light card */}
             <div style={{ background: '#fff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 22, padding: '48px 44px', display: 'flex', flexDirection: 'column', gap: 0, boxShadow: 'rgba(0,0,0,0.05) 0 6px 24px', position: 'relative', overflow: 'hidden', flex: 1 }}>
               <div style={{ position: 'absolute', top: -50, right: -50, width: 200, height: 200, borderRadius: '50%', background: 'radial-gradient(ellipse, rgba(0,117,222,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
               <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1 }}>
                 {/* eyebrow */}
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, background: '#f4f4f4', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 24 }}>
+                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 7, background: '#f4f4f4', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 9999, padding: '4px 12px', marginBottom: 24 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(0,0,0,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                   <span style={{ fontSize: 10.5, fontWeight: 700, color: '#111111', letterSpacing: '1.2px', textTransform: 'uppercase' }}>For candidates</span>
                 </div>
@@ -594,7 +594,7 @@
                 Need CertiMinds Consultants?
               </h2>
               <p style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', margin: 0, maxWidth: 460 }}>
-                See exactly how the Launchpad works for organisations - from consultant selection through to placement and ongoing support.
+                See exactly how the Launchpad works for organisations, from consultant selection through to placement and ongoing support.
               </p>
             </div>
             <div style={{ flexShrink: 0 }}>
@@ -616,15 +616,15 @@
         { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
         { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
       ];
-      const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+      const linkStyle = { fontSize:18, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
       return (
         <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
           <div style={{ maxWidth:1200, margin:'0 auto' }}>
             <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
               <div>
                 <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
-                <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
-                  Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
+                <p style={{ fontSize:18, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+                  Developing the next generation of tech professionals in Qatar and the Gulf, from day one to day one.
                 </p>
                 <div style={{ display:'flex', gap:10 }}>
                   {[{ href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> }].map(({ href, title, svg }) => (
@@ -639,7 +639,7 @@
               </div>
               {navCols.map(col => (
                 <div key={col.heading}>
-                  <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+                  <div style={{ fontSize:14, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
                   <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
                     {col.links.map(({ label, href }) => (
                       <a key={label} href={href}
@@ -652,13 +652,13 @@
               ))}
             </div>
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
-              <span style={{ fontSize:13, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
+              <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
               <div style={{ display:'flex', gap:24 }}>
                 {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
                   <a key={label} href={href}
                     onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                     onMouseLeave={e=>e.currentTarget.style.color='#111111'}
-                    style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                    style={{ fontSize:17, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
                 ))}
               </div>
             </div>

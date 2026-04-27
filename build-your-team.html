@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build Your Team - CertiMinds</title>
+  <title>Build Your Team, CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -90,7 +90,7 @@ const Nav = () => {
             const isActive = window.location.pathname.includes('build-your-team') && href === 'build-your-team.html';
             return (
               <a key={label} href={href} style={{
-                fontSize: 13.5, fontWeight: isActive ? 600 : 500,
+                fontSize: 16, fontWeight: isActive ? 600 : 500,
                 color: isActive ? '#0a1628' : '#111111',
                 padding: '8px 16px', textDecoration: 'none', borderRadius: 6,
                 transition: 'color 0.18s', whiteSpace: 'nowrap',
@@ -166,7 +166,7 @@ const Hero = () => {
           </h1>
 
           <p style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#111111', maxWidth: 500, marginBottom: 32 }}>
-            Finding AI-native professionals with leading technology and business skills in Qatar is harder than it should be. We solve that - developing and placing the right talent directly with your organization.
+            Finding AI-native professionals with leading technology and business skills in Qatar is harder than it should be. We solve that, developing and placing the right talent directly with your organization.
           </p>
 
           <div className="hero-ctas" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 40 }}>
@@ -199,7 +199,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT - visual card replaced with image */}
+        {/* RIGHT, visual card replaced with image */}
         <div className="hero-img" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 420 }}>
           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Tech team collaboration" style={{ maxWidth: 560, width: '100%', borderRadius: 24, boxShadow: '0 8px 32px rgba(21,96,176,0.18)', objectFit: 'cover', height: 420 }} />
         </div>
@@ -514,7 +514,7 @@ const FAQ = () => {
         onClick={() => toggle(idx)}
         style={{
           borderRadius: 16,
-          background: isOpen ? '#0a1628' : '#ffffff',
+          background: isOpen ? 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)' : '#ffffff',
           border: `1.5px solid ${isOpen ? '#1560b0' : 'rgba(0,0,0,0.07)'}`,
           padding: '22px 24px',
           cursor: 'pointer',
@@ -563,11 +563,10 @@ const FAQ = () => {
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '4px 14px', marginBottom: 20 }}>
               <span style={{ fontSize: 11.5, fontWeight: 700, color: '#1560b0', letterSpacing: '0.6px', textTransform: 'uppercase' }}>FAQs</span>
             </div>
-            <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, margin: 0, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <h2 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.2rem)', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1.1, margin: 0, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Got Questions?<br />We Have Answers.
             </h2>
           </div>
-          <p style={{ fontSize: '0.975rem', color: '#111111', maxWidth: 340, lineHeight: 1.75, margin: 0, fontWeight: 700 }}>Everything you need to know about working with CertiMinds.</p>
         </div>
 
         {/* Two-column accordion */}
@@ -612,15 +611,15 @@ const Footer = () => {
     { heading: 'Services', links: [{ label:'Build Your Team', href:'build-your-team.html' }, { label:'Build Your Career', href:'build-your-career.html' }, { label:'Our Launchpad', href:'our-launchpad.html' }] },
     { heading: 'Company',  links: [{ label:'About Us', href:'about-us.html' }, { label:'Insights', href:'#' }, { label:'Contact', href:'contact.html' }] },
   ];
-  const linkStyle = { fontSize:14, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
+  const linkStyle = { fontSize:18, color:'#111111', textDecoration:'none', transition:'color 0.18s', display:'inline-block' };
   return (
     <footer style={{ background:'#fff', borderTop:'1px solid rgba(0,0,0,0.08)', padding:'72px 24px 0' }}>
       <div style={{ maxWidth:1200, margin:'0 auto' }}>
         <div className="footer-top" style={{ display:'grid', gridTemplateColumns:'2fr 1fr 1fr', gap:48, paddingBottom:56, borderBottom:'1px solid rgba(0,0,0,0.08)' }}>
           <div>
                 <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height: 115, marginBottom:20 }} />
-            <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
-              Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
+            <p style={{ fontSize:18, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
+              Developing the next generation of tech professionals in Qatar and the Gulf, from day one to day one.
             </p>
             <div style={{ display:'flex', gap:10 }}>
               {[
@@ -637,7 +636,7 @@ const Footer = () => {
           </div>
           {navCols.map(col => (
             <div key={col.heading}>
-              <div style={{ fontSize:11, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
+              <div style={{ fontSize:14, fontWeight:700, color:'#111111', letterSpacing:'2px', textTransform:'uppercase', marginBottom:20 }}>{col.heading}</div>
               <div style={{ display:'flex', flexDirection:'column', gap:13 }}>
                 {col.links.map(({ label, href }) => (
                   <a key={label} href={href}
@@ -650,13 +649,13 @@ const Footer = () => {
           ))}
         </div>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
-          <span style={{ fontSize:13, color:'#111111' }}>Â© CertiMinds 2026. All rights reserved.</span>
+          <span style={{ fontSize:17, color:'#111111' }}>Â© CertiMinds 2026. All rights reserved.</span>
           <div style={{ display:'flex', gap:24 }}>
             {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
               <a key={label} href={href}
                 onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                 onMouseLeave={e=>e.currentTarget.style.color='#111111'}
-                style={{ fontSize:13, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
+                style={{ fontSize:17, color:'#111111', textDecoration:'none', transition:'color 0.18s' }}>{label}</a>
             ))}
           </div>
         </div>
