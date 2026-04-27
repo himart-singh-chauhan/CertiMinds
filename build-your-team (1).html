@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build Your Team — CertiMinds</title>
+  <title>Build Your Team - CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -20,7 +20,7 @@
     @media (max-width: 520px) {
       .footer-grid { grid-template-columns: 1fr !important; }
     }
-    /* ── Scroll Reveal ─────────────────────────────────────── */
+    /* -- Scroll Reveal --------------------------------------- */
   </style>
 </head>
 <body>
@@ -28,7 +28,7 @@
   <script type="text/babel">
 
 
-/* ── Nav ──────────────────────────────────────────────────────── */
+/* -- Nav -------------------------------------------------------- */
 const Nav = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const links = [
@@ -82,7 +82,7 @@ const Nav = () => {
 
 };
 
-/* ── Hero ─────────────────────────────────────────────────────── */
+/* -- Hero ------------------------------------------------------- */
 const Hero = () =>
 <section style={{ background: '#fff', padding: '88px 24px 80px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -95,7 +95,7 @@ const Hero = () =>
               Tech capability built<br />for your organisation.
             </h1>
             <p style={{ fontSize: '1.2rem', lineHeight: 1.65, color: '#111111', maxWidth: 560, marginBottom: 40 }}>
-              We identify driven individuals, develop them through the Launchpad programme, and place them as consultants within your team. You get tech talent that's shaped around your context — not a generic hire from a job board.
+              We identify driven individuals, develop them through the Launchpad programme, and place them as consultants within your team. You get tech talent that's shaped around your context - not a generic hire from a job board.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <a href="contact.html" style={{ background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '11px 24px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
@@ -134,7 +134,7 @@ const Hero = () =>
       </section>;
 
 
-/* ── Icons ────────────────────────────────────────────────────── */
+/* -- Icons ------------------------------------------------------ */
 const iconProps = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.75", strokeLinecap: "round", strokeLinejoin: "round" };
 const DiscoverIcon = () => <svg {...iconProps}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /><path d="M11 8v6" /><path d="M8 11h6" /></svg>;
 const SelectIcon = () => <svg {...iconProps}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
@@ -143,13 +143,13 @@ const AlignIcon = () => <svg {...iconProps}><path d="M12 20h9" /><path d="M16.5 
 const PlaceIcon = () => <svg {...iconProps}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>;
 const GrowIcon = () => <svg {...iconProps}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></svg>;
 
-/* ── Engagement Model ─────────────────────────────────────────── */
+/* -- Engagement Model ------------------------------------------- */
 const STEPS = [
 {
   n: '01', label: 'Discovery',
   headline: 'We understand your capability gap',
-  body: "Every engagement starts with a structured discovery session. We work with your technical leadership to map current gaps, near-term projects, and the skills you need — before a single consultant is selected.",
-  detail: 'Typical duration: 1–2 weeks',
+  body: "Every engagement starts with a structured discovery session. We work with your technical leadership to map current gaps, near-term projects, and the skills you need - before a single consultant is selected.",
+  detail: 'Typical duration: 1�2 weeks',
   icon: <DiscoverIcon />
 },
 {
@@ -162,15 +162,15 @@ const STEPS = [
 {
   n: '03', label: 'Launchpad development',
   headline: 'We develop them for your context',
-  body: 'Selected candidates enter the Launchpad programme — a structured multi-month development track covering technical skills, professional foundations, and your specific domain context.',
-  detail: 'Typically 4–6 months',
+  body: 'Selected candidates enter the Launchpad programme - a structured multi-month development track covering technical skills, professional foundations, and your specific domain context.',
+  detail: 'Typically 4�6 months',
   icon: <DevelopIcon />
 },
 {
   n: '04', label: 'Pre-placement alignment',
   headline: 'We align before they arrive',
-  body: 'Before placement, consultants go through a context-setting phase specific to your organisation — your tools, culture, team dynamics, and expectations. No surprises on day one.',
-  detail: '2–4 weeks before placement',
+  body: 'Before placement, consultants go through a context-setting phase specific to your organisation - your tools, culture, team dynamics, and expectations. No surprises on day one.',
+  detail: '2�4 weeks before placement',
   icon: <AlignIcon />
 },
 {
@@ -259,12 +259,12 @@ const EngagementModel = () => {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 20 }}>
               <button onClick={() => setActiveStep(Math.max(0, activeStep - 1))}
           style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: '#fff', color: activeStep === 0 ? 'rgba(0,0,0,0.25)' : 'rgba(0,0,0,0.7)', fontWeight: 600, fontSize: 13, cursor: activeStep === 0 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
-                ← Previous
+                ? Previous
               </button>
               <span style={{ fontSize: 13, color: '#111111', fontWeight: 600 }}>{activeStep + 1} of {STEPS.length}</span>
               <button onClick={() => setActiveStep(Math.min(STEPS.length - 1, activeStep + 1))}
           style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '8px 16px', borderRadius: 4, border: '1px solid rgba(0,0,0,0.12)', background: activeStep === STEPS.length - 1 ? '#fff' : '#0075de', color: activeStep === STEPS.length - 1 ? 'rgba(0,0,0,0.25)' : '#fff', fontWeight: 600, fontSize: 13, cursor: activeStep === STEPS.length - 1 ? 'default' : 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
-                Next →
+                Next ?
               </button>
             </div>
           </div>
@@ -272,14 +272,14 @@ const EngagementModel = () => {
 
 };
 
-/* ── FAQ ──────────────────────────────────────────────────────── */
+/* -- FAQ -------------------------------------------------------- */
 const FAQS = [
-{ q: "We already have a recruitment agency. Why do we need CertiMinds?", a: "Recruitment agencies find existing talent. We build it. If you can't find the right people in the market — or if the talent you hire arrives and still needs significant investment — that's the gap we close. We're not a faster recruiter. We're a different solution entirely." },
-{ q: "How long does the full process take from engagement to placement?", a: "The typical timeline from initial discovery to placement is 6–8 months. The majority of that is development time in the Launchpad programme. We plan with your hiring pipeline in mind, so engagements can be structured to meet your timelines." },
+{ q: "We already have a recruitment agency. Why do we need CertiMinds?", a: "Recruitment agencies find existing talent. We build it. If you can't find the right people in the market - or if the talent you hire arrives and still needs significant investment - that's the gap we close. We're not a faster recruiter. We're a different solution entirely." },
+{ q: "How long does the full process take from engagement to placement?", a: "The typical timeline from initial discovery to placement is 6�8 months. The majority of that is development time in the Launchpad programme. We plan with your hiring pipeline in mind, so engagements can be structured to meet your timelines." },
 { q: "Do we get to review candidates before development begins?", a: "Yes. After initial selection, you review candidate profiles before anyone enters the development programme. You're involved in the decision, not just the outcome." },
 { q: "What sectors and technology areas do your consultants cover?", a: "Our current capability tracks include: AI & Data, Cloud & Infrastructure, Cybersecurity, Software Engineering, and Business Analysis. We expand tracks based on demand from partner organisations." },
-{ q: "What happens if a placement doesn't work out?", a: "We work with you and the consultant to understand the issue and resolve it. Our 30/60/90-day check-in structure is designed to catch misalignments early. If a placement is genuinely not the right fit, we work to find a resolution — including re-placement where appropriate." },
-{ q: "Is there a minimum commitment or contract length?", a: "We structure engagements based on your requirements. Contact us to discuss your situation — we'll be direct about what makes sense and what doesn't." }];
+{ q: "What happens if a placement doesn't work out?", a: "We work with you and the consultant to understand the issue and resolve it. Our 30/60/90-day check-in structure is designed to catch misalignments early. If a placement is genuinely not the right fit, we work to find a resolution - including re-placement where appropriate." },
+{ q: "Is there a minimum commitment or contract length?", a: "We structure engagements based on your requirements. Contact us to discuss your situation - we'll be direct about what makes sense and what doesn't." }];
 
 
 const FAQ = () => {
@@ -315,7 +315,7 @@ const FAQ = () => {
 
 };
 
-/* ── Footer CTA ───────────────────────────────────────────────── */
+/* -- Footer CTA ------------------------------------------------- */
 const FooterCTA = () =>
 <section style={{ background: '#31302e', padding: '88px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
@@ -323,18 +323,18 @@ const FooterCTA = () =>
             Ready to close your capability gap?
           </h2>
           <p style={{ fontSize: '1.1rem', lineHeight: 1.6, color: 'rgba(255,255,255,0.6)', maxWidth: 480, margin: '0 auto 40px' }}>
-            Tell us about your technology challenges. We'll tell you whether we can help — and what that looks like.
+            Tell us about your technology challenges. We'll tell you whether we can help - and what that looks like.
           </p>
           <a href="contact.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#0075de', color: '#fff', fontSize: 15, fontWeight: 600, padding: '12px 28px', borderRadius: 4, textDecoration: 'none', transition: 'background 0.15s' }}
     onMouseEnter={(e) => e.currentTarget.style.background = '#005bab'}
     onMouseLeave={(e) => e.currentTarget.style.background = '#0075de'}>
-            Start a conversation →
+            Start a conversation ?
           </a>
         </div>
       </section>;
 
 
-/* ── Footer ───────────────────────────────────────────────────── */
+/* -- Footer ----------------------------------------------------- */
 const Footer = () =>
 <footer style={{ background: '#f6f5f4', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '56px 24px 40px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -368,7 +368,7 @@ const Footer = () =>
       )}
           </div>
           <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <span style={{ fontSize: 13, color: '#111111' }}>© 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
+            <span style={{ fontSize: 13, color: '#111111' }}>� 2026 CertiMinds. All rights reserved. Doha, Qatar.</span>
             <div style={{ display: 'flex', gap: 20 }}>
               {['Privacy', 'Terms'].map((l) =>
         <a key={l} href="#" style={{ fontSize: 13, color: '#111111', textDecoration: 'none' }}
@@ -381,7 +381,7 @@ const Footer = () =>
       </footer>;
 
 
-/* ── App ─────────────────────────────────────────────────────── */
+/* -- App ------------------------------------------------------- */
 const App = () =>
 <div>
         <Nav />

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Build Your Career — CertiMinds</title>
+  <title>Build Your Career - CertiMinds</title>
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -153,7 +153,7 @@ const Hero = () => {
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', maxWidth: 1160, margin: '0 auto', padding: '120px 32px 60px', width: '100%', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 64, alignItems: 'center', width: '100%' }} className="hero-grid">
 
-          {/* LEFT — text */}
+          {/* LEFT - text */}
           <div>
             {/* Eyebrow */}
             <div className="animate-up" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#eef5ff', border: '1px solid #c7ddf8', borderRadius: 9999, padding: '5px 14px', marginBottom: 36 }}>
@@ -204,7 +204,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* RIGHT — career path visualizer */}
+          {/* RIGHT - career path visualizer */}
           <div style={{ width: 220, flexShrink: 0, position: 'relative' }}>
             {/* vertical line */}
             <div style={{ position: 'absolute', left: 22, top: 28, bottom: 28, width: 2, background: 'linear-gradient(180deg, #1560b0 0%, rgba(21,96,176,0.08) 100%)', borderRadius: 99 }} />
@@ -237,7 +237,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom track strip — seamless scrolling marquee */}
+      {/* Bottom track strip - seamless scrolling marquee */}
       <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '18px 0', overflow: 'hidden', position: 'relative', zIndex: 1, background: '#f8f9fc' }}>
         <div className="track-inner">
           {[...tracks, ...tracks].map((t, i) => (
@@ -266,7 +266,7 @@ const Footer = () => {
           <div>
             <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" style={{ height:58, marginBottom:20 }} />
             <p style={{ fontSize:14, color:'#111111', lineHeight:1.8, maxWidth:280, marginBottom:28 }}>
-              Developing the next generation of tech professionals in Qatar and the Gulf — from day one to day one.
+              Developing the next generation of tech professionals in Qatar and the Gulf - from day one to day one.
             </p>
             <div style={{ display:'flex', gap:10 }}>
               {[{ href:'https://linkedin.com', title:'LinkedIn', svg:<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> }].map(({ href, title, svg }) => (
@@ -322,13 +322,13 @@ const STEPS = [
     num: '02',
     title: 'Assessment',
     body: 'We look beyond grades and qualifications. Our assessment focuses on your potential, communication ability and technical foundations.',
-    icon: '◈',
+    icon: '�-�',
     tag: 'Potential-First',
   },
   {
     num: '03',
     title: 'Launchpad',
-    body: 'Selected candidates join our intensive training programme — hands-on technical and professional development with AI training built in throughout.',
+    body: 'Selected candidates join our intensive training programme - hands-on technical and professional development with AI training built in throughout.',
     icon: '⬡',
     tag: '16 Weeks · Full-Time',
   },
@@ -336,7 +336,7 @@ const STEPS = [
     num: '04',
     title: 'Placement',
     body: 'You join an ambitious organisation in Qatar, contributing to real projects and playing your part in Qatar\'s continued growth.',
-    icon: '◎',
+    icon: '�-�',
     tag: '0% Placement Fees',
   },
   {
@@ -365,7 +365,7 @@ const Journey = () => {
             Five Steps.<br /><span>One Destination.</span>
           </h2>
           <p style={{ fontSize: '1rem', color: '#111111', lineHeight: 1.75, maxWidth: 480 }}>
-            From your first message to a thriving career in tech — here is exactly how it works.
+            From your first message to a thriving career in tech - here is exactly how it works.
           </p>
         </div>
 
@@ -468,7 +468,7 @@ const Journey = () => {
   );
 };
 
-/* ── What You Gain — Stacking Cards ──────────────────────────── */
+/* ── What You Gain - Stacking Cards ──────────────────────────── */
 const gainCards = [
   {
     num: '01',
@@ -493,7 +493,7 @@ const gainCards = [
     checkColor: '#5b21b6',
     icon: (<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>),
     title: 'AI Equipped',
-    body: "Every candidate will have hands-on experience with the latest AI tools. You will not just understand AI — you will know how to use it practically in a professional environment, giving you an immediate advantage in the workplace.",
+    body: "Every candidate will have hands-on experience with the latest AI tools. You will not just understand AI - you will know how to use it practically in a professional environment, giving you an immediate advantage in the workplace.",
     checks: ['Practical experience using AI tools in real work scenarios','The skills modern technology teams are actively looking for'],
   },
   {
