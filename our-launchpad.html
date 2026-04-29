@@ -148,30 +148,43 @@
             .lp-d2 { animation-delay:0.3s; }
             .lp-d3 { animation-delay:0.45s; }
             .lp-d4 { animation-delay:0.6s; }
-            @media (max-width: 768px) {
-              .lp-hero-img { opacity: 0.18 !important; }
-              .lp-hero-content { padding: 140px 24px 80px !important; }
+            /* Hide hero image on tablet and below */
+            @media (max-width: 900px) {
+              .lp-hero-img-wrap { display: none !important; }
+              .lp-hero-overlay { display: none !important; }
+              .lp-hero-content { padding: 140px 40px 80px !important; }
+              .lp-hero-inner { max-width: 600px !important; }
+            }
+            /* Mobile */
+            @media (max-width: 600px) {
+              .lp-hero-content { padding: 120px 20px 60px !important; }
+              .lp-hero-inner { max-width: 100% !important; }
+              .lp-hero-btns { flex-direction: column !important; align-items: flex-start !important; }
+              .lp-hero-btns a { width: 100% !important; justify-content: center !important; }
             }
           `}</style>
 
-          {/* Background image, right side */}
-          <div className="lp-hero-img" style={{
+          {/* Background gradient overlay — hidden on mobile via CSS */}
+          <div className="lp-hero-overlay" style={{
             position: 'absolute', inset: 0,
             background: 'linear-gradient(to right, #ffffff 35%, rgba(255,255,255,0.5) 55%, transparent 72%)',
             zIndex: 2,
             pointerEvents: 'none',
           }} />
-          <img
-            src="uploads/launchpad.png"
-            alt="Launchpad"
-            style={{
-              position: 'absolute', bottom: '-5%', right: '8%',
-              height: '120%', width: 'auto',
-              maxWidth: '70%',
-              objectFit: 'contain', objectPosition: 'bottom center',
-              display: 'block', zIndex: 1,
-            }}
-          />
+          {/* Hero image — hidden on tablet/mobile via CSS */}
+          <div className="lp-hero-img-wrap" style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+            <img
+              src="uploads/launchpad.png"
+              alt="Launchpad"
+              style={{
+                position: 'absolute', bottom: '-5%', right: '8%',
+                height: '120%', width: 'auto',
+                maxWidth: '70%',
+                objectFit: 'contain', objectPosition: 'bottom center',
+                display: 'block',
+              }}
+            />
+          </div>
 
           {/* Content */}
           <div className="lp-hero-content" style={{
@@ -180,18 +193,17 @@
             width: '100%',
             padding: '110px 48px 60px',
           }}>
-            <div style={{ maxWidth: 520 }}>
+            <div className="lp-hero-inner" style={{ maxWidth: 520 }}>
 
 
               {/* H1 */}
               <h1 className="lp-fu lp-d2" style={{
-                fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
+                fontSize: 'clamp(2rem, 5vw, 4.2rem)',
                 fontWeight: 900,
-                lineHeight: 1.05,
-                letterSpacing: '-2.5px',
+                lineHeight: 1.1,
+                letterSpacing: '-2px',
                 color: '#0a1628',
                 margin: '0 0 20px 0',
-                whiteSpace: 'nowrap',
               }}>
                 Not a Bootcamp.<br />
                 Not a Recruiter.<br />
@@ -212,7 +224,7 @@
               </p>
 
               {/* CTAs */}
-              <div className="lp-fu lp-d4" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
+              <div className="lp-fu lp-d4 lp-hero-btns" style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
                 <a href="build-your-career.html"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 14.5, fontWeight: 700, padding: '14px 32px', borderRadius: 9999, textDecoration: 'none', transition: 'all 0.2s', boxShadow: '0 6px 28px rgba(109,40,217,0.45)', letterSpacing: '0.1px' }}
                   onMouseEnter={e => { e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 12px 36px rgba(109,40,217,0.6)'; }}
