@@ -289,19 +289,30 @@ const EngagementModel = () => {
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:1 }}>
 
         {/* â”€â”€ Top Header â”€â”€ */}
-        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', flexWrap:'wrap', gap:20, marginBottom:72 }}>
+        <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', flexWrap:'wrap', gap:28, marginBottom:72 }} className="working-header">
           <div>
             <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(109,40,217,0.08)', border:'1px solid rgba(109,40,217,0.2)', borderRadius:9999, padding:'6px 18px', marginBottom:20 }}>
               <span style={{ fontSize:11.5, fontWeight:700, color:'#6d28d9', letterSpacing:'1px', textTransform:'uppercase' }}>How It Works</span>
             </div>
-            <h2 style={{ fontSize:'clamp(2.4rem,4.5vw,3.6rem)', fontWeight:900, lineHeight:1.25, letterSpacing:'-2.5px', margin:0, padding:'8px 0',
+            <h2 style={{ fontSize:'clamp(2rem,4.5vw,3.6rem)', fontWeight:900, lineHeight:1.25, letterSpacing:'-2.5px', margin:0, padding:'8px 0',
               background:'linear-gradient(135deg,#0a1628 0%,#1560b0 45%,#7c3aed 100%)',
               WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Working With Us</h2>
           </div>
-          <p style={{ fontSize:'1rem', color:'#000000', maxWidth:340, lineHeight:1.8, margin:0, fontWeight:700 }}>
-            A transparent, low-friction process from first<br/>conversation to placed consultant.
+          <p style={{ fontSize:'clamp(0.9rem,2vw,1rem)', color:'#000000', maxWidth:340, lineHeight:1.7, margin:0, fontWeight:700 }}>
+            A transparent, low-friction process from first conversation to placed consultant.
           </p>
         </div>
+        <style>{`
+          @media (max-width: 768px) {
+            .working-header { flex-direction: column !important; gap: 24px !important; align-items: flex-start !important; }
+            .working-header p { max-width: 100% !important; font-size: 0.95rem !important; }
+          }
+          @media (max-width: 520px) {
+            .working-header { gap: 16px !important; margin-bottom: 56px !important; }
+            .working-header h2 { font-size: 1.6rem !important; }
+            .working-header p { font-size: 0.9rem !important; line-height: 1.6 !important; }
+          }
+        `}</style>
 
         {/* â”€â”€ Main Layout: Timeline LEFT + Content RIGHT â”€â”€ */}
         <div style={{ display:'grid', gridTemplateColumns:'260px 1fr', gap:0, alignItems:'stretch' }} className="step-detail-grid">
@@ -383,7 +394,7 @@ const EngagementModel = () => {
               {step.n}
             </div>
 
-            <div style={{ padding:'56px 60px 52px', position:'relative', zIndex:1 }}>
+            <div style={{ padding:'clamp(32px, 8vw, 56px) clamp(24px, 5vw, 60px)', position:'relative', zIndex:1 }}>
 
               {/* step meta */}
               <div style={{ display:'flex', alignItems:'center', gap:14, marginBottom:32,
@@ -408,7 +419,7 @@ const EngagementModel = () => {
               </div>
 
               {/* body */}
-              <p style={{ fontSize:17.5, lineHeight:1.9, color:'#374151', marginBottom:44, maxWidth:580,
+              <p style={{ fontSize:'clamp(1rem,2vw,17.5px)', lineHeight:1.9, color:'#374151', marginBottom:44, maxWidth:580,
                 opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'translateY(0)',
                 transition:'opacity 0.28s ease 0.06s, transform 0.28s ease 0.06s', whiteSpace: 'pre-wrap' }}>
                 {step.body}
