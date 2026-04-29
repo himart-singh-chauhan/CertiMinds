@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -159,7 +159,7 @@ const Hero = () => {
             <span style={{ fontSize: 12, fontWeight: 600, color: '#1560b0' }}>For Organisations · Qatar</span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.6rem)', fontWeight: 900, lineHeight: 1.08, letterSpacing: '-2px', marginBottom: 20, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <h1 style={{ fontSize: 'clamp(2.4rem, 4vw, 3.6rem)', fontWeight: 900, lineHeight: 1.25, letterSpacing: '-2px', marginBottom: 20, padding: '8px 0', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
             The Tech Professionals<br />
             You've Been<br />
             Looking For
@@ -185,15 +185,15 @@ const Hero = () => {
           </div>
 
           {/* trust strip */}
-          <div className="trust-strip" style={{ display: 'flex', gap: 24, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'nowrap' }}>
+          <div className="trust-strip" style={{ display: 'flex', gap: 24, paddingTop: 24, borderTop: '1px solid rgba(0,0,0,0.08)', flexWrap: 'nowrap', whiteSpace: 'nowrap', overflowX: 'auto' }}>
             {[
               { icon: '✓', text: 'Qatar-Based Talent' },
               { icon: '✓', text: 'Day-one Productive' },
               { icon: '✓', text: 'Assessed Before Arrival' },
             ].map(({ icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
                 <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(21,96,176,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, color: '#1560b0', fontWeight: 800, flexShrink: 0 }}>{icon}</span>
-                <span style={{ fontSize: 13, fontWeight: 600, color: '#111111' }}>{text}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#111111', whiteSpace: 'nowrap' }}>{text}</span>
               </div>
             ))}
           </div>
@@ -248,7 +248,7 @@ const STEPS = [
 },
 {
   n: '04', label: 'They join your team',
-  body: 'Your consultant starts on a direct monthly contract. Zero upfront cost. No placement fees.',
+  body: 'Your consultant starts on a direct monthly contract.\nZero upfront cost. No placement fees.',
   detail: 'Direct monthly contract',
   icon: <PlaceIcon />
 },
@@ -294,7 +294,7 @@ const EngagementModel = () => {
             <div style={{ display:'inline-flex', alignItems:'center', gap:8, background:'rgba(109,40,217,0.08)', border:'1px solid rgba(109,40,217,0.2)', borderRadius:9999, padding:'6px 18px', marginBottom:20 }}>
               <span style={{ fontSize:11.5, fontWeight:700, color:'#6d28d9', letterSpacing:'1px', textTransform:'uppercase' }}>How It Works</span>
             </div>
-            <h2 style={{ fontSize:'clamp(2.4rem,4.5vw,3.6rem)', fontWeight:900, lineHeight:1.05, letterSpacing:'-2.5px', margin:0,
+            <h2 style={{ fontSize:'clamp(2.4rem,4.5vw,3.6rem)', fontWeight:900, lineHeight:1.25, letterSpacing:'-2.5px', margin:0, padding:'8px 0',
               background:'linear-gradient(135deg,#0a1628 0%,#1560b0 45%,#7c3aed 100%)',
               WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Working With Us</h2>
           </div>
@@ -410,7 +410,7 @@ const EngagementModel = () => {
               {/* body */}
               <p style={{ fontSize:17.5, lineHeight:1.9, color:'#374151', marginBottom:44, maxWidth:580,
                 opacity: animating ? 0 : 1, transform: animating ? 'translateY(8px)' : 'translateY(0)',
-                transition:'opacity 0.28s ease 0.06s, transform 0.28s ease 0.06s' }}>
+                transition:'opacity 0.28s ease 0.06s, transform 0.28s ease 0.06s', whiteSpace: 'pre-wrap' }}>
                 {step.body}
               </p>
 
@@ -478,7 +478,7 @@ const EngagementModel = () => {
 };
 
 const FAQS = [
-{ q: "How long does it take for consultants to be ready?", a: "Our consultants complete up to 16 weeks of intensive training in Qatar, depending on client requests. Once complete they are available for immediate placement." },
+{ q: "How long does it take for consultants to be ready?", a: "Deployment timelines depend on your specific requirements and consultant availability. We confirm expected start dates during your free consultation call." },
 { q: "Can we influence the training consultants receive?", a: "Yes. Alongside our core curriculum we can tailor training to reflect your workflows and project needs." },
 { q: "Do we choose which consultants join our team?", a: "Yes. You can meet and interview consultants before confirming placement to ensure the right fit for your team and culture." },
 { q: "How flexible are you if our needs change?", a: "Very. If a consultant change is needed we handle it at no additional cost. Additional consultants are prioritised for existing clients to ensure continuity." },
@@ -589,7 +589,7 @@ const FooterCTA = () =>
 <section style={{ background: 'linear-gradient(135deg,#0a1628 0%,#1560b0 100%)', padding: '88px 24px' }}>
         <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-1.5px', color: '#fff', marginBottom: 20 }}>
-            Tell us what you need.<br />We'll find the right fit.
+            Tell us what you need.<br /><span style={{ color:'#38bdf8' }}>We'll find the right fit.</span>
           </h2>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', maxWidth: 440, margin: '0 auto 40px' }}>
             No lengthy procurement process. No placement fees. Just a direct conversation about your capability needs.
@@ -651,7 +651,7 @@ const Footer = () => {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
           <span style={{ fontSize:17, color:'#111111' }}>Â© CertiMinds 2026. All rights reserved.</span>
           <div style={{ display:'flex', gap:24 }}>
-            {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+            {[{ label:'Privacy Policy', href:'privacy-policy.html' }, { label:'Terms of Use', href:'terms-of-use.html' }].map(({ label, href }) => (
               <a key={label} href={href}
                 onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                 onMouseLeave={e=>e.currentTarget.style.color='#111111'}

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -185,15 +185,16 @@
 
               {/* H1 */}
               <h1 className="lp-fu lp-d2" style={{
-                fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
+                fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
                 fontWeight: 900,
                 lineHeight: 1.05,
                 letterSpacing: '-2.5px',
                 color: '#0a1628',
                 margin: '0 0 20px 0',
+                whiteSpace: 'nowrap',
               }}>
-                Not a bootcamp.<br />
-                Not a recruiter.<br />
+                Not a Bootcamp.<br />
+                Not a Recruiter.<br />
                 <span style={{ background: 'linear-gradient(135deg, #1560b0, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   A Career Built Properly.
                 </span>
@@ -239,7 +240,7 @@
         <div style={{ maxWidth: 1180, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 64 }}>
             <span style={{ fontSize: 11, fontWeight: 700, color: '#097fe8', letterSpacing: '1.5px', textTransform: 'uppercase', background: '#eef6ff', padding: '5px 14px', borderRadius: 9999, display: 'inline-block', marginBottom: 20, border: '1px solid rgba(0,117,222,0.15)' }}>Programme philosophy</span>
-            <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 18, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Built on three pillars.</h2>
+            <h2 style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)', fontWeight: 800, lineHeight: 1.05, letterSpacing: '-1.5px', marginBottom: 18, background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Built on Three Pillars.</h2>
             <p style={{ fontSize: '1rem', color: '#111111', maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>Every aspect of the Launchpad is designed around a clear philosophy. These three pillars shape everything, how we select, how we develop, and how we place.</p>
           </div>
 
@@ -250,8 +251,8 @@
                 color: '#0075de',
                 accentBg: '#eef6ff',
                 label: 'Depth over speed',
-                headline: 'Months, not weeks',
-                body: 'Short courses produce surface knowledge. The Launchpad runs over several months because that\'s what it takes to build genuine capability. We don\'t rush people into placements, we prepare them properly.',
+                headline: 'Rigorous by Design',
+                body: 'Short courses produce surface knowledge. The Launchpad runs intensively to build genuine capability. We don\'t rush people into placements, we prepare them thoroughly.',
                 points: ['Structured multi-month curriculum', 'Milestone-based progression', 'No shortcuts, no padding'],
               },
               {
@@ -483,6 +484,13 @@
             <div style={{ textAlign: 'center', marginTop: 28 }}>
               <span style={{ fontSize: 12, color: '#111111', fontWeight: 500 }}>Click any track to explore what it covers</span>
             </div>
+
+            {/* Bottom note */}
+            <div style={{ textAlign: 'left', marginTop: 18 }}>
+              <span style={{ fontSize: '1.05rem', fontWeight: 800, color: 'rgba(0,0,0,0.92)', lineHeight: 1.3 }}>
+                *Every track can be customized to your<br />organization's exact technology stack requirements.
+              </span>
+            </div>
           </div>
         </section>
       );
@@ -504,7 +512,7 @@
                 {/* eyebrow */}
                 <div style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 7, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 9999, padding: '4px 12px', marginBottom: 24 }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  <span style={{ fontSize: 10.5, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: '1.2px', textTransform: 'uppercase' }}>For organisations</span>
+                  <span style={{ fontSize: 10.5, fontWeight: 700, color: '#111111', letterSpacing: '1.2px', textTransform: 'uppercase' }}>For organisations</span>
                 </div>
 
                 <h3 style={{ fontSize: 'clamp(1.35rem, 2.2vw, 1.7rem)', fontWeight: 800, lineHeight: 1.2, letterSpacing: '-0.6px', color: '#fff', marginBottom: 16 }}>
@@ -521,7 +529,7 @@
                       <div style={{ width: 18, height: 18, borderRadius: 6, background: 'rgba(0,117,222,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                         <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       </div>
-                      <span style={{ fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.7)' }}>{pt}</span>
+                      <span style={{ fontSize: 13, fontWeight: 600, color: '#ffffff' }}>{pt}</span>
                     </div>
                   ))}
                 </div>
@@ -584,6 +592,7 @@
       <section style={{ background: '#0a1628', padding: '72px 32px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 700, height: 400, background: 'radial-gradient(ellipse, rgba(0,117,222,0.18) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', top: 0, right: 0, width: 320, height: 260, background: 'radial-gradient(ellipse at top right, rgba(33,49,131,0.25) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, width: 320, height: 260, background: 'radial-gradient(ellipse at bottom left, rgba(21,96,176,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div style={{ maxWidth: 1180, margin: '0 auto', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 420px' }}>
@@ -654,7 +663,7 @@
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
               <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
               <div style={{ display:'flex', gap:24 }}>
-                {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+                {[{ label:'Privacy Policy', href:'privacy-policy.html' }, { label:'Terms of Use', href:'terms-of-use.html' }].map(({ label, href }) => (
                   <a key={label} href={href}
                     onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                     onMouseLeave={e=>e.currentTarget.style.color='#111111'}

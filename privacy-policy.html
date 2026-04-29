@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | CertiMinds</title>
+  <meta name="description" content="CertiMinds Privacy Policy">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 118%; }
+    body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #ffffff; color: rgba(0,0,0,0.9); -webkit-font-smoothing: antialiased; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex !important; }
+      .nav-inner { padding: 0 16px !important; }
+      .nav-logo { height: 48px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const Nav = () => {
+      const [menuOpen, setMenuOpen] = React.useState(false);
+      const [scrolled, setScrolled] = React.useState(false);
+
+      React.useEffect(() => {
+        const fn = () => setScrolled(window.scrollY > 16);
+        window.addEventListener('scroll', fn, { passive: true });
+        return () => window.removeEventListener('scroll', fn);
+      }, []);
+
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const links = [
+        { label: 'Build Your Team',   href: 'build-your-team.html' },
+        { label: 'Build Your Career', href: 'build-your-career.html' },
+        { label: 'Our Launchpad',     href: 'our-launchpad.html' },
+        { label: 'About Us',          href: 'about-us.html' },
+        { label: 'Contact',           href: 'contact.html' },
+      ];
+
+      return (
+        <header style={{
+          position: 'fixed', top: 16, left: '50%', transform: 'translateX(-50%)',
+          zIndex: 100,
+          width: 'calc(100% - 48px)',
+          maxWidth: 1200,
+          background: 'transparent',
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          borderRadius: 20,
+          boxShadow: scrolled ? '0 8px 36px rgba(0,0,0,0.13)' : '0 2px 18px rgba(0,0,0,0.07)',
+          transition: 'box-shadow 0.3s',
+          overflow: 'hidden',
+        }}>
+          <div className="nav-inner" style={{ padding: '0 28px', height: 80, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+
+            {/* Logo */}
+            <a href="index.html" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+              <img src="uploads/CertiMinds Blue Final-7e7cb488.png" alt="CertiMinds" className="nav-logo" style={{ height: 115, transition: 'opacity 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'} />
+            </a>
+
+            {/* Nav links */}
+            <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: 0, flex: 1, justifyContent: 'center' }}>
+              {links.map(({ label, href }) => {
+                const isActive = href !== '#' && currentPage === href;
+                return <NavPill key={label} href={href} label={label} active={isActive} />;
+              })}
+            </div>
+
+            {/* CTA buttons */}
+            <div className="nav-cta" style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+              <a href="contact.html"
+                style={{ display: 'inline-flex', alignItems: 'center', fontSize: 13.5, fontWeight: 700, color: '#fff', textDecoration: 'none', padding: '9px 22px', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', borderRadius: 9999, border: 'none', transition: 'all 0.2s', whiteSpace: 'nowrap', boxShadow: '0 4px 14px rgba(109,40,217,0.3)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #5b21b6, #2563eb)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(109,40,217,0.45)'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'linear-gradient(135deg, #6d28d9, #3b82f6)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(109,40,217,0.3)'; }}>
+                Let's Talk
+              </a>
+            </div>
+
+            {/* Hamburger */}
+            <button className="nav-hamburger" style={{ display: 'none', flexDirection: 'column', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px' }}
+              onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+              {[0,1,2].map(i => (
+                <span key={i} style={{ width: 22, height: 2, background: '#0a1628', borderRadius: 2, display: 'block', transition: 'all 0.22s',
+                  transform: i===0 && menuOpen ? 'rotate(45deg) translateY(7px)' : i===2 && menuOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
+                  opacity: i===1 && menuOpen ? 0 : 1 }} />
+              ))}
+            </button>
+          </div>
+
+          {/* Mobile menu */}
+          {menuOpen && (
+            <div style={{ borderTop: '1px solid rgba(0,0,0,0.07)', padding: '12px 24px 20px', display: 'flex', flexDirection: 'column', gap: 2 }}>
+              {links.map(({ label, href }) => (
+                <a key={label} href={href} style={{ fontSize: 14, fontWeight: 500, color: '#111111', padding: '11px 12px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'rgba(10,22,40,0.05)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>{label}</a>
+              ))}
+              <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+                <a href="contact.html" style={{ flex: 1, textAlign: 'center', background: 'linear-gradient(135deg, #6d28d9, #3b82f6)', color: '#fff', fontSize: 13.5, fontWeight: 700, padding: '10px 16px', borderRadius: 9999, textDecoration: 'none' }}>Let's Talk</a>
+              </div>
+            </div>
+          )}
+        </header>
+      );
+    };
+
+    const NavPill = ({ href, label, active }) => {
+      const [hov, setHov] = React.useState(false);
+      return (
+        <a href={href}
+          onMouseEnter={() => setHov(true)}
+          onMouseLeave={() => setHov(false)}
+          style={{
+            fontSize: 16,
+            fontWeight: active ? 600 : 500,
+            color: active ? '#0a1628' : hov ? '#0a1628' : '#111111',
+            padding: '8px 16px',
+            textDecoration: 'none',
+            borderRadius: 6,
+            background: 'transparent',
+            border: 'none',
+            transition: 'color 0.18s ease',
+            whiteSpace: 'nowrap',
+          }}>
+          {label}
+        </a>
+      );
+    };
+
+    const App = () => (
+      <div style={{ paddingTop: 112, minHeight: '100vh', background: '#ffffff' }}>
+        <Nav />
+      </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

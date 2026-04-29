@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -190,7 +190,7 @@
 
     /* ── Hero ─────────────────────────────────────────────────────── */
     const HeroTyped = () => {
-      const words = ['Engineers', 'Developers', 'Data Analysts', 'Cloud Architects', 'DevOps Talent'];
+      const words = ['Data Scientists', 'Software Developers', 'AI Engineers', 'Cloud Architects', 'Buisiness Analysts', 'QA Engineers'];
       const [wordIdx, setWordIdx] = React.useState(0);
       const [displayed, setDisplayed] = React.useState('');
       const [deleting, setDeleting] = React.useState(false);
@@ -384,7 +384,7 @@
               {[
                 { value: '2% Acceptance Rate', label: 'Rigorous selection, not open enrolment', gradient: 'linear-gradient(135deg,#eef5ff 0%,#dceeff 100%)', accent: '#1560b0', borderR: true },
                 { value: '100% Qatar-Based Talent', label: 'Qatar-first talent pipeline', gradient: 'linear-gradient(135deg,#f3e8ff 0%,#e9d5ff 100%)', accent: '#7c3aed', borderR: true },
-                { value: '3-Track Programme', label: 'Technical · Professional · AI-Native', gradient: 'linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%)', accent: '#059669', borderR: false },
+                { value: '3-Core Pillars', label: 'Technical · Professional · AI-Native', gradient: 'linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%)', accent: '#059669', borderR: false },
               ].map(({ value, label, gradient, accent, borderR }, i) => (
                 <div key={i} style={{ background: gradient, padding: i === 2 ? '32px 36px 42px' : '36px 32px 34px', borderRight: borderR ? `1px solid rgba(0,0,0,0.06)` : 'none', display: 'flex', flexDirection: 'column', gap: i === 2 ? 14 : 12, minHeight: i === 2 ? 150 : 130, zIndex: i === 2 ? 10 : 1, position: 'relative', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                   <div style={{ fontSize: i === 2 ? 'clamp(0.8rem, 1.3vw, 1.1rem)' : 'clamp(0.75rem, 1.2vw, 1rem)', fontWeight: 800, color: accent, lineHeight: 1.3, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{value}</div>
@@ -420,7 +420,7 @@
             {/* Section label */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 56, justifyContent: 'center', flexWrap: 'wrap', textAlign: 'center' }}>
               <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
-              <h2 style={{ fontSize: 'clamp(1.55rem, 2.9vw, 2.3rem)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>We Work With Organizations building the future , and the minds ready to build it with them</h2>
+              <h2 style={{ fontSize: 'clamp(1.55rem, 2.9vw, 2.3rem)', fontWeight: 900, lineHeight: 1.1, letterSpacing: '-1.5px', background: 'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>We Serve the Organizations Building the Future and the Minds Ready to Build It with Them</h2>
               <span style={{ width: 28, height: 1, background: '#1560b0', display: 'inline-block', flexShrink: 0 }} />
             </div>
 
@@ -486,19 +486,19 @@
       {
         step: '01', label: 'Select',
         title: 'We Identify The Right People',
-        desc: 'We identify elite talent locally based in Qatar with strong technological foundations, assessed on capability and potential, not qualifications alone.',
+        desc: 'We source elite talent locally based in Qatar with strong technological foundations, assessed on capability and potential, not qualifications alone.',
         color: 'linear-gradient(135deg, #c8e6f8 0%, #b8d4f0 40%, #d4c8f0 100%)',
       },
       {
         step: '02', label: 'Develop',
-        title: 'We Train To Your Brief',
+        title: 'We Train to Your Brief',
         desc: 'Selected candidates enter our Launchpad programme, a structured period of technical and professional development built around the capability your organization actually needs.',
         color: 'linear-gradient(135deg, #bdd8f5 0%, #c4beed 40%, #dab8e8 100%)',
       },
       {
         step: '03', label: 'Place',
         title: 'Onboarded Once. Productive Immediately.',
-        desc: 'Developed professionals are placed with your organization on flexible monthly engagements through a direct contract. No hidden fees. No additional costs.',
+        desc: 'Developed professionals are placed with your organization on flexible monthly engagements through a direct contract.\nNo hidden fees. No additional costs.',
         color: 'linear-gradient(135deg, #b8ccf0 0%, #c8b8ec 40%, #e0b8e8 100%)',
       },
     ];
@@ -549,7 +549,7 @@
               {/* Left */}
               <div className="how-card-left" style={{ width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <h2 style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.4rem)', fontWeight: 800, color: '#0a1628', lineHeight: 1.25, letterSpacing: '-0.4px', marginBottom: 14 }}>{title}</h2>
-                <p style={{ fontSize: 17, lineHeight: 1.75, color: '#111111' }}>{desc}</p>
+                <p style={{ fontSize: 17, lineHeight: 1.75, color: '#111111', whiteSpace: 'pre-wrap' }}>{desc}</p>
 
               </div>
 
@@ -570,7 +570,7 @@
               {/* ── Right panel 03 (Place): image ── */}
               {i === 2 && (
                 <div ref={imgRef} className="how-card-img" style={{ flex: 1, borderRadius: 12, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', willChange: 'transform', transformOrigin: 'center center', background: '#f0f4fa' }}>
-                  <img src="uploads/imgCard 3.jpeg" alt="Place" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
+                  <img src="uploads/imgCard 3.jpg" alt="Place" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 12, display: 'block' }} />
                 </div>
               )}
             </div>
@@ -705,7 +705,7 @@
           {/* Right, text */}
           <div style={{ display:'flex', flexDirection:'column', gap:24 }}>
             <span style={{ fontSize:12, fontWeight:700, color:'#6d28d9', letterSpacing:'2.5px', textTransform:'uppercase' }}>The Reality Qatar's Tech Market Faces</span>
-            <h2 style={{ fontSize:'clamp(2.2rem,3.8vw,3.4rem)', fontWeight:900, letterSpacing:'-2px', lineHeight:1.05, margin:0, background:'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>
+            <h2 style={{ fontSize:'clamp(2.2rem,3.8vw,3.4rem)', fontWeight:900, letterSpacing:'-2px', lineHeight:1.25, margin:0, padding:'8px 0', background:'linear-gradient(135deg, #0a1628 0%, #1560b0 45%, #7c3aed 100%)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text', position:'relative', zIndex:9999 }}>
               Demand Isn't the Problem.<br/>Ready Talent Is.
             </h2>
             <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
@@ -716,7 +716,7 @@
                 Finding the right person takes time. Getting them up to speed takes more. And while that's happening, your projects don't wait.
               </p>
               <p style={{ fontSize:'1.05rem', color:'#111111', lineHeight:1.85, margin:0 }}>
-                At CertiMinds, we do the heavy lifting before the hire. Every consultant we place has been put through a structured development process built around technical skills, workplace readiness, and the kind of AI fluency that modern teams actually need. By the time they join you, the work is already done.
+                At CertiMinds, we do the heavy lifting before the hire. Every consultant we place has been put through a structured development process built around technical skills, workplace readiness, and the kind of AI fluency that modern teams actually need.
               </p>
               <p style={{ fontSize:'1.1rem', fontWeight:700, color:'#0a1628', margin:0 }}>That's how we close the gap.</p>
             </div>
@@ -833,7 +833,7 @@
             <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
               <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
               <div style={{ display:'flex', gap:24 }}>
-                {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+                {[{ label:'Privacy Policy', href:'privacy-policy.html' }, { label:'Terms of Use', href:'terms-of-use.html' }].map(({ label, href }) => (
                   <a key={label} href={href}
                     onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                     onMouseLeave={e=>e.currentTarget.style.color='#111111'}

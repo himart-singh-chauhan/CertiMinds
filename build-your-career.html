@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -214,13 +214,13 @@ const Hero = () => {
             {/* Trust row */}
             <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
               {[
-                { val: '16 Weeks', lbl: 'Intensive training' },
+                { val: 'Upto 16 Weeks', lbl: 'Intensive training' },
                 { val: '6 Tracks', lbl: 'Specialisation paths' },
                 { val: '100%', lbl: 'Qatar-based placements' },
               ].map(({ val, lbl }) => (
                 <div key={lbl} style={{ borderLeft: '2px solid rgba(21,96,176,0.35)', paddingLeft: 12 }}>
                   <div style={{ fontSize: 16, fontWeight: 800, color: '#0a1628', lineHeight: 1 }}>{val}</div>
-                  <div style={{ fontSize: 12, color: '#111111', marginTop: 3, fontWeight: 500 }}>{lbl}</div>
+                  <div style={{ fontSize: 15, color: '#111111', marginTop: 3, fontWeight: 600 }}>{lbl}</div>
                 </div>
               ))}
             </div>
@@ -318,7 +318,7 @@ const Footer = () => {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:16, padding:'22px 0 26px' }}>
           <span style={{ fontSize:17, color:'#111111' }}>© CertiMinds 2026. All rights reserved.</span>
           <div style={{ display:'flex', gap:24 }}>
-            {[{ label:'Privacy Policy', href:'#' }, { label:'Terms of Use', href:'#' }].map(({ label, href }) => (
+            {[{ label:'Privacy Policy', href:'privacy-policy.html' }, { label:'Terms of Use', href:'terms-of-use.html' }].map(({ label, href }) => (
               <a key={label} href={href}
                 onMouseEnter={e=>e.currentTarget.style.color='#0b1120'}
                 onMouseLeave={e=>e.currentTarget.style.color='#111111'}
@@ -580,7 +580,7 @@ const GainCard = React.memo(({ i, c, total, sectionRef }) => {
                   <div style={{ flexShrink: 0, width: 22, height: 22, borderRadius: 7, background: c.tagBg, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 1 }}>
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke={c.checkColor} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </div>
-                  <span style={{ fontSize: '1rem', color: c.subColor, lineHeight: 1.6 }}>{chk}</span>
+                  <span style={{ fontSize: '1.1rem', color: c.subColor, lineHeight: 1.6, fontWeight: 500 }}>{chk}</span>
                 </div>
               ))}
             </div>
@@ -612,14 +612,14 @@ const WhatYouGain = () => {
 /* ── FAQs ────────────────────────────────────────────────────── */
 const faqs = [
   { q: 'Do I have to pay for the training?', a: 'Not at all. CertiMinds invests in your development because we believe in your potential. Your entire programme is fully funded from day one.' },
-  { q: 'How long is my commitment with CertiMinds?', a: 'Consultants typically commit to a fixed contract following the completion of training. This gives you meaningful industry experience and gives our clients confidence in your capabilities.' },
+  { q: 'How long is my commitment with CertiMinds?', a: 'Consultants commit to a fixed contract following the completion of training. This gives you meaningful industry experience and gives our clients confidence in your capabilities.' },
   { q: 'How long is the training programme?', a: 'Up to 16 weeks depending on your track and specialization.' },
   { q: 'Am I guaranteed a placement after training?', a: 'Our focus is always on placing you into a meaningful role. While opportunities can vary, CertiMinds exists to connect capable professionals with real industry demand and we work hard to place every consultant we develop.' },
   { q: 'Can I choose which organization I work with?', a: 'We match you to opportunities where your skills and interests align with client needs. While consultants do not select their own placements, we make every effort to align you with industries and roles that suit your ambitions.' },
   { q: 'Do I need to be based in Qatar?', a: 'Yes. All placements are currently within Qatar.' },
   { q: 'Do I need a computer science degree?', a: 'We welcome applicants from relevant technical backgrounds including Computer Science, Data, AI, Engineering and related fields. What matters most is your drive, problem-solving ability and passion for technology.' },
   { q: 'What support do I receive during my placement?', a: 'You are never on your own. Our team provides regular check-ins throughout your engagement and you have ongoing access to mentors, peers and the wider CertiMinds community.' },
-  { q: 'What happens when my contract ends?', a: 'Many of our consultants move into permanent roles, extended placements, or explore opportunities further afield. You also become part of our alumni network with lifelong access to support and connections.' },
+  { q: 'What happens when my contract ends?', a: 'Our consultants move into permanent roles, extended placements, or explore opportunities further afield. You also become part of our alumni network with lifelong access to support and connections.' },
   { q: 'What makes CertiMinds different?', a: 'We do not just place you into a role. We develop you, support you throughout your engagement and invest in your long-term career. You are not just a consultant. You are part of a community helping to shape Qatar\'s technology future.' },
 ];
 
